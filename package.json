@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "lint": "umi-lint --eslint.ext='.ts,tsx' ./packages/*/src",
+    "dev": "father doc dev",
+    "rollup:build": "father build"
+  },
+  "devDependencies": {
+    "@umijs/fabric": "^1.0.6",
+    "antd": "^3.19.3",
+    "babel-plugin-import": "^1.12.0",
+    "father": "^2.7.2",
+    "glob": "^7.1.4",
+    "lerna": "^3.15.0",
+    "umi-lint": "2.0.2"
+  }
+}

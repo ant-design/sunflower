@@ -1,0 +1,82 @@
+---
+name: sunflower-search-result
+route: '/'
+---
+
+import { Playground } from 'docz'
+import { useSearchResult } from 'sunflower-search-result';
+import { Input, Button, Table } from 'antd';
+
+
+
+## 基本使用
+
+<Playground>
+  {
+    () => {
+
+      const { Form, Table } = useSearchResult({
+        search(values) {
+          return {
+            list: [{
+              name: 'lily',
+              like: 'apple',
+            }, {
+              name: 'lucy',
+              like: 'orange',
+            }]
+          }
+        }
+      });
+
+      const formItemLayout = {
+        labelCol: { span: 4 },
+        wrapperCol: { span: 12 },
+      };
+      const tailFormItemLayout = {
+        wrapperCol: {
+          span: 8,
+          offset: 4,
+        },
+      };
+
+      return <div>
+
+        <Form {...formItemLayout}>
+          <Form.Item
+            label="用户名称"
+            name="username"
+            rules={[{ 
+              required: true,
+              message: 'Please input your username!' 
+              }]}
+            required={true}
+          >
+            <Input placeholder="Username" />
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <Table columns={[
+          {
+            title: '名称',
+            dataIndex: 'name',
+          },
+          {
+            title: '喜欢',
+            dataIndex: 'like',
+          }
+        ]} />
+    
+      </div>
+    }
+  }
+</Playground>
+
+
+

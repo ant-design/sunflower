@@ -1,0 +1,10 @@
+{
+  "packages": ["packages/*"],
+  "command": {
+    "version": {
+      "exact": true
+    }
+  },
+  "npmClient": "yarn",
+  "version": "independent"
+}
