@@ -9,7 +9,6 @@ Using sunflower allows developers to efficiently complete process and component 
 
 ## Examples
 
-
 ![image](https://user-images.githubusercontent.com/44191223/59961424-3e5cee00-950a-11e9-8b3a-0b7574b54e32.png)
 
 
@@ -56,6 +55,28 @@ function Component() {
   </div>;
 }
 ```
+
+Want  customize the ui, use list instead of table ?
+
+```jsx
+const { Form, responseData } = useSearchResult({
+   search: (values) => request(values),
+});
+
+return <div>
+   
+    <Form>
+         ...
+    </Form>
+    
+    {
+       responseList.list.map(item => <div>
+         {item.username}
+       </div>)
+    }
+</div>
+```
+
 
 ## Development
 
