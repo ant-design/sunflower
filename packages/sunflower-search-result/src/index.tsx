@@ -1,12 +1,16 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'rc-field-form';
 import { Store } from 'rc-field-form/lib/interface';
 import Form from 'sunflower-form';
 import { Table } from 'antd';
+import { TableProps } from 'antd/lib/table';
 
 
 export interface UseSearchResultConfig {
   search: (payload: Store) => (Promise<SearchResponseData> | SearchResponseData);
+  defaultPageSize?: number;
+  defaultCurrentPage?: number;
+  firstAutoSearch?: boolean;
 }
 
 export interface SearchResponseData {
@@ -14,34 +18,81 @@ export interface SearchResponseData {
   total?: number;
 }
 
-const createForm = ({
-  form,
-  onFinish,
-}) => (props) => <Form form={form} onFinish={onFinish} {...props} />;
 
-export const useSearchResult = (config: UseSearchResultConfig) => {
+export const useSearchResult = ({
+  search,
+  defaultPageSize = 10,
+  defaultCurrentPage = 1,
+  firstAutoSearch = true,
+}: UseSearchResultConfig) => {
   const [form] = useForm();
-  const [responseData, setResponseData] = useState({ list: [] });
+  const [requestData, setRequestData] = useState<Store>({
+    currentPage: defaultCurrentPage,
+    pageSize: defaultPageSize,
+  });
+  const [responseData, setResponseData] = useState<SearchResponseData>({ list: [] });
+  const [loading, setLoading] = useState(false);
+  const didMountRef = useRef(false);
 
-  const SearchResultForm = useMemo(() => createForm({
-    form,
-    onFinish(values: Store) {
-      const { search } = config;
-      Promise.resolve(search(values)).then((data: SearchResponseData) => setResponseData(data));
-    },
-  }), [form, config]);
-
-  const SearchResultTable = (props) =>
-    <Table
-      dataSource={responseData.list}
+  const SearchResultForm = (props) =>
+    <Form
+      form={form}
+      onFinish={(values: Store) => setRequestData(values)}
       {...props}
     />;
 
+  const SearchResultTable = (props: TableProps<any>) => {
+    const {
+      pagination: customPagination,
+    } = props;
+
+    const pagination = {
+      onChange(page) {
+        setRequestData({
+          ...requestData,
+          currentPage: page,
+        });
+      },
+      pageSize: requestData.pageSize as number,
+      current: requestData.currentPage as number,
+      ...(customPagination || {}),
+      defaultPageSize,
+      defaultCurrent: defaultCurrentPage,
+    };
+
+    return <Table
+      loading={loading}
+      dataSource={responseData.list}
+      {...props}
+      pagination={pagination}
+    />;
+  };
+
   SearchResultForm['Item'] = Form.Item;
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      if (!firstAutoSearch) {
+        return;
+      }
+    }
+    setLoading(true);
+    Promise.resolve(search(requestData))
+      .then((data: SearchResponseData) => {
+        setLoading(false);
+        setResponseData(data);
+      });
+  }, [requestData]);
 
   return {
     Form: SearchResultForm,
     Table: SearchResultTable,
+    loading,
+    requestData,
+    setRequestData,
+    responseData,
+    form,
   };
 };
 

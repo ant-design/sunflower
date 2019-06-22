@@ -6,6 +6,7 @@ route: '/'
 import { Playground } from 'docz'
 import { useSearchResult } from 'sunflower-search-result';
 import { Input, Button, Table } from 'antd';
+import Mock from 'mockjs';
 
 
 
@@ -15,17 +16,18 @@ import { Input, Button, Table } from 'antd';
   {
     () => {
 
-      const { Form, Table } = useSearchResult({
+      const { Form, Table, onPagination } = useSearchResult({
         search(values) {
-          return {
-            list: [{
-              name: 'lily',
-              like: 'apple',
-            }, {
-              name: 'lucy',
-              like: 'orange',
-            }]
-          }
+          console.log('request values', values);
+          return new Promise(r => setTimeout(() => {
+            r(Mock.mock({
+              "list|200": [{
+                name: '@name',
+                email: '@email',
+                id: '@guid',
+              }]
+            }));
+          }, 300));
         }
       });
 
@@ -64,14 +66,16 @@ import { Input, Button, Table } from 'antd';
 
         <Table columns={[
           {
-            title: '名称',
+            title: 'name',
             dataIndex: 'name',
+            key: 'name',
           },
           {
-            title: '喜欢',
-            dataIndex: 'like',
+            title: 'email',
+            dataIndex: 'email',
+            key: 'email',
           }
-        ]} />
+        ]} rowKey="id"/>
     
       </div>
     }

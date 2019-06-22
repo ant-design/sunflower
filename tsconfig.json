@@ -6,5 +6,6 @@
     "moduleResolution": "node",
     "jsx": "react",
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["node_modules", "lib", "es"]
 }

@@ -4,7 +4,8 @@ module.exports = {
   ...base,
   rules: {
     ...base.rules,
-    'arrow-parens': 0,
-    'dot-notation': 0,
+    'arrow-parens': 1,
+    'dot-notation': 1,
+    'import/no-unresolved': 1,
   },
 };
