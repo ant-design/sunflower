@@ -22,7 +22,8 @@ Using sunflower allows developers to efficiently complete process and component 
   {
     () => {
       const { Form, Table } = useSearchResult({
-        search: (values) => request(values)
+        search: (values) => request(values),
+        defaultPageSize: 5,
       });
       return <div>
         <Form>
@@ -65,7 +66,8 @@ import { useSearchResult } from 'sunflower-search-table';
 
 function Component() {
   const { Form, Table } = useSearchResult({
-    search: (values) => request(values)
+    search: (values) => request(values),
+    defaultPageSize: 5,
   });
   return <div>
     <Form>
