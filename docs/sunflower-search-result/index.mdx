@@ -1,0 +1,186 @@
+---
+name: sunflower-search-result
+route: '/sunflower-search-result'
+---
+
+import { Playground } from 'docz'
+import { useSearchResult } from 'sunflower-search-result';
+import { Input, Button, Table } from 'antd';
+import request from './request';
+
+# sunflower-search-result
+
+```jsx
+import { useSearchResult } from 'sunflower-search-result';
+```
+
+## basic
+
+
+
+<Playground>
+  {
+    () => {
+      const {
+        Form,
+        Table,
+      } = useSearchResult({
+        search(values) {
+          console.log('request values', values);
+          return request(values);
+        }
+      });
+
+      const formItemLayout = {
+        labelCol: { span: 4 },
+        wrapperCol: { span: 12 },
+      };
+      const tailFormItemLayout = {
+        wrapperCol: {
+          span: 8,
+          offset: 4,
+        },
+      };
+
+      return <div>
+
+        <Form {...formItemLayout}>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ 
+              required: true,
+              message: 'Please input your username!' 
+              }]}
+            required={true}
+          >
+            <Input placeholder="Username" />
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Search
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <Table
+          columns={[
+            {
+              title: 'name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'email',
+              dataIndex: 'email',
+              key: 'email',
+            }
+          ]}
+          rowKey="id"
+        />
+    
+      </div>
+    }
+  }
+</Playground>
+
+config
+```js
+{
+  search(values) {
+    console.log('request values', values);
+    return request(values);
+  }
+}
+```
+
+
+## customize pagination
+
+<Playground>
+  {
+    () => {
+      const {
+        Form,
+        Table,
+      } = useSearchResult({
+        defaultCurrentPage: 2,
+        defaultPageSize: 5,
+        search(values) {
+          console.log('request values', values);
+          return request(values);
+        }
+      });
+
+      const formItemLayout = {
+        labelCol: { span: 4 },
+        wrapperCol: { span: 12 },
+      };
+      const tailFormItemLayout = {
+        wrapperCol: {
+          span: 8,
+          offset: 4,
+        },
+      };
+
+      return <div>
+
+        <Form {...formItemLayout}>
+          <Form.Item
+            label="用户名称"
+            name="username"
+            rules={[{ 
+              required: true,
+              message: 'Please input your username!' 
+              }]}
+            required={true}
+          >
+            <Input placeholder="Username" />
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <Table
+          columns={[
+            {
+              title: 'name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'email',
+              dataIndex: 'email',
+              key: 'email',
+            }
+          ]}
+          rowKey="id"
+          pagination={{
+            showSizeChanger: true,
+          }}
+        />
+    
+      </div>
+    }
+  }
+</Playground>
+
+config
+```js
+{
+  defaultCurrentPage: 2,
+  defaultPageSize: 5,
+  search(values) {
+    console.log('request values', values);
+    return request(values);
+  }
+}
+```
+
+## customize ui
+

@@ -37,7 +37,11 @@ export const useSearchResult = ({
   const SearchResultForm = (props) =>
     <Form
       form={form}
-      onFinish={(values: Store) => setRequestData(values)}
+      onFinish={(values: Store) => setRequestData({
+        ...requestData,
+        ...values,
+        currentPage: 1,
+      })}
       {...props}
     />;
 
@@ -53,11 +57,19 @@ export const useSearchResult = ({
           currentPage: page,
         });
       },
+      onShowSizeChange(page, pageSize) {
+        setRequestData({
+          ...requestData,
+          currentPage: 1,
+          pageSize,
+        });
+      },
       pageSize: requestData.pageSize as number,
       current: requestData.currentPage as number,
       ...(customPagination || {}),
       defaultPageSize,
       defaultCurrent: defaultCurrentPage,
+      total: responseData.total,
     };
 
     return <Table

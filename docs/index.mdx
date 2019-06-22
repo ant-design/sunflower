@@ -1,0 +1,113 @@
+---
+name: sunflower
+route: '/'
+---
+
+import { Playground } from 'docz'
+import { useSearchResult } from 'sunflower-search-result';
+import { Input, Button, Table } from 'antd';
+import request from './sunflower-search-result/request';
+
+
+
+## What is Sunflower
+
+Sunflower is an [antd](https://ant.design/) based process component library that uses react hooks.
+
+Using sunflower allows developers to efficiently complete process and component development, and you don't need to know too many callback methods and states. At the same time, antd's ui features are also flexible.
+
+## example
+
+<Playground>
+  {
+    () => {
+      const { Form, Table } = useSearchResult({
+        search: (values) => request(values)
+      });
+      return <div>
+        <Form>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ 
+              required: true,
+              message: 'Please input your username!' 
+              }]}
+            required={true}
+          >
+            <Input placeholder="Username" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Search
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <Table
+          columns={[
+            {
+              title: 'name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'email',
+              dataIndex: 'email',
+              key: 'email',
+            }
+          ]}
+          rowKey="id"
+        />
+      </div>;
+    }
+  }
+</Playground>
+
+```jsx
+import { useSearchResult } from 'sunflower-search-table';
+
+function Component() {
+  const { Form, Table } = useSearchResult({
+    search: (values) => request(values)
+  });
+  return <div>
+    <Form>
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ 
+          required: true,
+          message: 'Please input your username!' 
+          }]}
+        required={true}
+      >
+        <Input placeholder="Username" />
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Search
+        </Button>
+      </Form.Item>
+    </Form>
+
+    <Table
+      columns={[
+        {
+          title: 'name',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'email',
+          dataIndex: 'email',
+          key: 'email',
+        }
+      ]}
+      rowKey="id"
+    />
+  </div>;
+}
+```
