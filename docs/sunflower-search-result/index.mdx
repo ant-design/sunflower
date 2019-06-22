@@ -48,11 +48,6 @@ import { useSearchResult } from 'sunflower-search-result';
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ 
-              required: true,
-              message: 'Please input your username!' 
-              }]}
-            required={true}
           >
             <Input placeholder="Username" />
           </Form.Item>
@@ -67,12 +62,12 @@ import { useSearchResult } from 'sunflower-search-result';
         <Table
           columns={[
             {
-              title: 'name',
-              dataIndex: 'name',
-              key: 'name',
+              title: 'Username',
+              dataIndex: 'username',
+              key: 'username',
             },
             {
-              title: 'email',
+              title: 'Email',
               dataIndex: 'email',
               key: 'email',
             }
@@ -94,93 +89,3 @@ config
   }
 }
 ```
-
-
-## customize pagination
-
-<Playground>
-  {
-    () => {
-      const {
-        Form,
-        Table,
-      } = useSearchResult({
-        defaultCurrentPage: 2,
-        defaultPageSize: 5,
-        search(values) {
-          console.log('request values', values);
-          return request(values);
-        }
-      });
-
-      const formItemLayout = {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 12 },
-      };
-      const tailFormItemLayout = {
-        wrapperCol: {
-          span: 8,
-          offset: 4,
-        },
-      };
-
-      return <div>
-
-        <Form {...formItemLayout}>
-          <Form.Item
-            label="用户名称"
-            name="username"
-            rules={[{ 
-              required: true,
-              message: 'Please input your username!' 
-              }]}
-            required={true}
-          >
-            <Input placeholder="Username" />
-          </Form.Item>
-
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Log in
-            </Button>
-          </Form.Item>
-        </Form>
-
-        <Table
-          columns={[
-            {
-              title: 'name',
-              dataIndex: 'name',
-              key: 'name',
-            },
-            {
-              title: 'email',
-              dataIndex: 'email',
-              key: 'email',
-            }
-          ]}
-          rowKey="id"
-          pagination={{
-            showSizeChanger: true,
-          }}
-        />
-    
-      </div>
-    }
-  }
-</Playground>
-
-config
-```js
-{
-  defaultCurrentPage: 2,
-  defaultPageSize: 5,
-  search(values) {
-    console.log('request values', values);
-    return request(values);
-  }
-}
-```
-
-## customize ui
-

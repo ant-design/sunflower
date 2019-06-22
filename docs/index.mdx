@@ -29,11 +29,6 @@ Using sunflower allows developers to efficiently complete process and component 
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ 
-              required: true,
-              message: 'Please input your username!' 
-              }]}
-            required={true}
           >
             <Input placeholder="Username" />
           </Form.Item>
@@ -48,12 +43,12 @@ Using sunflower allows developers to efficiently complete process and component 
         <Table
           columns={[
             {
-              title: 'name',
-              dataIndex: 'name',
-              key: 'name',
+              title: 'Username',
+              dataIndex: 'username',
+              key: 'username',
             },
             {
-              title: 'email',
+              title: 'Email',
               dataIndex: 'email',
               key: 'email',
             }
@@ -77,11 +72,6 @@ function Component() {
       <Form.Item
         label="Username"
         name="username"
-        rules={[{ 
-          required: true,
-          message: 'Please input your username!' 
-          }]}
-        required={true}
       >
         <Input placeholder="Username" />
       </Form.Item>
@@ -96,12 +86,12 @@ function Component() {
     <Table
       columns={[
         {
-          title: 'name',
-          dataIndex: 'name',
-          key: 'name',
+          title: 'Username',
+          dataIndex: 'username',
+          key: 'username',
         },
         {
-          title: 'email',
+          title: 'Email',
           dataIndex: 'email',
           key: 'email',
         }
