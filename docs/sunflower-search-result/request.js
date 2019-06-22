@@ -11,14 +11,18 @@ const db = Mock.mock({
   }],
 });
 
+function filter(list, dataIndex, keyword) {
+  if (!keyword) {
+    return list;
+  }
+  return list.filter(item => (item[dataIndex].toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) > -1));
+}
+
 export default ({ username, pageSize, currentPage }) => {
   const start = pageSize * (currentPage - 1) + 1;
   const end = start + pageSize;
   let totalList = db.list;
-  if (username) {
-    totalList = totalList.filter(item => (item.username.indexOf(username) > -1));
-  }
-  debugger
+  totalList = filter(totalList, 'username', username);
   const list = totalList.slice(start, end);
   return new Promise(r => setTimeout(() => {
     r({

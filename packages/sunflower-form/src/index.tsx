@@ -34,8 +34,9 @@ const Form = ({
 Form.Item = ({
   name,
   children,
+  rules,
   ...restProps
-}) => <Field name={name} {...restProps}>
+}) => <Field name={name} rules={rules} {...restProps}>
     {(control, meta, form) => {
       const childNode =
         typeof children === 'function'
@@ -44,9 +45,11 @@ Form.Item = ({
 
       const validateStatus = meta.errors.length > 0 ? 'error' : undefined;
       const help = meta.errors.length > 0 ? meta.errors[0] : undefined;
+      const required = !!((rules || []).find(item => item.required));
       return <AntdForm.Item
         help={help}
         validateStatus={validateStatus}
+        required={required}
         {...restProps}
       >
         {childNode}
