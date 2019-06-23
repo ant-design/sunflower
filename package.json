@@ -5,9 +5,11 @@
     "bootstrap": "lerna bootstrap",
     "lint": "umi-lint --eslint.ext='.ts,tsx' ./packages/*/src",
     "dev": "father doc dev",
-    "rollup:build": "father build"
+    "build": "father build",
+    "test": "father test"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^1.0.4",
     "@umijs/fabric": "^1.0.6",
     "antd": "^3.19.3",
     "babel-plugin-import": "^1.12.0",
