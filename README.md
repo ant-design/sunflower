@@ -85,5 +85,8 @@ return <div>
 
 ```
 $ yarn
-$ yarn dev
+$ yarn bootstrap
+$ yarn dev       // dev
+$ yarn build     // build
+$ yarn test      // test
 ```
