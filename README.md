@@ -73,7 +73,7 @@ return <div>
     </Form>
     
     {
-       responseList.list.map(item => <div>
+       responseData.list.map(item => <div>
          {item.username}
        </div>)
     }
