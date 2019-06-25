@@ -12,5 +12,8 @@ export const useStore = () => {
   useEffect(() => () => {
     delete map[id];
   }, []);
-  return [get, set];
+  return {
+    get,
+    set,
+  };
 };

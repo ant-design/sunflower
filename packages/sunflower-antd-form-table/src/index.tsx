@@ -48,7 +48,7 @@ export const useFormTable = ({
     })),
   });
 
-  const [get, set] = useStore();
+  const { get, set } = useStore();
   set({
     requestData,
     responseData,
