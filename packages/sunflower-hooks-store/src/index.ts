@@ -1,16 +1,11 @@
-import { useRef, useCallback, useEffect } from 'react';
-import { ulid } from 'ulid';
+import { useRef, useCallback } from 'react';
 
-const map = {};
+
 export const useStore = () => {
-  const obj = useRef(ulid());
-  const id = obj.current;
-  const get = useCallback(() => map[id], []);
+  const obj = useRef({});
+  const get = useCallback(() => obj.current, []);
   const set = useCallback((value: any) => {
-    map[id] = value;
-  }, []);
-  useEffect(() => () => {
-    delete map[id];
+    obj.current = value;
   }, []);
   return {
     get,
