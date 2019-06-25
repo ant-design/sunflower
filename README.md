@@ -18,7 +18,7 @@ Using sunflower allows developers to efficiently complete process and component 
 Contains requests, paging, and more, requiring very little code.
 
 ```jsx
-import { useSearchResult } from 'sunflower-search-table';
+import { useFormTable } from '@sunflower-antd/form-table';
 
 function Component() {
   const { Form, Table } = useSearchResult({
@@ -62,7 +62,7 @@ function Component() {
 Want  customize the ui, use list instead of table ?
 
 ```jsx
-const { Form, responseData } = useSearchResult({
+const { Form, responseData } = useFormTable({
    search: (values) => request(values),
 });
 
