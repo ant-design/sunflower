@@ -10,6 +10,7 @@ import {
 } from '@sunflower-hooks/search-result';
 import { useStore } from '@sunflower-hooks/store';
 
+
 export interface SearchResponseData {
   list: Store[];
   total?: number;
@@ -48,12 +49,17 @@ export const useFormTable = ({
     })),
   });
 
-  const { get, set } = useStore();
+  const { get, set } = useStore<{
+    requestData: Store;
+    responseData: SearchResponseData;
+    loading: boolean;
+  }>();
   set({
     requestData,
     responseData,
     loading,
   });
+
 
   const SearchResultForm = useCallback(props => (
     <Form
