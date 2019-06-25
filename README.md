@@ -21,7 +21,7 @@ Contains requests, paging, and more, requiring very little code.
 import { useFormTable } from '@sunflower-antd/form-table';
 
 function Component() {
-  const { Form, Table } = useSearchResult({
+  const { Form, Table } = useFormTable({
     search: (values) => request(values),
   });
   return <div>
