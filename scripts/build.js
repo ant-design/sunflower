@@ -46,9 +46,6 @@ function build(name) {
     const promise = Promise.all(deps.map(item => build(item)));
     promise.then(() => {
       console.log(`\nbuilding ${name}\n`);
-      // distMap[name].forEach(item => {
-      //   rimraf.sync(item);
-      // });
       fork(father, ['build'], {
         cwd: join(__dirname, '../'),
         env: {
