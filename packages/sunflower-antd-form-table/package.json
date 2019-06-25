@@ -1,5 +1,5 @@
 {
-  "name": "sunflower-search-result",
+  "name": "@sunflower-antd/form-table",
   "version": "0.0.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -7,7 +7,9 @@
   "entry": "src/index.tsx",
   "dependencies": {
     "rc-field-form": "0.0.0-alpha.2",
-    "sunflower-form": "0.0.0"
+    "sunflower-form": "0.0.0",
+    "@sunflower-hooks/search-result": "0.0.0",
+    "@sunflower-hooks/store": "0.0.0"
   },
   "peerDependencies": {
     "antd": "^3.19.3",
