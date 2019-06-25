@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useForm } from 'rc-field-form';
 import { Store } from 'rc-field-form/lib/interface';
 import Form from 'sunflower-form';
@@ -8,6 +8,7 @@ import {
   useSearchResult as useSearchResultHooks,
   UseSearchResultConfig,
 } from '@sunflower-hooks/search-result';
+import { useStore } from '@sunflower-hooks/store';
 
 export interface SearchResponseData {
   list: Store[];
@@ -21,7 +22,8 @@ export interface UseSearchResultAntdConfig
   defaultFormValues?: Store | Promise<Store>;
 }
 
-export const useSearchResult = ({
+
+export const useFormTable = ({
   search,
   firstAutoSearch = true,
   defaultPageSize = 10,
@@ -46,54 +48,60 @@ export const useSearchResult = ({
     })),
   });
 
-  const SearchResultForm = props => (
+  const [get, set] = useStore();
+  set({
+    requestData,
+    responseData,
+    loading,
+  });
+
+  const SearchResultForm = useCallback(props => (
     <Form
       form={form}
       onFinish={(values: Store) =>
         searchFunc({
-          ...requestData,
+          ...get().requestData,
           ...values,
           currentPage: 1,
         })
       }
       {...props}
     />
-  );
+  ), []);
 
-  const SearchResultTable = (props: TableProps<any>) => {
+  const SearchResultTable = useCallback((props: TableProps<any>) => {
     const { pagination: customPagination } = props;
-
+    const store = get();
     const pagination = {
       onChange(page: number) {
         searchFunc({
-          ...requestData,
+          ...store.requestData,
           currentPage: page,
         });
       },
       onShowSizeChange(page: number, pageSize: number) {
         searchFunc({
-          ...requestData,
+          ...store.requestData,
           currentPage: 1,
           pageSize,
         });
       },
-      pageSize: requestData.pageSize as number,
-      current: requestData.currentPage as number,
+      pageSize: store.requestData.pageSize as number,
+      current: store.requestData.currentPage as number,
       ...(customPagination || {}),
       defaultPageSize,
       defaultCurrent: defaultCurrentPage,
-      total: responseData.total,
+      total: store.responseData.total,
     };
-
     return (
       <Table
-        loading={loading}
-        dataSource={responseData.list}
+        loading={store.loading}
+        dataSource={store.responseData.list}
         {...props}
         pagination={pagination}
       />
     );
-  };
+  }, []);
 
   SearchResultForm.Item = Form.Item;
 
@@ -109,7 +117,3 @@ export const useSearchResult = ({
     search: searchFunc,
   };
 };
-
-export const renderSearchResult = (config, S) => () => (
-  <S {...useSearchResult(config)} />
-);

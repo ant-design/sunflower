@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lint": "umi-lint --eslint.ext='.ts,tsx' ./packages/*/src",
-    "precommit": "umi-lint --staged --eslint.ext='.ts,tsx' --prettier --fix",
+    "precommit": "umi-lint --staged --eslint.ext='.ts,tsx' --fix",
     "dev": "father doc dev",
     "build": "father build",
     "test": "father test",

@@ -1,0 +1,14 @@
+{
+  "name": "@sunflower-hooks/store",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "entry": "src/index.ts",
+  "dependencies": {
+    "ulid": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  }
+}

@@ -4,9 +4,9 @@ route: '/'
 ---
 
 import { Playground } from 'docz'
-import { useSearchResult } from '@sunflower-antd/search-result';
+import { useFormTable } from '@sunflower-antd/form-table';
 import { Input, Button, Table } from 'antd';
-import request from './sunflower-antd-search-result/request';
+import request from './sunflower-antd-form-table/request';
 
 
 
@@ -21,7 +21,7 @@ Using sunflower allows developers to efficiently complete process and component 
 <Playground>
   {
     () => {
-      const { Form, Table } = useSearchResult({
+      const { Form, Table } = useFormTable({
         search: (values) => request(values),
         defaultPageSize: 5,
       });
@@ -62,10 +62,10 @@ Using sunflower allows developers to efficiently complete process and component 
 </Playground>
 
 ```jsx
-import { useSearchResult } from '@sunflower-antd/search-table';
+import { useFormTable } from '@sunflower-antd/form-table';
 
 function Component() {
-  const { Form, Table } = useSearchResult({
+  const { Form, Table } = useFormTable({
     search: (values) => request(values),
     defaultPageSize: 5,
   });

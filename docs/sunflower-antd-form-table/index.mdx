@@ -1,14 +1,15 @@
 ---
-name: sunflower-search-result
-route: '/sunflower-search-result'
+name: sunflower-antd-form-table
+route: '/sunflower-antd-form-table'
 ---
 
 import { Playground } from 'docz'
-import { useSearchResult } from '@sunflower-antd/search-result';
+import { useFormTable } from '@sunflower-antd/form-table';
 import { Input, Button, Table } from 'antd';
 import request from './request';
+import App from './App';
 
-# sunflower-search-result
+# sunflower-antd-form-table
 
 
 ## basic
@@ -21,7 +22,7 @@ import request from './request';
       const {
         Form,
         Table,
-      } = useSearchResult({
+      } = useFormTable({
         search(values) {
           console.log('request values', values);
           return request(values);
@@ -87,3 +88,7 @@ config
   }
 }
 ```
+
+## app
+
+<App />
