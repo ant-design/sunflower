@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'rc-field-form';
 import { Store } from 'rc-field-form/lib/interface';
 import Form from 'sunflower-form';
