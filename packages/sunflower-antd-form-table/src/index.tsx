@@ -103,7 +103,7 @@ export const useFormTable = ({
     );
   }, []);
 
-  SearchResultForm.Item = Form.Item;
+  SearchResultForm['Item'] = Form.Item;
 
   return {
     Form: SearchResultForm,

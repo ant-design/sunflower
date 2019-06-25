@@ -1,0 +1,75 @@
+const { fork } = require('child_process');
+const { join } = require('path');
+const glob = require('glob');
+const father = require.resolve('father/bin/father');
+
+const list = glob.sync('packages/*').map(item => {
+  const array = item.split('/');
+  const name = array[array.length -1];
+  return name;
+});
+
+
+const depsMap = {};
+const distMap = {};
+list.forEach(item => {
+  const pkg = join(__dirname, '../packages', item, 'package.json');
+  const { dependencies, main, module: pkgModule } = require(pkg);
+  const deps = [];
+  const dist = [];
+  if (dependencies) {
+    Object.keys(dependencies).forEach(dependencie => {
+      if (list.includes(dependencie)) {
+        deps.push(dependencie);
+      }
+    });
+  }
+  if (main) {
+    dist.push(join(pkg, '../', main, '../'));
+  }
+  if (pkgModule) {
+    dist.push(join(pkg, '../', pkgModule, '../'));
+  }
+  depsMap[item] = deps; 
+  distMap[item] = dist;
+});
+
+const map = {};
+
+function build(name) {
+  if (map[name]) {
+    return;
+  }
+  map[name] = true;
+  return new Promise(resolve => {
+    const deps = depsMap[name];
+    const promise = Promise.all(deps.map(item => build(item)));
+    promise.then(() => {
+      console.log(`\nbuilding ${name}\n`);
+      // distMap[name].forEach(item => {
+      //   rimraf.sync(item);
+      // });
+      fork(father, ['build'], {
+        cwd: join(__dirname, '../'),
+        env: {
+          PACKAGE: name,
+        },
+        stdio: 'inherit'
+      }).on('close', (code) => {
+        if (code !== 0) {
+          process.exit(code);
+        } else {
+          resolve();
+        }
+      });
+    })
+  });
+}
+
+
+
+const promise = Promise.all(Object.keys(depsMap).map(name => build(name)));
+
+promise.then(() => {
+  console.log('build success');
+});
