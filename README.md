@@ -1,28 +1,45 @@
-# sunflower
+# sunflower (开发中)
+ 
+Sunflower  🌻 是一套基于 antd 及 react-hooks 的业务流程库。sunflower 将常用的业务流程通过 hooks 提供出来，此外，sunflower 提供将这个流程跟 antd ui 组件组合起来，提供出更为方便的使用方式。
 
-under development
+![image](https://user-images.githubusercontent.com/44191223/60277688-a196b800-9930-11e9-8905-0722ef9a03de.png)
 
+## 特点
 
-[《为什么有sunflower》](https://github.com/ant-design/sunflower/issues/1)
+- 😆 采用 ”react-hooks“ 来沉淀业务中的流程，一个流程就是一个 hooks。
+- 😁 提供 ”react-hooks + antd“ 的方式组合方式，使用申明式式的方式即可完成开发，不用配置 antd 的方法跟状态，只需要配置 antd 的 ui 属性即可。
+- 😝 来源于业务，服务于业务。沉淀业务中常用的流程，让业务开发更高效。
 
+更多可看 [《为什么有sunflower》](https://github.com/ant-design/sunflower/issues/1)
 
-Sunflower  🌻 is an [antd](https://ant.design/) based process component library that uses react hooks.
+## 使用
 
-Using sunflower allows developers to efficiently complete process and component development, and you don't need to know too many callback methods and states. At the same time, antd's ui features are also flexible.
+```
+$ npm install @sunflower-antd/form-table
+```
 
-## Examples
+## 示例
+
 
 ![image](https://user-images.githubusercontent.com/44191223/59961424-3e5cee00-950a-11e9-8b3a-0b7574b54e32.png)
 
-
-Contains requests, paging, and more, requiring very little code.
+一个包含了 ”请求“，”分页“，”查找“ 功能的示例仅需要很少的代码。
 
 ```jsx
 import { useFormTable } from '@sunflower-antd/form-table';
 
 function Component() {
   const { Form, Table } = useFormTable({
-    search: (values) => request(values),
+    search: (values) => {
+      return {
+        list: [{
+          name: 'lily',
+        }, {
+          name: 'jack',
+        }],
+        total: 200,
+      };
+    },
   });
   return <div>
     <Form>
@@ -57,9 +74,11 @@ function Component() {
     />
   </div>;
 }
+
+ReactDOM.render(<Component />, mountNode);
 ```
 
-Want  customize the ui, use list instead of table ?
+想要自定义的而不是 sunflower 提供的组件？
 
 ```jsx
 const { Form, responseData } = useFormTable({
@@ -69,19 +88,24 @@ const { Form, responseData } = useFormTable({
 return <div>
    
     <Form>
-         ...
+      ...
     </Form>
     
     {
-       responseData.list.map(item => <div>
-         {item.username}
-       </div>)
+      responseData.list.map(item => <div>
+        {item.username}
+      </div>)
     }
 </div>
 ```
 
+这里的 Form 跟 Table 都是 antd 的，可用 antd 的 ui 配置，但是不用去管方法跟状态。比如 Table 不需要手动去传 dataSource <Table dataSource={dataSource} />。不过 sunflower 也是优先使用用户的配置，如果配置了 dataSource，也会优先使用用户的。这样，用户只用去关注 antd 的 ui 配置即可，不用管理方法跟状态。
 
-## Development
+
+更多可见 https://github.com/ant-design/sunflower/blob/master/docs
+
+
+## 开发
 
 ```
 $ yarn
