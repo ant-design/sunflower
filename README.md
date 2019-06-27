@@ -91,10 +91,10 @@ return <div>
 </div>
 ```
 
-这里的 Form 跟 Table 都是 antd 的，可用 antd 的 ui 配置，但是不用去管方法跟状态。比如 Table 不需要手动去传 dataSource <Table dataSource={dataSource} />。不过 sunflower 也是优先使用用户的配置，如果配置了 dataSource，也会优先使用用户的。这样，用户只用去关注 antd 的 ui 配置即可，不用管理方法跟状态。
+> 这里的 Form 跟 Table 都是 antd 的，可用 antd 组件的属性，但是可不用去管方法跟状态（要是配置了会优先使用）。比如 Table 不需要手动去传 dataSource `<Table dataSource={dataSource} />`。不过 sunflower 也是优先使用用户的配置，如果配置了 dataSource，也会优先使用用户的。这样，用户只用去关注 antd 的 ui 配置即可，不用管理方法跟状态。
 
 
-更多可见 https://github.com/ant-design/sunflower/blob/master/docs
+更多可见 [开发示例](https://github.com/ant-design/sunflower/blob/master/docs)
 
 
 ## 开发
