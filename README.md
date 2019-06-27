@@ -26,6 +26,7 @@ $ npm install @sunflower-antd/form-table
 一个包含了 ”请求“，”分页“，”查找“ 功能的示例仅需要很少的代码。
 
 ```jsx
+import { Input, Button } from 'antd'; 
 import { useFormTable } from '@sunflower-antd/form-table';
 
 function Component() {
