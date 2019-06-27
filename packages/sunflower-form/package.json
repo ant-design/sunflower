@@ -11,5 +11,9 @@
   "peerDependencies": {
     "antd": "^3.19.3",
     "react": "^16.8.4"
-  }
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ]
 }

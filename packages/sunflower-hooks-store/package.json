@@ -7,5 +7,12 @@
   "entry": "src/index.ts",
   "peerDependencies": {
     "react": "^16.8.4"
-  }
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ]
 }
