@@ -31,15 +31,7 @@ import { useFormTable } from '@sunflower-antd/form-table';
 function Component() {
   const { Form, Table } = useFormTable({
     search: (values) => {
-      return {
-        list: [{
-          name: 'lily',
-        }, {
-          name: 'jack',
-        }],
-        total: 200,
-      };
-    },
+      return request('/api/user.json'); // 返回 {list,total} promise
   });
   return <div>
     <Form>
