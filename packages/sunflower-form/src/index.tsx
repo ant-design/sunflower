@@ -23,10 +23,7 @@ const Form = ({
 <StateForm
   form={form}
   onFinish={onFinish}
-  __COMPATIBILITY_USAGE_OR_YOU_WILL_BE_FIRED__={{
-    NOT_CONTAIN_FORM: true,
-    HOOK_MARK: 'asdihasiodhaohdioahfoihsoefhisihifhsiofhiosfd',
-  }}
+  component={false}
   initialValues={initialValues}
 >
   {children}
