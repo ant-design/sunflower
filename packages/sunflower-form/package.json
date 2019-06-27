@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "entry": "src/index.tsx",
   "dependencies": {
-    "rc-field-form": "0.0.0-alpha.2"
+    "rc-field-form": "0.0.0-alpha.13"
   },
   "peerDependencies": {
     "antd": "^3.19.3",

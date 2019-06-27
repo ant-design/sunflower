@@ -3,12 +3,11 @@ const { join } = require('path');
 const glob = require('glob');
 const father = require.resolve('father/bin/father');
 
-const list = glob.sync('packages/*').map(item => {
+const list = process.env.NAME ? [process.env.NAME] : glob.sync('packages/*').map(item => {
   const array = item.split('/');
   const name = array[array.length -1];
   return name;
 });
-
 
 const depsMap = {};
 const distMap = {};

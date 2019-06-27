@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useForm } from 'rc-field-form';
 import { Store } from 'rc-field-form/lib/interface';
 import Form from 'sunflower-form';
@@ -20,7 +20,7 @@ export interface UseSearchResultAntdConfig
   extends UseSearchResultConfig<SearchResponseData, Store> {
   defaultPageSize?: number;
   defaultCurrentPage?: number;
-  defaultFormValues?: Store | Promise<Store>;
+  defaultFormValues?: Store | (() => (Promise<Store> | Store));
 }
 
 
@@ -32,6 +32,7 @@ export const useFormTable = ({
   defaultFormValues = {},
 }: UseSearchResultAntdConfig) => {
   const [form] = useForm();
+  const [initialValues, setInitialValues] = useState();
   const {
     loading,
     requestData,
@@ -42,38 +43,58 @@ export const useFormTable = ({
   } = useSearchResultHooks({
     search,
     firstAutoSearch,
-    defaultRequestData: Promise.resolve(defaultFormValues).then(data => ({
-      pageSize: defaultPageSize,
-      currentPage: defaultCurrentPage,
-      ...data,
-    })),
+    defaultRequestData: () => {
+      let value: Store | Promise<Store>;
+      if (typeof defaultFormValues === 'function') {
+        value = defaultFormValues();
+      } else {
+        value = defaultFormValues;
+      }
+      return Promise.resolve(value).then(data => {
+        if (form.getFieldsError().find(item => item.errors.length > 0)) {
+          throw new Error('getFieldsError');
+        }
+        const obj = { ...data };
+        Object.keys(data).forEach(name => {
+          obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
+        });
+        setInitialValues(data);
+        form.setFieldsValue(obj);
+        return {
+          pageSize: defaultPageSize,
+          currentPage: defaultCurrentPage,
+          ...obj,
+        };
+      });
+    },
   });
 
   const { get, set } = useStore<{
     requestData: Store;
     responseData: SearchResponseData;
     loading: boolean;
+    initialValues: Store;
   }>();
   set({
     requestData,
     responseData,
     loading,
+    initialValues,
   });
 
 
-  const SearchResultForm = useCallback(props => (
-    <Form
-      form={form}
-      onFinish={(values: Store) =>
-        searchFunc({
-          ...get().requestData,
-          ...values,
-          currentPage: 1,
-        })
-      }
-      {...props}
-    />
-  ), []);
+  const SearchResultForm = useCallback(props => <Form
+    form={form}
+    onFinish={(values: Store) =>
+      searchFunc({
+        ...get().requestData,
+        ...values,
+        currentPage: 1,
+      })
+    }
+    initialValues={get().initialValues}
+    {...props}
+  />, []);
 
   const SearchResultTable = useCallback((props: TableProps<any>) => {
     const { pagination: customPagination } = props;
@@ -81,7 +102,7 @@ export const useFormTable = ({
     const pagination = {
       onChange(page: number) {
         searchFunc({
-          ...store.requestData,
+          ...requestData,
           currentPage: page,
         });
       },

@@ -25,7 +25,7 @@ function filter(list, dataIndex, keyword) {
 
 export default ({ username, pageSize, currentPage }) => {
   console.log('username: %s, pageSize: %s, currentPage: %s', username, pageSize, currentPage);
-  const start = pageSize * (currentPage - 1) + 1;
+  const start = pageSize * (currentPage - 1);
   const end = start + pageSize;
   let totalList = db.list;
   totalList = filter(totalList, "username", username);
