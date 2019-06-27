@@ -51,6 +51,9 @@ export const useFormTable = ({
         value = defaultFormValues;
       }
       return Promise.resolve(value).then(data => {
+        if (form.getFieldsError().find(item => item.errors.length > 0)) {
+          throw new Error('getFieldsError');
+        }
         const obj = { ...data };
         Object.keys(data).forEach(name => {
           obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
