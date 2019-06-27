@@ -7,11 +7,12 @@ const Form = ({
   children,
   form,
   onFinish,
+  initialValues,
   ...restProps
 }) => <AntdForm {...restProps} onSubmit={event => {
   event.preventDefault();
   event.stopPropagation();
-  form.validateFields().then((values) => {
+  form.validateFields().then(values => {
     if (onFinish) {
       onFinish(values);
     }
@@ -26,6 +27,7 @@ const Form = ({
     NOT_CONTAIN_FORM: true,
     HOOK_MARK: 'asdihasiodhaohdioahfoihsoefhisihifhsiofhiosfd',
   }}
+  initialValues={initialValues}
 >
   {children}
    </StateForm>

@@ -3,13 +3,13 @@ import { useState, useEffect, useCallback } from 'react';
 export interface UseSearchResultConfig<T, S> {
   search: (requestData: S) => Promise<T> | T;
   firstAutoSearch?: boolean;
-  defaultRequestData?: S | Promise<S>;
+  defaultRequestData?: S | (() => Promise<S> | S);
 }
 
 export const useSearchResult = <T, S>({
   search,
   firstAutoSearch = true,
-  defaultRequestData = {} as S,
+  defaultRequestData,
 }: UseSearchResultConfig<T, S>) => {
   const [requestData, setRequestData] = useState<S>({} as S);
   const [responseData, setResponseData] = useState<T>({} as T);
@@ -29,13 +29,19 @@ export const useSearchResult = <T, S>({
 
   useEffect(() => {
     setDefaultRequestDataLoading(true);
-    Promise.resolve(defaultRequestData).then(data => {
+    let value;
+    if (typeof defaultRequestData === 'function') {
+      value = (defaultRequestData as any)();
+    } else {
+      value = defaultRequestData;
+    }
+    Promise.resolve(value).then(data => {
       setRequestData(data);
       setDefaultRequestDataLoading(false);
       if (firstAutoSearch) {
         searchFunc(data);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   return {
