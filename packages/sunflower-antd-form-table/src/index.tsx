@@ -82,37 +82,42 @@ export const useFormTable = ({
     initialValues,
   });
 
+  const onFinish = useCallback((values: Store) => {
+    searchFunc({
+      ...get().requestData,
+      ...values,
+      currentPage: 1,
+    });
+  }, []);
 
   const SearchResultForm = useCallback(props => <Form
     form={form}
-    onFinish={(values: Store) =>
-      searchFunc({
-        ...get().requestData,
-        ...values,
-        currentPage: 1,
-      })
-    }
+    onFinish={onFinish}
     initialValues={get().initialValues}
     {...props}
   />, []);
+
+  const onPaginationChange = useCallback((page: number) => {
+    searchFunc({
+      ...get().requestData,
+      currentPage: page,
+    });
+  }, []);
+
+  const onPaginationShowSizeChange = useCallback((page: number, pageSize: number) => {
+    searchFunc({
+      ...get().requestData,
+      currentPage: 1,
+      pageSize,
+    });
+  }, []);
 
   const SearchResultTable = useCallback((props: TableProps<any>) => {
     const { pagination: customPagination } = props;
     const store = get();
     const pagination = {
-      onChange(page: number) {
-        searchFunc({
-          ...store.requestData,
-          currentPage: page,
-        });
-      },
-      onShowSizeChange(page: number, pageSize: number) {
-        searchFunc({
-          ...store.requestData,
-          currentPage: 1,
-          pageSize,
-        });
-      },
+      onChange: onPaginationChange,
+      onShowSizeChange: onPaginationShowSizeChange,
       pageSize: store.requestData.pageSize as number,
       current: store.requestData.currentPage as number,
       ...(customPagination || {}),
@@ -142,5 +147,10 @@ export const useFormTable = ({
     responseData,
     defaultFormValuesLoading: defaultRequestDataLoading,
     search: searchFunc,
+    pagination: {
+      onChange: onPaginationChange,
+      onShowSizeChange: onPaginationShowSizeChange,
+    },
+    onFinish,
   };
 };
