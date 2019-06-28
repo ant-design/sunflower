@@ -1,6 +1,6 @@
 {
   "name": "@sunflower-antd/form-table",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.2",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
