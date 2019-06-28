@@ -41,7 +41,9 @@ export const useSearchResult = <T, S>({
       if (firstAutoSearch) {
         searchFunc(data);
       }
-    }).catch(() => {});
+    }).catch(() => {
+      setDefaultRequestDataLoading(false);
+    });
   }, []);
 
   return {
