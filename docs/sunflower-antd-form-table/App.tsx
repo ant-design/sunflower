@@ -38,7 +38,7 @@ export default () => {
     {
       defaultFormValuesLoading && 'defaultFormValuesLoading...'
     }
-    <Form {...formItemLayout}>
+    <Form form={form} {...formItemLayout}>
       <Row>
         <Col span={8}>
           <Form.Item
