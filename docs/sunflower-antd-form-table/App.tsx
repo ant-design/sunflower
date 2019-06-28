@@ -33,12 +33,11 @@ export default () => {
     wrapperCol: { span: 16 },
   };
 
-
   return <div>
     {
       defaultFormValuesLoading && 'defaultFormValuesLoading...'
     }
-    <Form form={form} {...formItemLayout}>
+    <Form {...formItemLayout}>
       <Row>
         <Col span={8}>
           <Form.Item
