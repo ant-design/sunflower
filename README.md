@@ -2,8 +2,6 @@
  
 Sunflower  🌻 是一套基于 antd 及 react-hooks 的业务流程库。sunflower 将常用的业务流程通过 hooks 提供出来，此外，sunflower 提供将这个流程跟 antd ui 组件组合起来，提供出更为方便的使用方式。
 
-![image](https://user-images.githubusercontent.com/44191223/60330155-65ad3280-99c4-11e9-9301-c96a3f28da31.png)
-
 
 ## 特点
 
@@ -21,8 +19,7 @@ $ npm install @sunflower-antd/form-table
 
 ## 示例
 
-
-![image](https://user-images.githubusercontent.com/44191223/59961424-3e5cee00-950a-11e9-8b3a-0b7574b54e32.png)
+![image](https://user-images.githubusercontent.com/44191223/60330155-65ad3280-99c4-11e9-9301-c96a3f28da31.png)
 
 一个包含了 ”请求“，”分页“，”查找“ 功能的示例仅需要很少的代码。
 
