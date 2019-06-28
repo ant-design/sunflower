@@ -102,7 +102,7 @@ export const useFormTable = ({
     const pagination = {
       onChange(page: number) {
         searchFunc({
-          ...requestData,
+          ...store.requestData,
           currentPage: page,
         });
       },
