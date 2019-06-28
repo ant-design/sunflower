@@ -46,7 +46,9 @@ export default () => {
             name="username"
             rules={[{ required: true, message: 'Please input' }]}
           >
-            <Input placeholder="Username" />
+            <Input placeholder="Username" onChange={e => {
+              console.log(e.target.value);
+            }} />
           </Form.Item>
         </Col>
 
