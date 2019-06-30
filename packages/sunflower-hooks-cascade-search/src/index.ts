@@ -16,9 +16,8 @@ export const useCascadeSearch = <T>({
       return;
     }
     const value = await Promise.resolve(list[index](responseDataList[index - 1], ...args));
-    const next = index + 1;
-    const array = [...responseDataList.slice(0, next + 1)];
-    array[next] = value;
+    const array = [...responseDataList.slice(0, index + 1)];
+    array[index] = value;
     setResponseDataList(array);
   }, [responseDataList]);
   return {
