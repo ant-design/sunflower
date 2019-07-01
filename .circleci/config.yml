@@ -8,7 +8,7 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - save_cache:
           paths:
             - node_modules
@@ -23,7 +23,7 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - save_cache:
           paths:
             - node_modules
@@ -38,7 +38,7 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - save_cache:
           paths:
             - node_modules
