@@ -42,7 +42,7 @@ export default () => {
   });
   const [Select0, Select1, Select2] = selects;
 
-  const { Form, form } = useFormTable({});
+  const { Form } = useFormTable({});
 
   return <div>
 
