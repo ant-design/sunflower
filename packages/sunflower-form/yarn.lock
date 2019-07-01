@@ -84,10 +84,10 @@ prop-types@^15.5.10:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-rc-field-form@0.0.0-alpha.2:
-  version "0.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/rc-field-form/-/rc-field-form-0.0.0-alpha.2.tgz#3159ec682386d12f3f45494e5cc24765f64dc402"
-  integrity sha512-kh3TSDVUEnYCmCILxOqXsM6PM6pupUo0pXkQkZrJyrnL/kHYl7E+0B8GKjhq9LrUWJ3/Tfpty5PxGCmgiz+6Tw==
+rc-field-form@0.0.0-alpha.13:
+  version "0.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/rc-field-form/-/rc-field-form-0.0.0-alpha.13.tgz#93840425c9b4cee30ace1f9f4605815b3b2baba6"
+  integrity sha512-dkGMYxqGyGwtAwE28TMZlzMD5fQ84VQkAOhmikHeUVlEd3LdMuPAo32Cs/TB39iODQqoFflp+oGMhRJ756Utew==
   dependencies:
     async-validator "^1.11.2"
     lodash "^4.17.4"
