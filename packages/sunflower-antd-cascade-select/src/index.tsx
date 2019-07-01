@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import { Select } from 'antd';
 import { useStore } from '@sunflower-hooks/store';
 import { useCascadeSearch, UseCascadeSearchConfig } from '@sunflower-hooks/cascade-search';
@@ -12,29 +12,43 @@ export interface OptionData {
 export type OptionDataList = OptionData[];
 
 export interface UseCascadeSelectConfig extends UseCascadeSearchConfig<OptionDataList>{
-  firstOptions?: OptionDataList | (() => (OptionDataList | Promise<OptionDataList>))
+  autoFirstSearch: boolean;
+  form: any;
 }
 
 export const useCascadeSelect = ({
   list = [],
-  firstOptions = [],
+  autoFirstSearch = true,
 }: UseCascadeSelectConfig) => {
-  const { search, responseDataList } = useCascadeSearch({
-    list: list.map(item => {
-      return (...args) => {
-        item(undefined, ...args);
-      }
-    })
+  const { search, responseDataList, loadingList } = useCascadeSearch({
+    list: list.map(item => (lastValue, ...args) => item(...args)),
   });
-  const [ firstOptionsList, setFirstOptionsList ] = useState([]);
-  const selects = list.map((item, index) => {
+  const { get, set } = useStore<{
+    responseDataList: OptionDataList[];
+    loadingList: boolean[];
+    search: any;
+  }>();
+  set({
+    responseDataList,
+    loadingList,
+    search,
+  });
+
+  const selects = useMemo(() => list.map((item, index) => {
     return (props) => {
-      const options = index === 0 ? firstOptionsList : responseDataList[index - 1];
-      return <Select onChange={(value) => {
-        search(index, value);
-      }} {...props}>
+
+      const options = get().responseDataList[index];
+      return <Select 
+        loading={get().loadingList[index]}
+        {...props}
+        onChange={(...args) => {
+          if (props.onChange) {
+            props.onChange(...args);
+          }
+          get().search(index + 1, ...args);
+      }}>
         {
-          options.map(option =>
+          options && options.map(option =>
             <Select.Option value={option.value} key={option.value}>
               {option.label}
             </Select.Option>
@@ -42,20 +56,17 @@ export const useCascadeSelect = ({
         }
       </Select>
     };
-  });
+  }), []);
   useEffect(() => {
-    let result: OptionDataList | Promise<OptionDataList>;
-    if (typeof firstOptions === 'function') {
-      result = firstOptions();
-    } else {
-      result = firstOptions;
+    if (autoFirstSearch && !responseDataList[0]) {
+      search(0);
     }
-    Promise.resolve(result).then(options => {
-      setFirstOptionsList(options);
-    });
   }, []);
   return {
+    search,
     selects,
+    responseDataList,
+    loadingList,
   }
 };
 

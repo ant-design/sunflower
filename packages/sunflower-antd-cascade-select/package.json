@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "entry": "src/index.ts",
+  "entry": "src/index.tsx",
   "dependencies": {
     "@sunflower-hooks/cascade-search": "0.0.0",
     "@sunflower-hooks/store": "0.0.0-alpha.1"
