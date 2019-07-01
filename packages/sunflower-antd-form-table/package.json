@@ -1,15 +1,15 @@
 {
   "name": "@sunflower-antd/form-table",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0-alpha.3",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "entry": "src/index.tsx",
   "dependencies": {
-    "@sunflower-hooks/search-result": "0.0.0-alpha.1",
-    "@sunflower-hooks/store": "0.0.0-alpha.1",
+    "@sunflower-hooks/search-result": "0.0.0-alpha.2",
+    "@sunflower-hooks/store": "0.0.0-alpha.2",
     "rc-field-form": "0.0.0-alpha.13",
-    "sunflower-form": "0.0.0-alpha.1"
+    "sunflower-form": "0.0.0-alpha.2"
   },
   "peerDependencies": {
     "antd": "^3.19.3",
