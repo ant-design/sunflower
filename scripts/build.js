@@ -10,7 +10,6 @@ const list = process.env.NAME ? [process.env.NAME] : glob.sync('packages/*').map
 });
 
 const depsMap = {};
-const distMap = {};
 list.forEach(item => {
   const pkg = join(__dirname, '../packages', item, 'package.json');
   const { dependencies, main, module: pkgModule } = require(pkg);
@@ -18,20 +17,17 @@ list.forEach(item => {
   const dist = [];
   if (dependencies) {
     Object.keys(dependencies).forEach(dependencie => {
-      if (list.includes(dependencie)) {
-        deps.push(dependencie);
+      const name = dependencie
+        .replace('@sunflower-antd/', 'sunflower-antd-')
+        .replace('@sunflower-hooks/', 'sunflower-hooks-');
+      if (list.includes(name)) {
+        deps.push(name);
       }
     });
   }
-  if (main) {
-    dist.push(join(pkg, '../', main, '../'));
-  }
-  if (pkgModule) {
-    dist.push(join(pkg, '../', pkgModule, '../'));
-  }
-  depsMap[item] = deps; 
-  distMap[item] = dist;
+  depsMap[item] = deps;
 });
+
 
 const map = {};
 
