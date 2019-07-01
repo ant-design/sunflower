@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useCascadeSelect } from '@sunflower-antd/cascade-select';
 import { useFormTable } from '@sunflower-antd/form-table';
-import { Input, Button, Table, Select } from 'antd';
 
 
 export default () => {
@@ -19,32 +18,20 @@ export default () => {
       },
       async (value) => {
         await new Promise(r => setTimeout(r, 1000));
-        if (value === 'lily') {
-          return [{
-            label: 'lily 1',
-            value: 'lily 1',
-          }, 
-          {
-            label: 'lily 2',
-            value: 'lily 2',
-          }];
-        }
         return [{
-          label: 'jack 1',
-          value: 'jack 1',
+          label: `${value} 1`,
+          value: `${value} 1`,
         }, 
         {
-          label: 'jack 2',
-          value: 'jack 2',
+          label: `${value} 2`,
+          value: `${value} 2`,
         }];
       },
     ],
   });
   const [Select0, Select1] = selects;
 
-  const { Form, form } = useFormTable({
-    search: (values) => {},
-  });
+  const { Form, form } = useFormTable({});
 
   return <div>
 
@@ -54,7 +41,6 @@ export default () => {
         name="username"
       >
         <Select0
-          style={{width: 200}}
           onChange={() => {
             form.setFieldsValue({
               username2: '',
@@ -67,7 +53,7 @@ export default () => {
         label="Username2"
         name="username2"
       >
-        <Select1 style={{width: 200}} />
+        <Select1 />
       </Form.Item>
     </Form>
     
