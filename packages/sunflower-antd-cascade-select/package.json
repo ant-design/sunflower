@@ -1,0 +1,23 @@
+{
+  "name": "@sunflower-antd/cascade-select",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "entry": "src/index.tsx",
+  "dependencies": {
+    "@sunflower-hooks/cascade-search": "0.0.0",
+    "@sunflower-hooks/store": "0.0.0-alpha.1"
+  },
+  "peerDependencies": {
+    "antd": "^3.19.3",
+    "react": "^16.8.4"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ]
+}
