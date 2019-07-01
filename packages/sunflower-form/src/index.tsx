@@ -40,6 +40,10 @@ Form.Item = ({
       const props = {
         ...control,
         ...children.props,
+        __sunflower: {
+          form,
+          name,
+        },
       };
       // only modify when use onChange
       if (children.props.onChange) {
