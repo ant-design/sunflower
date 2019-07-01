@@ -51,13 +51,13 @@ export const useFormTable = ({
         value = defaultFormValues;
       }
       return Promise.resolve(value).then(data => {
+        const touched = form.isFieldsTouched();
         const obj = { ...data };
         Object.keys(data).forEach(name => {
           obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
         });
         setInitialValues(data);
         form.setFieldsValue(obj);
-        const touched = form.isFieldsTouched();
         if (touched) {
           setRequestData({
             pageSize: defaultPageSize,
