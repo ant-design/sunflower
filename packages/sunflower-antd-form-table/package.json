@@ -1,6 +1,6 @@
 {
   "name": "@sunflower-antd/form-table",
-  "version": "0.0.0-alpha.4",
+  "version": "0.0.0-alpha.5",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "@sunflower-hooks/search-result": "0.0.0-alpha.2",
     "@sunflower-hooks/store": "0.0.0-alpha.2",
     "rc-field-form": "0.0.0-alpha.16",
-    "sunflower-form": "0.0.0-alpha.2"
+    "sunflower-form": "0.0.0-alpha.3"
   },
   "peerDependencies": {
     "antd": "^3.19.3",
