@@ -8,7 +8,7 @@
   "dependencies": {
     "@sunflower-hooks/search-result": "0.0.0-alpha.2",
     "@sunflower-hooks/store": "0.0.0-alpha.2",
-    "rc-field-form": "0.0.0-alpha.13",
+    "rc-field-form": "0.0.0-alpha.16",
     "sunflower-form": "0.0.0-alpha.2"
   },
   "peerDependencies": {
