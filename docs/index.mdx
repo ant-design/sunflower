@@ -1,110 +1,49 @@
 ---
-name: sunflower
+name: Overview
 route: '/'
+order: -1
 ---
 
-import { Playground } from 'docz'
-import { useFormTable } from '@sunflower-antd/form-table';
-import { Input, Button, Table } from 'antd';
-import request from './sunflower-antd-form-table/request';
+# Overview
 
+## 🌻&nbsp; What is Sunflower
 
+&nbsp;&nbsp;&nbsp;&nbsp;Sunflower is a library based on antd and react-hooks, it provides common business processes through hooks. In addition, sunflower provides a more convenient way to combine this process with antd ui components.
 
-## What is Sunflower
+## 🎩&nbsp; Features
 
-Sunflower is an [antd](https://ant.design/) based process component library that uses react hooks.
+- 🏄  Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
+- 💅 Easy to customize. You can easily customize the combination of components you need.
+- 👯 Layered design. You can use react-hooks without ui or react-hooks with antd.
+- 🤾‍♂️Hooks return HOC. Crazy, but it does give you a more convenient api. At the same time you can choose not to use.
 
-Using sunflower allows developers to efficiently complete process and component development, and you don't need to know too many callback methods and states. At the same time, antd's ui features are also flexible.
+## 🤔&nbsp; Why?
 
-## example
+&nbsp;&nbsp;&nbsp;&nbsp;Usually, we use multiple component components of antd, and we organize their relationship through state and props methods like `value`, `onChange`.
 
-<Playground>
-  {
-    () => {
-      const { Form, Table } = useFormTable({
-        search: (values) => request(values),
-        defaultPageSize: 5,
-      });
-      return <div>
-        <Form>
-          <Form.Item
-            label="Username"
-            name="username"
-          >
-            <Input placeholder="Username" />
-          </Form.Item>
+&nbsp;&nbsp;&nbsp;&nbsp;Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to precipitate existing processes?
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Search
-            </Button>
-          </Form.Item>
-        </Form>
+&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.Further, we use hoc as the api, so we don't have to care about the state and methods.
 
-        <Table
-          columns={[
-            {
-              title: 'Username',
-              dataIndex: 'username',
-              key: 'username',
-            },
-            {
-              title: 'Email',
-              dataIndex: 'email',
-              key: 'email',
-            }
-          ]}
-          rowKey="id"
-          pagination={{
-            showQuickJumper: true,
-            showSizeChanger: true,
-            pageSizeOptions: ['5', '10', '20', '50'],
-          }}
-        />
-      </div>;
-    }
-  }
-</Playground>
+## 📟&nbsp; Usage
+
+Install the react-hooks you need 
+
+eg: `@sunflower-antd/form-table`
+```
+$ npm install @sunflower-antd/form-table --save
+```
 
 ```jsx
 import { useFormTable } from '@sunflower-antd/form-table';
 
-function Component() {
-  const { Form, Table } = useFormTable({
-    search: (values) => request(values),
-    defaultPageSize: 5,
-  });
+function Component(props) {
+  const { Form, Table } = useFormTable(config);
   return <div>
-    <Form>
-      <Form.Item
-        label="Username"
-        name="username"
-      >
-        <Input placeholder="Username" />
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Search
-        </Button>
-      </Form.Item>
-    </Form>
-
-    <Table
-      columns={[
-        {
-          title: 'Username',
-          dataIndex: 'username',
-          key: 'username',
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-        }
-      ]}
-      rowKey="id"
-    />
+    <Form />
+    <Table />
   </div>;
 }
+
+ReactDOM.render(<Component />, mountNode);
 ```

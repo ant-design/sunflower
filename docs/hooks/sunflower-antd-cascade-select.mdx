@@ -1,0 +1,174 @@
+---
+name: useCascadeSelect
+menu: Hooks
+---
+
+import App1 from '../../examples/sunflower-antd-cascade-select/App1';
+
+
+# useCascadeSelect
+
+## Overview
+
+`useCascadeSelect` is a react-hooks.When you want to use cascading select, you can use it.
+
+## Usage
+
+```
+$ npm install @sunflower-antd/cascade-select --save
+```
+
+> peerDependences "antd", so make sure you have installed "antd"
+
+```jsx
+import { useCascadeSelect } from '@sunflower-antd';
+```
+
+
+## API
+
+```jsx
+const obj = useCascadeSelect(config);
+```
+
+- config
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>list</td>
+      <td>Cascading method array. Each method returns a select list of options. When the previous select value change, the subsequent method will be triggered with previous select value.</td>
+      <td>(previouValue) => Promise | List[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <td>autoFirstSearch</td>
+      <td>Whether the first method in the list will be executed automatically.</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+- obj
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>selects</td>
+      <td>antd Select HOC array, according to the length of the config list</td>
+      <td>Select[]</td>
+    </tr>
+    <tr>
+      <td>search</td>
+      <td>Execute the method of specifying the index in the config list,usually do not need to use.</td>
+      <td>(index: number) => void</td>
+    </tr>
+    <tr>
+      <td>responseDataList</td>
+      <td>Request return value list.</td>
+      <td>List[]</td>
+    </tr>
+    <tr>
+      <td>loadingList</td>
+      <td>Request loading list.</td>
+      <td>boolean[]</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples 1
+
+<App1 />
+
+```jsx
+import React, { useState } from 'react';
+import { useCascadeSelect } from '@sunflower-antd/cascade-select';
+import { useFormTable } from '@sunflower-antd/form-table';
+
+
+export default () => {
+  const { selects } = useCascadeSelect({
+    list: [
+      async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        return [{
+          label: 'lily',
+          value: 'lily',
+        }, {
+          label: 'jack',
+          value: 'jack',
+        }];
+      },
+      async (value) => {
+        await new Promise(r => setTimeout(r, 1000));
+        return [{
+          label: `${value} 1`,
+          value: `${value} 1`,
+        }, 
+        {
+          label: `${value} 2`,
+          value: `${value} 2`,
+        }];
+      },
+      async (value) => {
+        await new Promise(r => setTimeout(r, 1000));
+        return [{
+          label: `${value} 1`,
+          value: `${value} 1`,
+        }, 
+        {
+          label: `${value} 2`,
+          value: `${value} 2`,
+        }];
+      },
+    ],
+  });
+  const [Select0, Select1, Select2] = selects;
+
+  const { Form } = useFormTable({});
+
+  return <div>
+
+    <Form>
+      <Form.Item
+        label="Username"
+        name="username"
+      >
+        <Select0 />
+      </Form.Item>
+
+      <Form.Item
+        label="Username2"
+        name="username2"
+      >
+        <Select1 />
+      </Form.Item>
+
+      <Form.Item
+        label="Username3"
+        name="username3"
+      >
+        <Select2 />
+      </Form.Item>
+    </Form>
+    
+  </div>
+};
+
+```
