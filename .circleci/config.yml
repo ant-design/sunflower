@@ -45,7 +45,7 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }} 
       - run: yarn bootstrap
       - run: yarn build
-  doc:
+  docs:
     docker:
       - image: circleci/node:latest
     steps:
@@ -64,9 +64,9 @@ jobs:
       - run: yarn deploy
 workflows:
   version: 2
-  lint_test_build_deploy:
+  lint_test_build_docs:
     jobs:
       - lint
       - test
       - build
-      - deploy
+      - docs
