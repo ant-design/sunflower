@@ -18,6 +18,7 @@ export default {
       alias(),
     ],
     title: 'sunflower',
+    base: '/sunflower/',
     description: 'A react-hooks + antd library.',
     repository: 'https://github.com/ant-design/sunflower',
     ordering: 'ascending',

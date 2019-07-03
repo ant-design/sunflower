@@ -6,9 +6,11 @@
     "lint": "umi-lint --eslint.ext='.ts,tsx' ./packages/*/src",
     "precommit": "umi-lint --staged --eslint.ext='.ts,tsx' --fix",
     "dev": "father doc dev",
+    "doc:build": "father doc build",
     "build": "node scripts/build",
     "test": "father test",
     "cov": "father test --coverage",
+    "doc:deploy": "father doc deploy",
     "pub": "yarn build && lerna publish"
   },
   "devDependencies": {
