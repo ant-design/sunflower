@@ -45,10 +45,28 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }} 
       - run: yarn bootstrap
       - run: yarn build
+  doc:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install --frozen-lockfile
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - add_ssh_keys:
+          fingerprints:
+            - "7c:12:ca:31:c8:cf:10:f3:28:0a:84:7a:14:bd:f2:45"
+      - run: yarn deploy
 workflows:
   version: 2
-  lint_test_build:
+  lint_test_build_deploy:
     jobs:
       - lint
       - test
       - build
+      - deploy
