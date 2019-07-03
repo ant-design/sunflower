@@ -3,4 +3,141 @@ name: useFormTable
 menu: Hooks
 ---
 
-## x
+import Example from '../Example';
+
+
+# useFormTable
+
+
+## Overview
+
+`useFormTable` is a react-hooks.When you want to use "Form Search Table", you can use it.
+
+## Usage
+
+```
+$ npm install @sunflower-antd/form-table --save
+```
+
+> peerDependences "antd", so make sure you have installed "antd"
+
+```jsx
+import { useFormTable } from '@sunflower-antd/form-table';
+```
+
+
+## API
+
+```jsx
+const obj = useFormTable(config);
+```
+
+- config
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>search</td>
+      <td>Request method, the parameter is the value of the form fields.The method needs to return an array or Promise as the "dataSource" props of the Table.</td>
+      <td>(values) => Promise | array</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>firstAutoSearch</td>
+      <td>Whether the search method will be executed automatically.</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>defaultPageSize</td>
+      <td>Default page size</td>
+      <td>number</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>defaultCurrentPage</td>
+      <td>Default current page</td>
+      <td>number</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>defaultFormValues</td>
+      <td>Default form values.If the form has data that needs to be backfilled, use it to get the data.</td>
+      <td>object</td>
+      <td dangerouslySetInnerHTML={{__html: '{}'}}></td>
+    </tr>
+  </tbody>
+</table>
+
+- obj
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Form</td>
+      <td>antd Select HOC array, according to the length of the config list</td>
+      <td>Select[]</td>
+    </tr>
+    <tr>
+      <td>Table</td>
+      <td>Execute the method of specifying the index in the config list,usually do not need to use.</td>
+      <td>(index: number) => void</td>
+    </tr>
+    <tr>
+      <td>form</td>
+      <td>Return formInstance so you can use the all form api.</td>
+      <td><a href="https://github.com/react-component/field-form#useform" target="_blank">formInstance</a></td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>Request loading.</td>
+      <td>boolean</td>
+    </tr>
+    <tr>
+      <td>requestData</td>
+      <td>Request Data.The value is used as a parameter by the search method.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>responseData</td>
+      <td>Response data.</td>
+      <td>array</td>
+    </tr>
+    <tr>
+      <td>defaultFormValuesLoading</td>
+      <td>When use 'defaultFormValues', the value will be true during the request.</td>
+      <td>boolean</td>
+    </tr>
+    <tr>
+      <td>pagination</td>
+      <td>Contains 'onChange' and 'onShowSizeChange' for custom table conditions.If you only use the Table returned by useFormTable, you don't need to care.</td>
+      <td>object</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+> This is a typical "Form Search Table" scene.
+
+<Example name="sunflower-antd-form-table/Example1" />
+
+> This is a scene with more customizations.
+
+<Example name="sunflower-antd-form-table/Example2" />
+
