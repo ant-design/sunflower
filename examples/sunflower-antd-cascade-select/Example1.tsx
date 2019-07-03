@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCascadeSelect } from '@sunflower-antd/cascade-select';
 import { useFormTable } from '@sunflower-antd/form-table';
 
@@ -48,22 +48,22 @@ export default () => {
 
     <Form>
       <Form.Item
-        label="Username"
-        name="username"
+        label="Select0"
+        name="select0"
       >
         <Select0 />
       </Form.Item>
 
       <Form.Item
-        label="Username2"
-        name="username2"
+        label="Select1"
+        name="select1"
       >
         <Select1 />
       </Form.Item>
 
       <Form.Item
-        label="Username3"
-        name="username3"
+        label="Select0"
+        name="select2"
       >
         <Select2 />
       </Form.Item>

@@ -3,10 +3,11 @@ name: useCascadeSelect
 menu: Hooks
 ---
 
-import App1 from '../../examples/sunflower-antd-cascade-select/App1';
+import Example from '../Example';
 
 
 # useCascadeSelect
+
 
 ## Overview
 
@@ -92,83 +93,9 @@ const obj = useCascadeSelect(config);
   </tbody>
 </table>
 
-## Examples 1
+## Examples
 
-<App1 />
+> This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter.When you select the second select, the selected value will be used as a parameter to call the third function.When you change the previous select option, the subsequent select values ​​will be cleared.
 
-```jsx
-import React, { useState } from 'react';
-import { useCascadeSelect } from '@sunflower-antd/cascade-select';
-import { useFormTable } from '@sunflower-antd/form-table';
+<Example name="sunflower-antd-cascade-select/Example1" />
 
-
-export default () => {
-  const { selects } = useCascadeSelect({
-    list: [
-      async () => {
-        await new Promise(r => setTimeout(r, 1000));
-        return [{
-          label: 'lily',
-          value: 'lily',
-        }, {
-          label: 'jack',
-          value: 'jack',
-        }];
-      },
-      async (value) => {
-        await new Promise(r => setTimeout(r, 1000));
-        return [{
-          label: `${value} 1`,
-          value: `${value} 1`,
-        }, 
-        {
-          label: `${value} 2`,
-          value: `${value} 2`,
-        }];
-      },
-      async (value) => {
-        await new Promise(r => setTimeout(r, 1000));
-        return [{
-          label: `${value} 1`,
-          value: `${value} 1`,
-        }, 
-        {
-          label: `${value} 2`,
-          value: `${value} 2`,
-        }];
-      },
-    ],
-  });
-  const [Select0, Select1, Select2] = selects;
-
-  const { Form } = useFormTable({});
-
-  return <div>
-
-    <Form>
-      <Form.Item
-        label="Username"
-        name="username"
-      >
-        <Select0 />
-      </Form.Item>
-
-      <Form.Item
-        label="Username2"
-        name="username2"
-      >
-        <Select1 />
-      </Form.Item>
-
-      <Form.Item
-        label="Username3"
-        name="username3"
-      >
-        <Select2 />
-      </Form.Item>
-    </Form>
-    
-  </div>
-};
-
-```
