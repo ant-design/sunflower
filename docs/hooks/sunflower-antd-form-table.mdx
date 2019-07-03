@@ -46,12 +46,12 @@ const obj = useFormTable(config);
   <tbody>
     <tr>
       <td>search</td>
-      <td>Request method, the parameter is the value of the form fields.The method needs to return an array or Promise as the "dataSource" props of the Table.</td>
-      <td>(values) => Promise | array</td>
+      <td>Request method, the parameter is the value of the form fields.The method needs to return an array or Promise of SearchResponseData.</td>
+      <td>(requestData) => Promise | responseData</td>
       <td></td>
     </tr>
     <tr>
-      <td>firstAutoSearch</td>
+      <td>autoFirstSearch</td>
       <td>Whether the search method will be executed automatically.</td>
       <td>boolean</td>
       <td>true</td>
@@ -76,6 +76,28 @@ const obj = useFormTable(config);
     </tr>
   </tbody>
 </table>
+
+Eg: responseData
+```js
+{
+  list: [{
+    name: 'jack',
+  }, {
+    name: 'lily',
+  }],
+  total: 10, 
+}
+```
+
+Eg: requestData
+```js
+search(requestData) {
+  const { currentPage, pageSize, ...formValues } = requestData;
+}
+```
+
+
+
 
 - obj
 
@@ -109,14 +131,29 @@ const obj = useFormTable(config);
       <td>boolean</td>
     </tr>
     <tr>
-      <td>requestData</td>
-      <td>Request Data.The value is used as a parameter by the search method.</td>
-      <td></td>
+      <td>currentPage</td>
+      <td>Current page.</td>
+      <td>number</td>
     </tr>
     <tr>
-      <td>responseData</td>
-      <td>Response data.</td>
+      <td>pageSize</td>
+      <td>Page size.</td>
+      <td>number</td>
+    </tr>
+    <tr>
+      <td>formValues</td>
+      <td>Form values.</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>list</td>
+      <td>The value's 'list prop' returned by the search method.If you use antd's Table instead of useFormTable's Table, you can use this value to pass to Table dataSource prop.</td>
       <td>array</td>
+    </tr>
+    <tr>
+      <td>total</td>
+      <td>The value's 'total prop' returned by the search method.</td>
+      <td>number</td>
     </tr>
     <tr>
       <td>defaultFormValuesLoading</td>
@@ -127,6 +164,11 @@ const obj = useFormTable(config);
       <td>pagination</td>
       <td>Contains 'onChange' and 'onShowSizeChange' for custom table conditions.If you only use the Table returned by useFormTable, you don't need to care.</td>
       <td>object</td>
+    </tr>
+    <tr>
+      <td>onFinish</td>
+      <td>Form 'onFinish' method.If you only use the Table returned by useFormTable, you don't need to care.</td>
+      <td>(formValues) => void</td>
     </tr>
   </tbody>
 </table>

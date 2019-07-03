@@ -29,7 +29,7 @@ test("useSearchResult", async () => {
         });
       }, 20)
     ),
-    firstAutoSearch: false
+    autoFirstSearch: false
   };
   const { result, waitForNextUpdate } = renderHook(() =>
     useSearchResult(config)
