@@ -17,5 +17,24 @@ export default {
     plugins: [
       alias(),
     ],
+    title: 'sunflower',
+    description: 'A react-hooks + antd library.',
+    repository: 'https://github.com/ant-design/sunflower',
+    ordering: 'ascending',
+    themeConfig: {
+      repository: 'https://github.com/ant-design/sunflower',
+      styles: {
+        container: {
+          fontSize: 16,
+        },
+      },
+      colors: {
+        primary:'rgb(230, 174, 49)',
+      },
+    },
+    menu: [
+      'Overview',
+      'Hooks',
+    ]
   },
 }

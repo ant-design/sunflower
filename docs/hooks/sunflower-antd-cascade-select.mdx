@@ -1,0 +1,101 @@
+---
+name: useCascadeSelect
+menu: Hooks
+---
+
+import Example from '../Example';
+
+
+# useCascadeSelect
+
+
+## Overview
+
+`useCascadeSelect` is a react-hooks.When you want to use cascading select, you can use it.
+
+## Usage
+
+```
+$ npm install @sunflower-antd/cascade-select --save
+```
+
+> peerDependences "antd", so make sure you have installed "antd"
+
+```jsx
+import { useCascadeSelect } from '@sunflower-antd/cascade-select';
+```
+
+
+## API
+
+```jsx
+const obj = useCascadeSelect(config);
+```
+
+- config
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>list</td>
+      <td>Cascading method array. Each method returns a select list of options. When the previous select value change, the subsequent method will be triggered with previous select value.</td>
+      <td>(previouValue) => Promise | List[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <td>autoFirstSearch</td>
+      <td>Whether the first method in the list will be executed automatically.</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+- obj
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>selects</td>
+      <td>antd Select HOC array, according to the length of the config list</td>
+      <td>Select[]</td>
+    </tr>
+    <tr>
+      <td>search</td>
+      <td>Execute the method of specifying the index in the config list,usually do not need to use.</td>
+      <td>(index: number) => void</td>
+    </tr>
+    <tr>
+      <td>responseDataList</td>
+      <td>Request return value list.</td>
+      <td>List[]</td>
+    </tr>
+    <tr>
+      <td>loadingList</td>
+      <td>Request loading list.</td>
+      <td>boolean[]</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+> This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter.When you select the second select, the selected value will be used as a parameter to call the third function.When you change the previous select option, the subsequent select values ​​will be cleared.
+
+<Example name="sunflower-antd-cascade-select/Example1" />
+
