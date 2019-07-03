@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFormTable } from '@sunflower-antd/form-table';
-import { Input, Button, Row, Col, Alert, Select } from 'antd';
+import { Input, Button, Row, Col, Alert, Select, Spin } from 'antd';
 import request from './request';
 
 
@@ -9,12 +9,16 @@ export default () => {
     Form,
     Table,
     form,
-    responseData,
+    total,
+    currentPage,
+    pageSize,
+    formValues,
     defaultFormValuesLoading,
   } = useFormTable({
-    search(values) {
-      console.log('request values', values);
-      return request(values);
+    search(requestData) {
+      const { currentPage, pageSize, ...formValues } = requestData;
+      console.log('requestData', requestData);
+      return request({ currentPage, pageSize, ...formValues });
     },
     defaultFormValues: () => {
       return new Promise(r => setTimeout(() => {
@@ -26,8 +30,6 @@ export default () => {
     },
   });
 
-  const [bordered, toggleTableBordered] = useState(false);
-
   const formItemLayout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -35,7 +37,13 @@ export default () => {
 
   return <div>
     {
-      defaultFormValuesLoading && 'defaultFormValuesLoading...'
+      defaultFormValuesLoading
+      ?
+      <div>
+        <Spin /> default form values loading
+      </div>
+      :
+      null
     }
     <Form {...formItemLayout}>
       <Row>
@@ -110,15 +118,14 @@ export default () => {
       </Row>
     </Form>
 
-    <div style={{ marginBottom: 20 }}>
-      <Button onClick={() => toggleTableBordered(!bordered)}>
-        change table bordered
-      </Button>
-    </div>
-
     <Alert
-      message={`total num: ${responseData.total || 0}`}
-      style={{marginBottom: 20}}
+      message={
+        `total num: ${total || 0},
+         currentPage: ${currentPage || 1},
+         pageSize: ${pageSize || 10},
+         Username: ${formValues.username || ''}
+      `}
+      style={{margin: '20px 0 20px 0'}}
     />
 
     <Table
@@ -135,7 +142,10 @@ export default () => {
         },
       ]}
       rowKey="id"
-      bordered={bordered}
+      pagination={{
+        showQuickJumper: true,
+        showSizeChanger: true,
+      }}
     />
 
   </div>;

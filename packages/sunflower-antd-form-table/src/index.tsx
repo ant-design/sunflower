@@ -26,7 +26,7 @@ export interface UseSearchResultAntdConfig
 
 export const useFormTable = ({
   search,
-  firstAutoSearch = true,
+  autoFirstSearch = true,
   defaultPageSize = 10,
   defaultCurrentPage = 1,
   defaultFormValues = {},
@@ -42,7 +42,7 @@ export const useFormTable = ({
     search: searchFunc,
   } = useSearchResultHooks({
     search,
-    firstAutoSearch,
+    autoFirstSearch,
     defaultRequestData: () => {
       let value: Store | Promise<Store>;
       if (typeof defaultFormValues === 'function') {
@@ -64,7 +64,7 @@ export const useFormTable = ({
             currentPage: defaultCurrentPage,
             ...obj,
           });
-          throw new Error('will not firstAutoSearch');
+          throw new Error('will not autoFirstSearch');
         }
         return {
           pageSize: defaultPageSize,
@@ -90,9 +90,9 @@ export const useFormTable = ({
 
   const onFinish = useCallback((values: Store) => {
     searchFunc({
-      ...get().requestData,
-      ...values,
       currentPage: 1,
+      pageSize: get().requestData.pageSize,
+      ...values,
     });
   }, []);
 
@@ -143,20 +143,28 @@ export const useFormTable = ({
 
   SearchResultForm['Item'] = Form.Item;
 
+  const formValues = { ...requestData };
+  delete formValues.currentPage;
+  delete formValues.pageSize;
   return {
     Form: SearchResultForm,
     Table: SearchResultTable,
     form,
     loading,
-    requestData,
-    setRequestData,
-    responseData,
+    formValues,
+    currentPage: requestData.currentPage,
+    pageSize: requestData.pageSize,
+    list: responseData.list,
+    total: responseData.total,
     defaultFormValuesLoading: defaultRequestDataLoading,
-    search: searchFunc,
     pagination: {
       onChange: onPaginationChange,
       onShowSizeChange: onPaginationShowSizeChange,
     },
     onFinish,
+    // requestData,
+    // setRequestData,
+    // responseData,
+    // search: searchFunc,
   };
 };
