@@ -48,8 +48,8 @@ jobs:
   docs:
     docker:
       - image: circleci/node:latest
-        environment:
-          CI: false
+    environment:
+      CI: false
     steps:
       - checkout
       - restore_cache:

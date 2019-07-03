@@ -10,7 +10,7 @@
     "test": "father test",
     "cov": "father test --coverage",
     "deploy": "father doc build",
-    "pub": "yarn build && lerna publish"
+    "pub": "CI=false yarn build && lerna publish"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^1.0.4",
