@@ -9,8 +9,8 @@
     "build": "node scripts/build",
     "test": "father test",
     "cov": "father test --coverage",
-    "deploy": "father doc build",
-    "pub": "CI=false yarn build && lerna publish"
+    "deploy": "CI=false father doc build && father doc deploy",
+    "pub": "yarn build && lerna publish"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^1.0.4",
