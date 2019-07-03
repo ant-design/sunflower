@@ -9,7 +9,7 @@
     "build": "node scripts/build",
     "test": "father test",
     "cov": "father test --coverage",
-    "deploy": "set \"CI=false\" && father doc build && father doc deploy",
+    "deploy": "CI=false node scripts/test",
     "pub": "yarn build && lerna publish"
   },
   "devDependencies": {
