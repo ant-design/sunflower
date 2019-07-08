@@ -11,5 +11,6 @@ module.exports = {
     "react-hooks/exhaustive-deps": 0,
     "no-underscore-dangle": 0,
     "@typescript-eslint/no-explicit-any": 0,
+    "arrow-body-style": 0,
   }
 };

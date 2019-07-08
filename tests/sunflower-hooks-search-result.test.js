@@ -14,7 +14,7 @@ test('useSearchResult', async () => {
                 },
                 {
                   name: 'jack',
-                }
+                },
               ],
               total: 10,
             }),
@@ -27,7 +27,7 @@ test('useSearchResult', async () => {
           a: 1,
           b: 2,
         });
-      }, 20)
+      }, 20);
     ),
     autoFirstSearch: false,
   };
