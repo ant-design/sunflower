@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseSearchResultConfig<T, S> {
-  search: (requestData: S) => Promise<T> | T;
+  search?: (requestData: S) => Promise<T> | T;
   autoFirstSearch?: boolean;
   defaultRequestData?: S | (() => Promise<S> | S);
 }
@@ -11,8 +11,8 @@ export const useSearchResult = <T, S>({
   autoFirstSearch = true,
   defaultRequestData,
 }: UseSearchResultConfig<T, S>) => {
-  const [requestData, setRequestData] = useState<S>({} as S);
-  const [responseData, setResponseData] = useState<T>({} as T);
+  const [requestData, setRequestData] = useState<S>();
+  const [responseData, setResponseData] = useState<T>({});
   const [loading, setLoading] = useState(false);
   const [defaultRequestDataLoading, setDefaultRequestDataLoading] = useState(
     false,
@@ -21,7 +21,7 @@ export const useSearchResult = <T, S>({
   const searchFunc = useCallback((data: S) => {
     setRequestData(data);
     setLoading(true);
-    return Promise.resolve(search(data)).then(response => {
+    return Promise.resolve(search && search(data)).then(response => {
       setResponseData(response);
       setLoading(false);
     });
