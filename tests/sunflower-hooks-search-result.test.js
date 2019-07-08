@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react-hooks";
-import { useSearchResult } from "../packages/sunflower-hooks-search-result/src";
+import { renderHook, act } from '@testing-library/react-hooks';
+import { useSearchResult } from '../packages/sunflower-hooks-search-result/src';
 
-test("useSearchResult", async () => {
+test('useSearchResult', async () => {
   const config = {
     search: () =>
       new Promise(r =>
@@ -10,26 +10,26 @@ test("useSearchResult", async () => {
             r({
               list: [
                 {
-                  name: "lily"
+                  name: 'lily',
                 },
                 {
-                  name: "jack"
+                  name: 'jack',
                 }
               ],
-              total: 10
+              total: 10,
             }),
-          200
-        )
+          200,
+        ),
       ),
     defaultRequestData: new Promise(r =>
       setTimeout(() => {
         r({
           a: 1,
-          b: 2
+          b: 2,
         });
       }, 20)
     ),
-    autoFirstSearch: false
+    autoFirstSearch: false,
   };
   const { result, waitForNextUpdate } = renderHook(() =>
     useSearchResult(config)
@@ -39,14 +39,14 @@ test("useSearchResult", async () => {
   await waitForNextUpdate();
   expect(result.current.requestData).toEqual({
     a: 1,
-    b: 2
+    b: 2,
   });
 
   act(() => {
     result.current.search({
       ...result.current.requestData,
       currentPage: 2,
-      pageSize: 2
+      pageSize: 2,
     });
   });
 
@@ -54,7 +54,7 @@ test("useSearchResult", async () => {
     a: 1,
     b: 2,
     currentPage: 2,
-    pageSize: 2
+    pageSize: 2,
   });
 
   await waitForNextUpdate();
@@ -62,12 +62,12 @@ test("useSearchResult", async () => {
   expect(result.current.responseData).toEqual({
     list: [
       {
-        name: "lily"
+        name: 'lily',
       },
       {
-        name: "jack"
-      }
+        name: 'jack',
+      },
     ],
-    total: 10
+    total: 10,
   });
 });
