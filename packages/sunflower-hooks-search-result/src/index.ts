@@ -12,7 +12,7 @@ export const useSearchResult = <T, S>({
   defaultRequestData,
 }: UseSearchResultConfig<T, S>) => {
   const [requestData, setRequestData] = useState<S>();
-  const [responseData, setResponseData] = useState<T>({});
+  const [responseData, setResponseData] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [defaultRequestDataLoading, setDefaultRequestDataLoading] = useState(
     false,
