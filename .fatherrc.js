@@ -19,9 +19,10 @@ export default {
     ],
     title: 'sunflower',
     base: '/sunflower/',
-    description: 'A react-hooks + antd library.',
+    description: 'Collection of React Hooks returning components of antd.',
     repository: 'https://github.com/ant-design/sunflower',
     ordering: 'ascending',
+    indexHtml: './docs/index.html',
     themeConfig: {
       repository: 'https://github.com/ant-design/sunflower',
       styles: {
