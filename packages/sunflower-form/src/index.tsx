@@ -45,17 +45,18 @@ Form.Item = ({
           name,
         },
       };
-      // only modify when use onChange
-      if (children.props.onChange) {
-        props.onChange = (...args) => {
-          control.onChange(...args);
-          children.props.onChange(...args);
-        };
-      }
-      const childNode =
+      const element =
         typeof children === 'function'
           ? children(control, meta, form)
-          : React.cloneElement(children, props);
+          : children;
+      // only modify when use onChange
+      if (element.props.onChange) {
+        props.onChange = (...args) => {
+          control.onChange(...args);
+          element.props.onChange(...args);
+        };
+      }
+      const childNode = React.cloneElement(element, props);
       const validateStatus = meta.errors.length > 0 ? 'error' : undefined;
       const help = meta.errors.length > 0 ? meta.errors[0] : undefined;
       const required = !!((rules || []).find(item => item.required));

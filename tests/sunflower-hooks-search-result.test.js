@@ -32,10 +32,10 @@ test('useSearchResult', async () => {
     autoFirstSearch: false,
   };
   const { result, waitForNextUpdate } = renderHook(() =>
-    useSearchResult(config)
+    useSearchResult(config),
   );
 
-  expect(result.current.requestData).toEqual({});
+  expect(result.current.requestData).toEqual(undefined);
   await waitForNextUpdate();
   expect(result.current.requestData).toEqual({
     a: 1,

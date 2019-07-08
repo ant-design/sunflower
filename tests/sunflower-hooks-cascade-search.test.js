@@ -13,17 +13,14 @@ test('useCascadeSearch', async () => {
           },
         ];
       },
-      (lastValue, value) => {
-        return new Promise(r => setTimeout(() => {
-          r(
-            value === '1' ? [
-              {
-                label: '2',
-                value: '2',
-              },
-            ] : [],
-          );
-        }, 200));
+      async (lastValue, value) => {
+        await new Promise(r => setTimeout(r, 200));
+        return value === '1' ? [
+          {
+            label: '2',
+            value: '2',
+          },
+        ] : [];
       },
     ],
     autoFirstSearch: false,

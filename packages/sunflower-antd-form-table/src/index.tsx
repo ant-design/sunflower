@@ -24,20 +24,22 @@ export interface UseSearchResultAntdConfig
 }
 
 
-export const useFormTable = ({
-  search,
-  autoFirstSearch = true,
-  defaultPageSize = 10,
-  defaultCurrentPage = 1,
-  defaultFormValues = {},
-}: UseSearchResultAntdConfig) => {
+export const useFormTable = (config: UseSearchResultAntdConfig) => {
+  const formTableConfig = config || {} as UseSearchResultAntdConfig;
+  const {
+    search,
+    autoFirstSearch = true,
+    defaultPageSize = 10,
+    defaultCurrentPage = 1,
+    defaultFormValues = {},
+  } = formTableConfig;
   const [form] = useForm();
   const [initialValues, setInitialValues] = useState();
   const {
     loading,
-    requestData,
+    requestData = {} as Store,
     setRequestData,
-    responseData,
+    responseData = {} as SearchResponseData,
     defaultRequestDataLoading,
     search: searchFunc,
   } = useSearchResultHooks({
