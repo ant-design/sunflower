@@ -29,7 +29,8 @@ jobs:
             - node_modules
           key: yarn-packages-{{ checksum "yarn.lock" }} 
       - run: yarn bootstrap
-      - run: yarn cov && bash <(curl -s https://codecov.io/bash)
+      - run: yarn cov
+      - run: bash <(curl -s https://codecov.io/bash)
   build:
     docker:
       - image: circleci/node:latest
