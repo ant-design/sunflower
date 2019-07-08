@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   lint:
     docker:
@@ -29,7 +29,7 @@ jobs:
             - node_modules
           key: yarn-packages-{{ checksum "yarn.lock" }} 
       - run: yarn bootstrap
-      - run: yarn test
+      - run: yarn cov && bash <(curl -s https://codecov.io/bash)
   build:
     docker:
       - image: circleci/node:latest
