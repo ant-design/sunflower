@@ -27,7 +27,7 @@ test('useSearchResult', async () => {
           a: 1,
           b: 2,
         });
-      }, 20);
+      }, 20),
     ),
     autoFirstSearch: false,
   };
