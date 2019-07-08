@@ -1,8 +1,16 @@
 # sunflower
 
-## 🌻&nbsp; What is Sunflower
+Collection of React Hooks returning components of [antd](https://ant.design).
 
-&nbsp;&nbsp;&nbsp;&nbsp;[sunflower](https://ant-design.github.io/sunflower) is a library based on [react-hooks](https://reactjs.org/docs/hooks-intro.html) and [antd](https://ant.design), it provides common processes through hooks. In addition, sunflower provides a more convenient way to combine this process with antd ui components.
+[![build status][circleci-image]][circleci-url] [![Test coverage][coveralls-image]][coveralls-url] [![node version][node-image]][node-url]
+
+[circleci-image]: https://img.shields.io/circleci/build/github/ant-design/sunflower/master.svg?style=flat-square
+[circleci-url]: https://circleci.com/gh/ant-design/sunflower/tree/master
+[coveralls-image]: https://img.shields.io/codecov/c/github/ant-design/sunflower/master.svg?style=flat-square
+[coveralls-url]: https://codecov.io/gh/ant-design/sunflower
+[node-image]: https://img.shields.io/badge/node.js-%3E=_6.0-green.svg?style=flat-square
+[node-url]: http://nodejs.org/download/
+
 
 ## 🎩&nbsp; Features
 
