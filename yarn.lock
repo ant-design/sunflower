@@ -3364,6 +3364,14 @@
     "@babel/runtime" "^7.4.5"
     "@testing-library/dom" "^5.0.0"
 
+"@testing-library/react@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-8.0.4.tgz#6ed405ba88b625ec53d7cfa78c038a950bafc1fa"
+  integrity sha512-omm4D00Z0aMaWfPRRP4X6zIaOVb0Kf1Yc1H5VE4id9D0pQRiBcTtmjbN0kZgT8rQGxHhVAuv1NuwFwMTwKzFqg==
+  dependencies:
+    "@babel/runtime" "^7.4.5"
+    "@testing-library/dom" "^5.0.0"
+
 "@tippy.js/react@^2.1.2":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@tippy.js/react/-/react-2.2.1.tgz#3826ecb318b4045a09d4cd1385a77d0538f4ac0e"
@@ -4441,6 +4449,13 @@ async-limiter@^1.0.0, async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
   integrity sha512-jp/uFnooOiO+L211eZOoSyzpOITMXx1rBITauYykG3BRYPu8h0UcxsPNB04RR5vo4Tyz3+ay17tR6JVf9qzYWg==
+
+async-validator@^1.11.2:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.11.3.tgz#23703b19740721d88edbcb6310f6d745da9ec109"
+  integrity sha512-Xeyt+fpqTSYeC++J/M/KkBq8UEGiAkjjKTirKhvkR9M9q+iZNCsv6ffVWNySllAuNPZ+SqzKMgBuvWHILjHatg==
+  dependencies:
+    babel-runtime "6.x"
 
 async-validator@~1.8.5:
   version "1.8.5"
@@ -16403,6 +16418,16 @@ rc-editor-mention@^1.1.13:
     prop-types "^15.5.8"
     rc-animate "^2.3.0"
     rc-editor-core "~0.8.3"
+
+rc-field-form@0.0.0-alpha.16:
+  version "0.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/rc-field-form/-/rc-field-form-0.0.0-alpha.16.tgz#4330300c4c01eb030d85f8f26927379ae5eff04c"
+  integrity sha512-rrruyO01ocYSa3ndyEPIAjOO76PAvih9ukV/3YjLjGoQQBDNaJfergyqCpPlTqneO6/GzFxZLTa+v1TgMMOAVw==
+  dependencies:
+    async-validator "^1.11.2"
+    lodash "^4.17.4"
+    rc-util "^4.6.0"
+    warning "^4.0.3"
 
 rc-form@^2.4.5:
   version "2.4.5"
