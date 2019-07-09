@@ -37,5 +37,5 @@ test('useCascadeSearch', async () => {
   expect(result.current.loadingList).toEqual([false, true]);
   await waitForNextUpdate();
   expect(result.current.loadingList).toEqual([false, false]);
-  expect(result.current.responseDataList).toEqual([[{"label": "1", "value": "1"}], [{"label": "2", "value": "2"}]]);
+  expect(result.current.responseDataList).toEqual([[{label: '1', value: '1' }], [{label: '2', value: '2' }]]);
 });

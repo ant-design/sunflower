@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react'
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useFormTable } from '../packages/sunflower-antd-form-table/src';
 

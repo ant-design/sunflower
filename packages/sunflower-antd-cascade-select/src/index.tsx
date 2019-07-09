@@ -74,7 +74,7 @@ export const useCascadeSelect = ({
   return {
     search,
     selects,
-    responseDataList,
+    optionsList: responseDataList,
     loadingList,
   };
 };
