@@ -82,50 +82,58 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     responseData: SearchResponseData;
     loading: boolean;
     initialValues: Store;
+    onFinish: any;
+    onPaginationChange: any;
+    onPaginationShowSizeChange: any;
   }>();
+
+  const onFinish = (values: Store) => {
+    searchFunc({
+      currentPage: 1,
+      pageSize: requestData.pageSize,
+      ...values,
+    });
+  };
+
+  const onPaginationChange = (page: number) => {
+    searchFunc({
+      ...requestData,
+      currentPage: page,
+    });
+  };
+
+  const onPaginationShowSizeChange = (page: number, pageSize: number) => {
+    searchFunc({
+      ...requestData,
+      currentPage: 1,
+      pageSize,
+    });
+  };
+
   set({
     requestData,
     responseData,
     loading,
     initialValues,
+    onFinish,
+    onPaginationChange,
+    onPaginationShowSizeChange,
   });
-
-  const onFinish = useCallback((values: Store) => {
-    searchFunc({
-      currentPage: 1,
-      pageSize: get().requestData.pageSize,
-      ...values,
-    });
-  }, []);
 
   const SearchResultForm = useCallback(props => <Form
     form={form}
-    onFinish={onFinish}
+    onFinish={get().onFinish}
     initialValues={get().initialValues}
     {...props}
   />, []);
 
-  const onPaginationChange = useCallback((page: number) => {
-    searchFunc({
-      ...get().requestData,
-      currentPage: page,
-    });
-  }, []);
-
-  const onPaginationShowSizeChange = useCallback((page: number, pageSize: number) => {
-    searchFunc({
-      ...get().requestData,
-      currentPage: 1,
-      pageSize,
-    });
-  }, []);
 
   const SearchResultTable = useCallback((props: TableProps<any>) => {
     const { pagination: customPagination } = props;
     const store = get();
     const pagination = {
-      onChange: onPaginationChange,
-      onShowSizeChange: onPaginationShowSizeChange,
+      onChange: store.onPaginationChange,
+      onShowSizeChange: store.onPaginationShowSizeChange,
       pageSize: store.requestData.pageSize as number,
       current: store.requestData.currentPage as number,
       ...(customPagination || {}),
@@ -167,6 +175,11 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     // requestData,
     // setRequestData,
     // responseData,
-    // search: searchFunc,
+    search: (data) => {
+      searchFunc({
+        ...requestData,
+        ...data,
+      });
+    },
   };
 };

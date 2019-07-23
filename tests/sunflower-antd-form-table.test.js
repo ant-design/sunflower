@@ -7,7 +7,9 @@ test('useFormTable', async () => {
   const search = jest.fn();
   const config = {
     search: (values) => {
-      search(values);
+      search({
+        ...values,
+      });
       return {
         list: [
           {

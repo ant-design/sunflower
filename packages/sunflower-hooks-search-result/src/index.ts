@@ -18,14 +18,14 @@ export const useSearchResult = <T, S>({
     false,
   );
 
-  const searchFunc = useCallback((data: S) => {
+  const searchFunc = (data: S) => {
     setRequestData(data);
     setLoading(true);
     return Promise.resolve(search && search(data)).then(response => {
       setResponseData(response);
       setLoading(false);
     });
-  }, []);
+  };
 
   useEffect(() => {
     setDefaultRequestDataLoading(true);
