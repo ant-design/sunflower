@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useEffect } from 'react';
 import { Select } from 'antd';
 import { useStore } from '@sunflower-hooks/store';
 import { useCascadeSearch, UseCascadeSearchConfig } from '@sunflower-hooks/cascade-search';
+import { SelectProps } from 'antd/lib/select';
 
 
 export interface OptionData {
@@ -20,7 +21,12 @@ export const useCascadeSelect = ({
   list = [],
   autoFirstSearch = true,
 }: UseCascadeSelectConfig) => {
-  const { search, responseDataList, loadingList } = useCascadeSearch({
+  const {
+    search,
+    responseDataList,
+    loadingList,
+    setResponseDataList,
+  } = useCascadeSearch({
     list: list.map(item => (lastValue, ...args) => item(...args)),
   });
   const obj = useRef([]);
@@ -35,9 +41,9 @@ export const useCascadeSelect = ({
     search,
   });
 
-  const selects = useMemo(() => list.map((item, index) => function Component(props) {
-    if (props.__sunflower) {
-      const { name } = props.__sunflower;
+  const selects = useMemo(() => list.map((item, index) => function Component(props: SelectProps) {
+    if (props['__sunflower']) {
+      const { name } = props['__sunflower'];
       obj.current[index] = name;
     }
     const options = get().responseDataList[index];
@@ -51,17 +57,19 @@ export const useCascadeSelect = ({
       loading={get().loadingList[index]}
       {...props}
       value={options && value}
-      onChange={(...args) => {
+      onChange={(val, option) => {
         if (props.onChange) {
-          props.onChange(...args);
+          props.onChange(val, option);
         }
-        if (props.__sunflower) {
-          const { form } = props.__sunflower;
+        if (props['__sunflower']) {
+          const { form } = props['__sunflower'];
           const values = {};
           for (let i = index + 1; i < obj.current.length; i += 1) {
             values[obj.current[i]] = undefined;
           }
+          const nextResponseDataList = get().responseDataList.slice(0, index + 1);
           form.setFieldsValue(values);
+          setResponseDataList(nextResponseDataList);
         }
     }}>
       {

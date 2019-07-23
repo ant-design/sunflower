@@ -34,7 +34,7 @@ export default () => {
           value: `${value} 1`,
         },
         {
-          label: `${value} 2`,
+          label: `${value.toUpperCase()} 2`,
           value: `${value} 2`,
         }];
       },
@@ -58,21 +58,21 @@ export default () => {
         label="Select0"
         name="select0"
       >
-        <Select0 />
+        <Select0 allowClear />
       </Form.Item>
 
       <Form.Item
         label="Select1"
         name="select1"
       >
-        <Select1 />
+        <Select1 allowClear />
       </Form.Item>
 
       <Form.Item
         label="Select0"
         name="select2"
       >
-        <Select2 />
+        <Select2 allowClear />
       </Form.Item>
     </Form>
 
