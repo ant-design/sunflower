@@ -35,15 +35,22 @@ export const useCascadeSelect = ({
     search,
   });
 
-  const selects = useMemo(() => list.map((item, index) => (props) => {
+  const selects = useMemo(() => list.map((item, index) => function Component(props) {
     if (props.__sunflower) {
       const { name } = props.__sunflower;
       obj.current[index] = name;
     }
     const options = get().responseDataList[index];
+    const { value } = props;
+    useEffect(() => {
+      if (value && options) {
+        get().search(index + 1, props.value);
+      }
+    }, [value, options]);
     return <Select
       loading={get().loadingList[index]}
       {...props}
+      value={options && value}
       onChange={(...args) => {
         if (props.onChange) {
           props.onChange(...args);
@@ -56,7 +63,6 @@ export const useCascadeSelect = ({
           }
           form.setFieldsValue(values);
         }
-        get().search(index + 1, ...args);
     }}>
       {
         options && options.map(option =>
