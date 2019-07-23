@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 export interface UseSearchResultConfig<T, S> {
   search?: (requestData: S) => Promise<T> | T;

@@ -9,28 +9,28 @@ export default () => {
       async () => {
         await new Promise(r => setTimeout(r, 1000));
         return [{
-          label: 'lily',
+          label: 'LILY',
           value: 'lily',
         }, {
-          label: 'jack',
+          label: 'JACK',
           value: 'jack',
         }];
       },
       async (value) => {
         await new Promise(r => setTimeout(r, 1000));
         return [{
-          label: `${value} 1`,
+          label: `${value.toUpperCase()} 1`,
           value: `${value} 1`,
         },
         {
-          label: `${value} 2`,
+          label: `${value.toUpperCase()} 2`,
           value: `${value} 2`,
         }];
       },
       async (value) => {
         await new Promise(r => setTimeout(r, 1000));
         return [{
-          label: `${value} 1`,
+          label: `${value.toUpperCase()} 1`,
           value: `${value} 1`,
         },
         {
@@ -42,7 +42,14 @@ export default () => {
   });
   const [Select0, Select1, Select2] = selects;
 
-  const { Form } = useFormTable({});
+  const { Form } = useFormTable({
+    async defaultFormValues() {
+      await new Promise(r => setTimeout(r, 200));
+      return {
+        select0: 'lily'
+      }
+    }
+  });
 
   return <div>
 
