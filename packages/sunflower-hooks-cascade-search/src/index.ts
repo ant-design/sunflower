@@ -35,5 +35,6 @@ export const useCascadeSearch = <T>({
     search,
     responseDataList,
     loadingList,
+    setResponseDataList,
   };
 };
