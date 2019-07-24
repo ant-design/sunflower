@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useFormTable } from '@sunflower-antd/form-table';
+import React from 'react';
+import { useFormTable } from 'sunflower-antd';
 import { Input, Button } from 'antd';
 import request from './request';
 

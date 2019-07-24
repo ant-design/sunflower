@@ -1,6 +1,5 @@
 import React from 'react';
-import { useCascadeSelect } from '@sunflower-antd/cascade-select';
-import { useFormTable } from '@sunflower-antd/form-table';
+import { useCascadeSelect, useFormTable } from 'sunflower-antd';
 
 
 export default () => {

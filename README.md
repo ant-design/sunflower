@@ -34,19 +34,13 @@ This project is still under development.
 
 ## 📟&nbsp; Usage
 
-Install the react-hooks you need 
-
-eg: `@sunflower-antd/form-table`
 ```
-$ npm install @sunflower-antd/form-table --save
+$ npm install sunflower-antd --save
 ```
-
-- [@sunflower-antd/cascade-select](https://ant-design.github.io/sunflower/docs-hooks-sunflower-antd-cascade-select)
-- [@sunflower-antd/form-table](https://ant-design.github.io/sunflower/docs-hooks-sunflower-antd-form-table)
 
 
 ```jsx
-import { useFormTable } from '@sunflower-antd/form-table';
+import { useFormTable } from 'sunflower-antd';
 
 function Component(props) {
   const { Form, Table } = useFormTable(config);
