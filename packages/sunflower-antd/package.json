@@ -1,0 +1,19 @@
+{
+  "name": "sunflower-antd",
+  "version": "0.0.0-alpha.1",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "entry": "src/index.ts",
+  "dependencies": {
+    "@sunflower-antd/cascade-select": "0.0.0-alpha.4",
+    "@sunflower-antd/form-table": "0.0.0-alpha.9"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ]
+}
