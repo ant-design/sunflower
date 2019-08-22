@@ -14,17 +14,12 @@ import Example from '../Example';
 
 `useCascadeSelect` is a react-hooks.When you want to use cascading select, you can use it.
 
-## Usage
 
-```
-$ npm install sunflower-antd --save
-```
+## Examples
 
-> peerDependences "antd", so make sure you have installed "antd"
+This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter.When you select the second select, the selected value will be used as a parameter to call the third function.When you change the previous select option, the subsequent select values ​​will be cleared.
 
-```jsx
-import { useCascadeSelect } from 'sunflower-antd';
-```
+<Example name="sunflower-antd-cascade-select/Example1" />
 
 
 ## API
@@ -93,10 +88,4 @@ const obj = useCascadeSelect(config);
     </tr>
   </tbody>
 </table>
-
-## Examples
-
-> This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter.When you select the second select, the selected value will be used as a parameter to call the third function.When you change the previous select option, the subsequent select values ​​will be cleared.
-
-<Example name="sunflower-antd-cascade-select/Example1" />
 
