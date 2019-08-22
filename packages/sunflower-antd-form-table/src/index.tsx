@@ -83,8 +83,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     loading: boolean;
     initialValues: Store;
     onFinish: any;
-    onPaginationChange: any;
-    onPaginationShowSizeChange: any;
+    onChange: any;
   }>();
 
   const onFinish = (values: Store) => {
@@ -95,18 +94,13 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     });
   };
 
-  const onPaginationChange = (page: number) => {
+  const onChange = (pagination, filters, sorter) => {
     searchFunc({
       ...requestData,
-      currentPage: page,
-    });
-  };
-
-  const onPaginationShowSizeChange = (page: number, pageSize: number) => {
-    searchFunc({
-      ...requestData,
-      currentPage: 1,
-      pageSize,
+      currentPage: pagination.current === requestData.currentPage ? 1 : pagination.current,
+      pageSize: pagination.pageSize,
+      filters,
+      sorter,
     });
   };
 
@@ -116,8 +110,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     loading,
     initialValues,
     onFinish,
-    onPaginationChange,
-    onPaginationShowSizeChange,
+    onChange,
   });
 
   const SearchResultForm = useCallback(props => <Form
@@ -129,11 +122,9 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
 
 
   const SearchResultTable = useCallback((props: TableProps<any>) => {
-    const { pagination: customPagination } = props;
+    const { pagination: customPagination, onChange: customOnChange } = props;
     const store = get();
     const pagination = {
-      onChange: store.onPaginationChange,
-      onShowSizeChange: store.onPaginationShowSizeChange,
       pageSize: store.requestData.pageSize as number,
       current: store.requestData.currentPage as number,
       ...(customPagination || {}),
@@ -141,12 +132,19 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
       defaultCurrent: defaultCurrentPage,
       total: store.responseData.total,
     };
+
     return (
       <Table
         loading={store.loading}
         dataSource={store.responseData.list}
         {...props}
         pagination={pagination}
+        onChange={(...args) => {
+          if (customOnChange) {
+            customOnChange(...args);
+          }
+          store.onChange(...args);
+        }}
       />
     );
   }, []);
@@ -164,12 +162,12 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     formValues,
     currentPage: requestData.currentPage,
     pageSize: requestData.pageSize,
+    filters: requestData.filters,
+    sorter: requestData.sorter,
     list: responseData.list,
     total: responseData.total,
     defaultFormValuesLoading: defaultRequestDataLoading,
     pagination: {
-      onChange: onPaginationChange,
-      onShowSizeChange: onPaginationShowSizeChange,
       pageSize: requestData.pageSize,
       current: requestData.currentPage,
       total: responseData.total,
@@ -177,9 +175,6 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
       defaultCurrent: defaultCurrentPage,
     },
     onFinish,
-    // requestData,
-    // setRequestData,
-    // responseData,
     search: (data) => {
       searchFunc({
         ...requestData,

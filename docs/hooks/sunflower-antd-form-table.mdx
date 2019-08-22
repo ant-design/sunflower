@@ -14,17 +14,17 @@ import Example from '../Example';
 
 `useFormTable` is a react-hooks.When you want to use "Form Search Table", you can use it.
 
-## Usage
+## Examples
 
-```
-$ npm install sunflower-antd --save
-```
+Default
+<Example name="sunflower-antd-form-table/Example1" />
 
-> peerDependences "antd", so make sure you have installed "antd"
+With filters and sorter
+<Example name="sunflower-antd-form-table/Example3" />
 
-```jsx
-import { useFormTable } from 'sunflower-antd';
-```
+With defaultFormValues
+<Example name="sunflower-antd-form-table/Example2" />
+
 
 
 ## API
@@ -78,7 +78,7 @@ const obj = useFormTable(config);
   </tbody>
 </table>
 
-Eg: responseData
+- responseData
 ```js
 {
   list: [{
@@ -90,10 +90,10 @@ Eg: responseData
 }
 ```
 
-Eg: requestData
+- requestData
 ```js
-search(requestData) {
-  const { currentPage, pageSize, ...formValues } = requestData;
+search({ currentPage, pageSize, filters, sorter, ...formValues }) {
+
 }
 ```
 
@@ -162,8 +162,18 @@ search(requestData) {
       <td>boolean</td>
     </tr>
     <tr>
+      <td>filters</td>
+      <td>antd Table filters</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>sorter</td>
+      <td>antd Table sorter</td>
+      <td>object</td>
+    </tr>
+    <tr>
       <td>pagination</td>
-      <td>Contains 'onChange' and 'onShowSizeChange' and 'pageSize' and 'current' and 'total' and 'defaultPageSize' and 'defaultCurrent' for custom table conditions.If you only use the Table returned by useFormTable, you don't need to care.</td>
+      <td>Contains 'pageSize' and 'current' and 'total' and 'defaultPageSize' and 'defaultCurrent' for custom table conditions.If you only use the Table returned by useFormTable, you don't need to care.</td>
       <td>object</td>
     </tr>
     <tr>
@@ -178,14 +188,3 @@ search(requestData) {
     </tr>
   </tbody>
 </table>
-
-## Examples
-
-> This is a typical "Form Search Table" scene.
-
-<Example name="sunflower-antd-form-table/Example1" />
-
-> This is a scene with more customizations.
-
-<Example name="sunflower-antd-form-table/Example2" />
-

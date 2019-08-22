@@ -7,7 +7,8 @@ const db = Mock.mock({
     {
       username: "@name",
       email: "@email",
-      id: "@guid"
+      id: "@guid",
+      "gender|1": ["male", "female"] 
     }
   ]
 });
@@ -23,13 +24,29 @@ function filter(list, dataIndex, keyword) {
   );
 }
 
-export default ({ username, email, pageSize, currentPage }) => {
-  console.log('username: %s, pageSize: %s, currentPage: %s', username, pageSize, currentPage);
+export default ({ username, email, filters, sorter, pageSize, currentPage }) => {
+  console.log('-------> request: username: %s, pageSize: %s, currentPage: %s, filters: %s, sorter: %s', username, pageSize, currentPage, JSON.stringify(filters), JSON.stringify(sorter));
   const start = pageSize * (currentPage - 1);
   const end = start + pageSize;
   let totalList = db.list;
   totalList = filter(totalList, "username", username);
   totalList = filter(totalList, "email", email);
+  if (filters) {
+    Object.keys(filters).forEach(key => {
+      if (filters[key].length === 0) {
+        return true;
+      }
+      totalList = totalList.filter(item => filters[key].includes(item[key]));
+    });
+  }
+  if (sorter && sorter.column) {
+    const { dataIndex } = sorter.column;
+    if (sorter.order === 'descend') {
+      totalList = [...totalList].sort((a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0));
+    } else {
+      totalList = [...totalList].sort((a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0));
+    }
+  }
   const list = totalList.slice(start, end);
   return new Promise(r =>
     setTimeout(() => {

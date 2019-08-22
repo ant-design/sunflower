@@ -46,8 +46,6 @@ test('useFormTable', async () => {
   expect(tableContainer.firstChild.nodeName).toBe('DIV');
   expect(result.current.defaultFormValuesLoading).toEqual(true);
   await waitForNextUpdate();
-  expect(result.current.currentPage).toEqual(undefined);
-  await waitForNextUpdate();
   expect(result.current.currentPage).toEqual(1);
   expect(result.current.defaultFormValuesLoading).toEqual(false);
   expect(search).toBeCalledWith({

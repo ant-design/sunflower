@@ -6,15 +6,15 @@ import request from './request';
 
 export default () => {
   const { Form, Table, form } = useFormTable({
-    async search(values) {
-      const res = await request(values);
+    async search({ currentPage, pageSize, filters, sorter, username, email }) {
+      const { list, total } = await request({ currentPage, pageSize, filters, sorter, username, email });
       return {
-        list: res.list,
-        total: res.total,
+        list,
+        total,
       };
     },
-    defaultPageSize: 5,
   });
+
   return <div>
     <Form layout="inline">
       <Form.Item
@@ -51,6 +51,20 @@ export default () => {
           title: 'Username',
           dataIndex: 'username',
           key: 'username',
+          sorter: true,
+        },
+        {
+          title: 'Gender',
+          dataIndex: 'gender',
+          key: 'gender',
+          filters: [{
+            text: 'male',
+            value: 'male'
+          }, {
+            text: 'female',
+            value: 'female'
+          }],
+          filterMultiple: false,
         },
         {
           title: 'Email',

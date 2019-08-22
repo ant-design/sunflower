@@ -13,20 +13,20 @@ export default () => {
     currentPage,
     pageSize,
     formValues,
-    defaultFormValuesLoading,
   } = useFormTable({
-    search(requestData) {
-      const { currentPage, pageSize, ...formValues } = requestData;
-      console.log('requestData', requestData);
-      return request({ currentPage, pageSize, ...formValues });
+    async search({ currentPage, pageSize, ...formValues }) {
+      const res = await request({ currentPage, pageSize, ...formValues });
+      return {
+        list: res.list,
+        total: res.total,
+      };
     },
-    defaultFormValues: () => {
-      return new Promise(r => setTimeout(() => {
-        r({
-          field5: 'jack',
-          username: 'a',
-        });
-      }, 2000));
+    async defaultFormValues() {
+      await new Promise(r => setTimeout(r, 2000));
+      return {
+        field5: 'jack',
+        username: 'a',
+      };
     },
   });
 
@@ -36,15 +36,6 @@ export default () => {
   };
 
   return <div>
-    {
-      defaultFormValuesLoading
-      ?
-      <div>
-        <Spin /> default form values loading
-      </div>
-      :
-      null
-    }
     <Form {...formItemLayout}>
       <Row>
         <Col span={8}>

@@ -12,18 +12,20 @@ const Playground = ({ name }) => {
     import(`!!raw-loader!../examples/${name}`).then(obj => setCode(obj.default))
   }, []);
   return (
-    <Tabs defaultActiveKey="1">
-        <TabPane tab="ui" key="1">
+    <div style={{ border: '1px solid #CED4DE', padding: 20, marginBottom: 60 }}>
+      <Tabs defaultActiveKey="1" type="card">
+        <TabPane tab="Preview" key="1">
           <Suspense fallback={<div>Loading...</div>}>
             <Component />
           </Suspense>
         </TabPane>
-        <TabPane tab="jsx" key="2">
+        <TabPane tab="Code" key="2">
           <SyntaxHighlighter language="jsx">
             {code}
           </SyntaxHighlighter>
         </TabPane>
-    </Tabs>
+      </Tabs>
+    </div>
   );
 };
 
