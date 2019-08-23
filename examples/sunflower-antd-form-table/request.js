@@ -33,6 +33,9 @@ export default ({ username, email, filters, sorter, pageSize, currentPage }) => 
   totalList = filter(totalList, "email", email);
   if (filters) {
     Object.keys(filters).forEach(key => {
+      if (!filters[key]) {
+        return true;
+      }
       if (filters[key].length === 0) {
         return true;
       }

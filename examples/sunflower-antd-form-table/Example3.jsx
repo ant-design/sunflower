@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormTable } from 'sunflower-antd';
 import { Input, Button } from 'antd';
 import request from './request';
 
 
 export default () => {
-  const { Form, Table, form } = useFormTable({
+  const { Form, Table, form, sorter, filters } = useFormTable({
     async search({ currentPage, pageSize, filters, sorter, username, email }) {
       const { list, total } = await request({ currentPage, pageSize, filters, sorter, username, email });
       return {
@@ -52,6 +52,7 @@ export default () => {
           dataIndex: 'username',
           key: 'username',
           sorter: true,
+          sortOrder: sorter && sorter.order,
         },
         {
           title: 'Gender',
@@ -65,6 +66,7 @@ export default () => {
             value: 'female'
           }],
           filterMultiple: false,
+          filteredValue: filters && filters.gender || null,
         },
         {
           title: 'Email',
