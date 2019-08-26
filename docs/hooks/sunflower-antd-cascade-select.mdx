@@ -43,7 +43,7 @@ const obj = useCascadeSelect(config);
     <tr>
       <td>list</td>
       <td>Cascading method array. Each method returns a select list of options. When the previous select value change, the subsequent method will be triggered with previous select value.</td>
-      <td>(previouValue) => Promise | List[]</td>
+      <td>name, options</td>
       <td>[]</td>
     </tr>
     <tr>
@@ -68,23 +68,13 @@ const obj = useCascadeSelect(config);
   <tbody>
     <tr>
       <td>selects</td>
-      <td>antd Select HOC array, according to the length of the config list</td>
-      <td>Select[]</td>
+      <td>antd Select props array, according to the length of the config list</td>
+      <td>props, options</td>
     </tr>
     <tr>
       <td>search</td>
       <td>Execute the method of specifying the index in the config list,usually do not need to use.</td>
-      <td>(index: number) => void</td>
-    </tr>
-    <tr>
-      <td>optionsList</td>
-      <td>Options list</td>
-      <td>Options[]</td>
-    </tr>
-    <tr>
-      <td>loadingList</td>
-      <td>Request loading list.</td>
-      <td>boolean[]</td>
+      <td>(index: number, value: string) => void</td>
     </tr>
   </tbody>
 </table>
