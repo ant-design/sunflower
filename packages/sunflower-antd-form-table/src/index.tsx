@@ -113,7 +113,6 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     onFinish,
     initialValues,
   } : {
-    form: formInstance,
     onSubmit(e) {
       e.preventDefault();
       formInstance.validateFields((err, values) => {
