@@ -20,11 +20,10 @@ Default
 <Example name="sunflower-antd-form-table/Example1" />
 
 With filters and sorter
-<Example name="sunflower-antd-form-table/Example3" />
-
-With defaultFormValues
 <Example name="sunflower-antd-form-table/Example2" />
 
+With defaultFormValues
+<Example name="sunflower-antd-form-table/Example3" />
 
 
 ## API
@@ -52,6 +51,12 @@ const obj = useFormTable(config);
       <td></td>
     </tr>
     <tr>
+      <td>form</td>
+      <td>Decorated by Form.create() will be automatically set this.props.form property(antd3); useForm react hooks(antd4)</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>autoFirstSearch</td>
       <td>Whether the search method will be executed automatically.</td>
       <td>boolean</td>
@@ -64,7 +69,7 @@ const obj = useFormTable(config);
       <td>10</td>
     </tr>
     <tr>
-      <td>defaultCurrentPage</td>
+      <td>defaultCurrent</td>
       <td>Default current page</td>
       <td>number</td>
       <td>1</td>
@@ -92,7 +97,7 @@ const obj = useFormTable(config);
 
 - requestData
 ```js
-search({ currentPage, pageSize, filters, sorter, ...formValues }) {
+search({ current, pageSize, filters, sorter, ...formValues }) {
 
 }
 ```
@@ -112,19 +117,19 @@ search({ currentPage, pageSize, filters, sorter, ...formValues }) {
   </thead>
   <tbody>
     <tr>
-      <td>Form</td>
-      <td>antd Form HOC</td>
+      <td>formProps</td>
+      <td>antd Form props</td>
       <td></td>
     </tr>
     <tr>
-      <td>Table</td>
-      <td>Execute the method of specifying the index in the config list,usually do not need to use.</td>
-      <td>(index: number) => void</td>
+      <td>tableProps</td>
+      <td>antd Table props</td>
+      <td></td>
     </tr>
     <tr>
       <td>form</td>
-      <td>Return formInstance so you can use the all form api.</td>
-      <td><a href="https://github.com/react-component/field-form#useform" target="_blank">formInstance</a></td>
+      <td>Form instance</td>
+      <td></td>
     </tr>
     <tr>
       <td>loading</td>
@@ -132,7 +137,7 @@ search({ currentPage, pageSize, filters, sorter, ...formValues }) {
       <td>boolean</td>
     </tr>
     <tr>
-      <td>currentPage</td>
+      <td>current</td>
       <td>Current page.</td>
       <td>number</td>
     </tr>
@@ -172,19 +177,9 @@ search({ currentPage, pageSize, filters, sorter, ...formValues }) {
       <td>object</td>
     </tr>
     <tr>
-      <td>pagination</td>
-      <td>Contains 'pageSize' and 'current' and 'total' and 'defaultPageSize' and 'defaultCurrent' for custom table conditions.If you only use the Table returned by useFormTable, you don't need to care.</td>
-      <td>object</td>
-    </tr>
-    <tr>
       <td>search</td>
-      <td>Form 'search' method.</td>
+      <td>will call the 'search' method</td>
       <td>(requestData) => void</td>
-    </tr>
-    <tr>
-      <td>onFinish</td>
-      <td>Form 'onFinish' method.If you only use the Table returned by useFormTable, you don't need to care.</td>
-      <td>(formValues) => void</td>
     </tr>
   </tbody>
 </table>

@@ -1,6 +1,6 @@
 # sunflower
 
-Collection of React Hooks returning components of [antd](https://ant.design).
+React Hooks with components of [antd](https://ant.design).
 
 [![build status][circleci-image]][circleci-url] [![Test coverage][coveralls-image]][coveralls-url] [![node version][node-image]][node-url]
 
@@ -17,7 +17,6 @@ Collection of React Hooks returning components of [antd](https://ant.design).
 - 🏄 Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
 - 💅 Easy to customize. You can easily customize the combination of components you need.
 - 👯 Layered design. You can use react-hooks without ui or react-hooks with antd.
-- 🤾‍ Hooks return higher-order component (HOC). Crazy, but it does give you a more convenient api. At the same time you can choose not to use.
 
 ## 🤔&nbsp; Why?
 
@@ -25,7 +24,7 @@ Collection of React Hooks returning components of [antd](https://ant.design).
 
 &nbsp;&nbsp;&nbsp;&nbsp;Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to use existing processes?
 
-&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.Further, we use HOC as the api, so we don't have to care about the state and methods.
+&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.
 
 
 ## ⚠️ Warning
@@ -40,13 +39,14 @@ $ npm install sunflower-antd --save
 
 
 ```jsx
+import { Form, Table } from 'antd';
 import { useFormTable } from 'sunflower-antd';
 
 function Component(props) {
-  const { Form, Table } = useFormTable(config);
+  const { formProps, tableProps } = useFormTable(config);
   return <div>
-    <Form />
-    <Table />
+    <Form {...formProps} />
+    <Table {...tableProps} />
   </div>;
 }
 

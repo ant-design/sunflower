@@ -4,26 +4,28 @@ route: '/'
 order: -1
 ---
 
-# Overview
+# sunflower
 
-## 🌻&nbsp; What is Sunflower
-
-&nbsp;&nbsp;&nbsp;&nbsp;Sunflower is a library based on antd and react-hooks, it provides common business processes through hooks. In addition, sunflower provides a more convenient way to combine this process with antd ui components.
+React Hooks with components of [antd](https://ant.design).
 
 ## 🎩&nbsp; Features
 
-- 🏄  Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
+- 🏄 Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
 - 💅 Easy to customize. You can easily customize the combination of components you need.
 - 👯 Layered design. You can use react-hooks without ui or react-hooks with antd.
-- 🤾‍♂️Hooks return HOC. Crazy, but it does give you a more convenient api. At the same time you can choose not to use.
 
 ## 🤔&nbsp; Why?
 
-&nbsp;&nbsp;&nbsp;&nbsp;Usually, we use multiple component components of antd, and we organize their relationship through state and props methods like `value`, `onChange`.
+&nbsp;&nbsp;&nbsp;&nbsp;Usually, we use multiple antd components, and we organize their relationship through state and props methods like `value`, `onChange`.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to precipitate existing processes?
+&nbsp;&nbsp;&nbsp;&nbsp;Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to use existing processes?
 
-&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.Further, we use hoc as the api, so we don't have to care about the state and methods.
+&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.
+
+
+## ⚠️ Warning
+
+This project is still under development.
 
 ## 📟&nbsp; Usage
 
@@ -31,16 +33,29 @@ order: -1
 $ npm install sunflower-antd --save
 ```
 
+
 ```jsx
+import { Form, Table } from 'antd';
 import { useFormTable } from 'sunflower-antd';
 
 function Component(props) {
-  const { Form, Table } = useFormTable(config);
+  const { formProps, tableProps } = useFormTable(config);
   return <div>
-    <Form />
-    <Table />
+    <Form {...formProps} />
+    <Table {...tableProps} />
   </div>;
 }
 
 ReactDOM.render(<Component />, mountNode);
+```
+
+
+## ⚒&nbsp; Development
+
+```
+$ yarn
+$ yarn bootstrap
+$ yarn dev       // dev
+$ yarn build     // build
+$ yarn test      // test
 ```

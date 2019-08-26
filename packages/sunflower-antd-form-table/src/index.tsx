@@ -1,26 +1,23 @@
-import React, { useState, useCallback } from 'react';
-import { useForm } from 'rc-field-form';
-import { Store } from 'rc-field-form/lib/interface';
-import Form from 'sunflower-form';
-import { Table } from 'antd';
-import { TableProps } from 'antd/lib/table';
-import {
-  useSearchResult as useSearchResultHooks,
-  UseSearchResultConfig,
-} from '@sunflower-hooks/search-result';
-import { useStore } from '@sunflower-hooks/store';
+import { useState } from 'react';
+import { Form } from 'antd';
+import { useSearchResult as useSearchResultHooks, UseSearchResultConfig } from '@sunflower-hooks/search-result';
 
-
+declare type StoreBaseValue = string | number | boolean;
+export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
+export interface Store {
+  [name: string]: StoreValue;
+}
 export interface SearchResponseData {
-  list: Store[];
+  dataSource: Store[];
   total?: number;
 }
 
 export interface UseSearchResultAntdConfig
   extends UseSearchResultConfig<SearchResponseData, Store> {
   defaultPageSize?: number;
-  defaultCurrentPage?: number;
+  defaultCurrent?: number;
   defaultFormValues?: Store | (() => (Promise<Store> | Store));
+  form: any;
 }
 
 
@@ -30,10 +27,26 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     search,
     autoFirstSearch = true,
     defaultPageSize = 10,
-    defaultCurrentPage = 1,
+    defaultCurrent = 1,
     defaultFormValues = {},
+    form,
   } = formTableConfig;
-  const [form] = useForm();
+
+  let version = 3;
+  // antd4
+  if (Form['useForm']) {
+    version = 4;
+  }
+
+  let formInstance = form;
+  if (!form) {
+    if (version === 4) {
+      [formInstance] = Form['useForm']();
+    } else {
+      throw new Error('"form" need in antd@3');
+    }
+  }
+
   const [initialValues, setInitialValues] = useState();
   const {
     loading,
@@ -63,32 +76,23 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
         if (touched) {
           setRequestData({
             pageSize: defaultPageSize,
-            currentPage: defaultCurrentPage,
+            current: defaultCurrent,
             ...obj,
           });
           throw new Error('will not autoFirstSearch');
         }
         return {
           pageSize: defaultPageSize,
-          currentPage: defaultCurrentPage,
+          current: defaultCurrent,
           ...obj,
         };
       });
     },
   });
 
-  const { get, set } = useStore<{
-    requestData: Store;
-    responseData: SearchResponseData;
-    loading: boolean;
-    initialValues: Store;
-    onFinish: any;
-    onChange: any;
-  }>();
-
   const onFinish = (values: Store) => {
     searchFunc({
-      currentPage: 1,
+      current: 1,
       pageSize: requestData.pageSize,
       ...values,
     });
@@ -97,84 +101,66 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
   const onChange = (pagination, filters, sorter) => {
     searchFunc({
       ...requestData,
-      currentPage: pagination.current === requestData.currentPage ? 1 : pagination.current,
+      current: pagination.current === requestData.current ? 1 : pagination.current,
       pageSize: pagination.pageSize,
       filters,
       sorter,
     });
   };
 
-  set({
-    requestData,
-    responseData,
-    loading,
-    initialValues,
+  const formProps = version === 4 ? {
+    form: formInstance,
     onFinish,
-    onChange,
-  });
+    initialValues,
+  } : {
+    onSubmit(e) {
+      e.preventDefault();
+      formInstance.validateFields((err, values) => {
+        if (!err) {
+          searchFunc({
+            current: 1,
+            pageSize: requestData.pageSize,
+            ...values,
+          });
+        }
+      });
+    },
+  };
 
-  const SearchResultForm = useCallback(props => <Form
-    form={form}
-    onFinish={get().onFinish}
-    initialValues={get().initialValues}
-    {...props}
-  />, []);
 
-
-  const SearchResultTable = useCallback((props: TableProps<any>) => {
-    const { pagination: customPagination, onChange: customOnChange } = props;
-    const store = get();
-    const pagination = {
-      pageSize: store.requestData.pageSize as number,
-      current: store.requestData.currentPage as number,
-      ...(customPagination || {}),
-      defaultPageSize,
-      defaultCurrent: defaultCurrentPage,
-      total: store.responseData.total,
-    };
-
-    return (
-      <Table
-        loading={store.loading}
-        dataSource={store.responseData.list}
-        {...props}
-        pagination={pagination}
-        onChange={(...args) => {
-          if (customOnChange) {
-            customOnChange(...args);
-          }
-          store.onChange(...args);
-        }}
-      />
-    );
-  }, []);
-
-  SearchResultForm['Item'] = Form.Item;
-
-  const formValues = { ...requestData };
-  delete formValues.currentPage;
-  delete formValues.pageSize;
-  return {
-    Form: SearchResultForm,
-    Table: SearchResultTable,
-    form,
-    loading,
-    formValues,
-    currentPage: requestData.currentPage,
-    pageSize: requestData.pageSize,
-    filters: requestData.filters,
-    sorter: requestData.sorter,
-    list: responseData.list,
-    total: responseData.total,
-    defaultFormValuesLoading: defaultRequestDataLoading,
+  const tableProps = {
     pagination: {
       pageSize: requestData.pageSize,
-      current: requestData.currentPage,
-      total: responseData.total,
+      current: requestData.current,
       defaultPageSize,
-      defaultCurrent: defaultCurrentPage,
+      defaultCurrent,
+      total: responseData.total,
     },
-    onFinish,
+    loading,
+    dataSource: responseData.dataSource,
+    onChange,
+  }
+
+
+  const formValues = { ...requestData };
+  delete formValues.current;
+  delete formValues.pageSize;
+  delete formValues.filter;
+  delete formValues.sorter;
+
+  return {
+    form: formInstance,
+    formProps,
+    tableProps,
+    loading,
+    defaultFormValuesLoading: defaultRequestDataLoading,
+    formValues,
+    filters: requestData.filters,
+    sorter: requestData.sorter,
+    current: requestData.current,
+    pageSize: requestData.pageSize,
+    dataSource: responseData.dataSource,
+    total: responseData.total,
     search: (data) => {
       searchFunc({
         ...requestData,
