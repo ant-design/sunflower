@@ -1,40 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormTable } from 'sunflower-antd';
-import { Input, Button } from 'antd';
+import { Input, Button, Table, Form } from 'antd';
 import request from './request';
 
 
-export default () => {
-  const { Form, Table, form, sorter, filters } = useFormTable({
-    async search({ currentPage, pageSize, filters, sorter, username, email }) {
-      const { list, total } = await request({ currentPage, pageSize, filters, sorter, username, email });
+export default Form.create()(props => {
+  const { form } = props;
+  const { formProps, tableProps,  } = useFormTable({
+    form,
+    async search(values) {
+      const res = await request(values);
       return {
-        list,
-        total,
+        list: res.list,
+        total: res.total,
+      };
+    },
+    async defaultFormValues() {
+      await new Promise(r => setTimeout(r, 200));
+      return {
+        username: 'j',
       };
     },
   });
-
   return <div>
-    <Form layout="inline">
-      <Form.Item
-        label="Username"
-        name="username"
-      >
-        <Input placeholder="Username" />
+    <Form layout="inline" {...formProps}>
+      <Form.Item label="Username">
+        {
+          form.getFieldDecorator('username')(
+            <Input placeholder="Username" />
+          )
+        } 
       </Form.Item>
 
-      <Form.Item
-        label="Email"
-        name="email"
-      >
-        <Input placeholder="Email" />
+      <Form.Item label="Email">
+        {
+          form.getFieldDecorator('email')(
+            <Input placeholder="Email" />
+          )
+        } 
       </Form.Item>
 
       <Form.Item>
         <Button onClick={() => form.resetFields()}>
-            Reset
-          </Button>
+          Reset
+        </Button>
       </Form.Item>
 
       <Form.Item>
@@ -51,22 +60,6 @@ export default () => {
           title: 'Username',
           dataIndex: 'username',
           key: 'username',
-          sorter: true,
-          sortOrder: sorter && sorter.order,
-        },
-        {
-          title: 'Gender',
-          dataIndex: 'gender',
-          key: 'gender',
-          filters: [{
-            text: 'male',
-            value: 'male'
-          }, {
-            text: 'female',
-            value: 'female'
-          }],
-          filterMultiple: false,
-          filteredValue: filters && filters.gender || null,
         },
         {
           title: 'Email',
@@ -75,11 +68,7 @@ export default () => {
         }
       ]}
       rowKey="id"
-      pagination={{
-        showQuickJumper: true,
-        showSizeChanger: true,
-        pageSizeOptions: ['5', '10', '20', '50'],
-      }}
+      {...tableProps}
     />
   </div>
-};
+});

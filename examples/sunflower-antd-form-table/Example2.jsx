@@ -1,143 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormTable } from 'sunflower-antd';
-import { Input, Button, Row, Col, Alert, Select, Spin } from 'antd';
+import { Input, Button, Form, Table } from 'antd';
 import request from './request';
 
 
-export default () => {
-  const {
-    Form,
-    Table,
+export default Form.create()(props => {
+  const { form } = props;
+  const { formProps, tableProps, sorter, filters } = useFormTable({
     form,
-    total,
-    currentPage,
-    pageSize,
-    formValues,
-  } = useFormTable({
-    async search({ currentPage, pageSize, ...formValues }) {
-      const res = await request({ currentPage, pageSize, ...formValues });
+    async search({ currentPage, pageSize, filters, sorter, username, email }) {
+      const { list, total } = await request({ currentPage, pageSize, filters, sorter, username, email });
       return {
-        list: res.list,
-        total: res.total,
-      };
-    },
-    async defaultFormValues() {
-      await new Promise(r => setTimeout(r, 2000));
-      return {
-        field5: 'jack',
-        username: 'a',
+        list,
+        total,
       };
     },
   });
 
-  const formItemLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
-
   return <div>
-    <Form {...formItemLayout}>
-      <Row>
-        <Col span={8}>
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: 'Please input' }]}
-          >
-            <Input placeholder="Username" onChange={e => {
-              console.log(e.target.value);
-            }} />
-          </Form.Item>
-        </Col>
+    <Form layout="inline" {...formProps}>
+      <Form.Item label="Username">
+        {
+          form.getFieldDecorator('username')(
+            <Input placeholder="Username" />
+          )
+        } 
+      </Form.Item>
 
-        <Col span={8}>
-          <Form.Item
-            label="Field 1"
-            name="field1"
-          >
-            <Input placeholder="Field 1" />
-          </Form.Item>
-        </Col>
+      <Form.Item label="Email">
+        {
+          form.getFieldDecorator('email')(
+            <Input placeholder="Email" />
+          )
+        } 
+      </Form.Item>
 
-        <Col span={8}>
-          <Form.Item
-            label="Field 2"
-            name="field2"
-          >
-            <Input placeholder="Field 2" />
-          </Form.Item>
-        </Col>
+      <Form.Item>
+        <Button onClick={() => form.resetFields()}>
+          Reset
+        </Button>
+      </Form.Item>
 
-        <Col span={8}>
-          <Form.Item
-            label="Field 3"
-            name="field3"
-          >
-            <Input placeholder="Field 3" />
-          </Form.Item>
-        </Col>
-
-        <Col span={8}>
-          <Form.Item
-            label="Field 4"
-            name="field4"
-          >
-            <Input placeholder="Field 4" />
-          </Form.Item>
-        </Col>
-
-        <Col span={8}>
-          <Form.Item
-            label="Field 5"
-            name="field5"
-          >
-            <Select>
-              <Select.Option value="jack">Jack</Select.Option>
-              <Select.Option value="lucy">Lucy</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-
-        <Col span={24} style={{ textAlign: 'right' }}>
-          <Button style={{marginRight: 12}} onClick={() => form.resetFields()}>
-            reset
-          </Button>
-          <Button type="primary" htmlType="submit">
-            Search
-          </Button>
-        </Col>
-      </Row>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Search
+        </Button>
+      </Form.Item>
     </Form>
 
-    <Alert
-      message={
-        `total num: ${total || 0},
-         currentPage: ${currentPage || 1},
-         pageSize: ${pageSize || 10},
-         Username: ${formValues.username || ''}
-      `}
-      style={{margin: '20px 0 20px 0'}}
-    />
-
     <Table
+      style={{marginTop: 20}}
       columns={[
         {
           title: 'Username',
           dataIndex: 'username',
           key: 'username',
+          sorter: true,
+          sortOrder: sorter && sorter.order,
+        },
+        {
+          title: 'Gender',
+          dataIndex: 'gender',
+          key: 'gender',
+          filters: [{
+            text: 'male',
+            value: 'male'
+          }, {
+            text: 'female',
+            value: 'female'
+          }],
+          filterMultiple: false,
+          filteredValue: filters && filters.gender || null,
         },
         {
           title: 'Email',
           dataIndex: 'email',
           key: 'email',
-        },
+        }
       ]}
       rowKey="id"
+      {...tableProps}
       pagination={{
+        ...tableProps.pagination,
         showQuickJumper: true,
         showSizeChanger: true,
+        pageSizeOptions: ['5', '10', '20', '50'],
       }}
     />
-
-  </div>;
-};
+  </div>
+});
