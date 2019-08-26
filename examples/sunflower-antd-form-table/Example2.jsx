@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormTable } from 'sunflower-antd';
 import { Input, Button, Form, Table } from 'antd';
 import request from './request';
@@ -8,11 +8,11 @@ export default Form.create()(props => {
   const { form } = props;
   const { formProps, tableProps, sorter, filters } = useFormTable({
     form,
-    async search({ currentPage, pageSize, filters, sorter, username, email }) {
-      const { list, total } = await request({ currentPage, pageSize, filters, sorter, username, email });
+    async search({ current, pageSize, filters, sorter, username, email }) {
+      const res = await request({ current, pageSize, filters, sorter, username, email });
       return {
-        list,
-        total,
+        dataSource: res.list,
+        total: res.total,
       };
     },
   });

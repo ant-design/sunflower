@@ -24,9 +24,9 @@ function filter(list, dataIndex, keyword) {
   );
 }
 
-export default ({ username, email, filters, sorter, pageSize, currentPage }) => {
-  console.log('-------> request: username: %s, pageSize: %s, currentPage: %s, filters: %s, sorter: %s', username, pageSize, currentPage, JSON.stringify(filters), JSON.stringify(sorter));
-  const start = pageSize * (currentPage - 1);
+export default ({ username, email, filters, sorter, pageSize, current }) => {
+  console.log('-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s', username, pageSize, current, JSON.stringify(filters), JSON.stringify(sorter));
+  const start = pageSize * (current - 1);
   const end = start + pageSize;
   let totalList = db.list;
   totalList = filter(totalList, "username", username);

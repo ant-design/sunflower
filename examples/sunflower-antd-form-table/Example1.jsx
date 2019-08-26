@@ -6,12 +6,12 @@ import request from './request';
 
 export default Form.create()(props => {
   const { form } = props;
-  const { formProps, tableProps,  } = useFormTable({
+  const { formProps, tableProps } = useFormTable({
     form,
     async search(values) {
       const res = await request(values);
       return {
-        list: res.list,
+        dataSource: res.list,
         total: res.total,
       };
     },
