@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useFormTable } from '../packages/sunflower-antd-form-table/src';
+import { useFormTable } from '../packages/sunflower-antd/src';
 
 test('useFormTable', async () => {
   const search = jest.fn();
@@ -25,7 +25,7 @@ test('useFormTable', async () => {
     defaultFormValues: {
       username: 'lily',
     },
-    autoFirstSearch: false,
+    autoFirstSearch: true,
   };
   const { result } = renderHook(() =>
     useFormTable(config),
