@@ -1,5 +1,5 @@
 import React from 'react';
-import { useModal } from '../../packages/sunflower-antd-modal/src';
+import { useModal } from 'sunflower-antd';
 import { Modal, Input, Button, Form, message } from 'antd';
 
 
