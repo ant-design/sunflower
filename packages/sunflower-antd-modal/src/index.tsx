@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 export interface UseModalConfig {
   defaultVisible: boolean;
@@ -11,8 +11,8 @@ export const useModal = (config: UseModalConfig) => {
   } = modalConfig;
 
   const [visible, setVisible] = useState(defaultVisible);
-  const show = () => setVisible(true);
-  const close = () => setVisible(false);
+  const show = useCallback(() => setVisible(true), [visible]);
+  const close = useCallback(() => setVisible(false), [visible]);
 
   const modalProps = {
     visible,
