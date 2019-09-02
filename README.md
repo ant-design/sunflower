@@ -38,19 +38,88 @@ $ npm install sunflower-antd --save
 ```
 
 
+## Examples
+
+### useFormTable
+
+![image](https://user-images.githubusercontent.com/44191223/64115560-8b8af500-cdc2-11e9-99f0-191b2e9fc485.png)
 ```jsx
 import { Form, Table } from 'antd';
 import { useFormTable } from 'sunflower-antd';
+import request from './request';
 
-function Component(props) {
-  const { formProps, tableProps } = useFormTable(config);
+
+function Component({ form }) {
+  // return: formProps, tableProps, current, pageSize, formValues ...
+  const { formProps, tableProps } = useFormTable({
+    // form instance from props
+    form,    
+
+    // default page size, default: 10
+    defaultPageSize: 5,
+
+    // search method, params: current, pageSize, fitlers, sorter and form values(eg: username)
+    async search({ current, pageSize, username, email }) {
+      const result = await request({ current, pageSize, username, email });
+
+      // just return { dataSource, total }
+      return {
+        dataSource: result.list,
+        total: result.total,
+      };
+    }
+  });
   return <div>
-    <Form {...formProps} />
-    <Table {...tableProps} />
+    <Form layout="inline" {...formProps}>
+      <Form.Item label="Username">
+        {
+          form.getFieldDecorator('username')(
+            <Input placeholder="Username" />
+          )
+        } 
+      </Form.Item>
+
+      <Form.Item label="Email">
+        {
+          form.getFieldDecorator('email')(
+            <Input placeholder="Email" />
+          )
+        } 
+      </Form.Item>
+
+      <Form.Item>
+        <Button onClick={() => form.resetFields()}>
+          Reset
+        </Button>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Search
+        </Button>
+      </Form.Item>
+    </Form>
+
+    <Table
+      columns={[
+        {
+          title: 'Username',
+          dataIndex: 'username',
+          key: 'username',
+        },
+        {
+          title: 'Email',
+          dataIndex: 'email',
+          key: 'email',
+        }
+      ]}
+      rowKey="id"
+      {...tableProps}
+    />
   </div>;
 }
 
-ReactDOM.render(<Component />, mountNode);
+export default Form.create()(Component);
 ```
 
 
