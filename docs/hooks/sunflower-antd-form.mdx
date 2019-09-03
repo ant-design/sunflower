@@ -1,0 +1,84 @@
+---
+name: useForm
+menu: Hooks
+---
+
+import "regenerator-runtime/runtime";
+import Example from '../Example';
+
+
+# useForm
+
+## Examples
+
+Default
+<Example name="sunflower-antd-form/Example1" />
+
+## Overview
+
+`useForm` is a react-hooks.When you want to use "Form", you can use it.
+
+
+## API
+
+```jsx
+const obj = useForm(config);
+```
+
+- config
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>defaultFormValues</td>
+      <td>Default form values.If the form has data that needs to be backfilled, use it to get the data.</td>
+      <td>object</td>
+      <td dangerouslySetInnerHTML={{__html: '{}'}}></td>
+    </tr>
+    <tr>
+      <td>form</td>
+      <td>Decorated by Form.create() will be automatically set this.props.form property(antd3); useForm react hooks(antd4)</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>search</td>
+      <td>Request method, the parameter is the value of the form fields.</td>
+      <td>(formValues) => any</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+- obj
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>formProps</td>
+      <td>antd Form props</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>loading</td>
+      <td>Request loading.</td>
+      <td>boolean</td>
+    </tr>
+  </tbody>
+</table>
