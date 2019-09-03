@@ -1,12 +1,6 @@
-import { useState } from 'react';
-import { Form } from 'antd';
 import { useSearchResult as useSearchResultHooks, UseSearchResultConfig } from '@sunflower-hooks/search-result';
+import { useForm, Store } from '@sunflower-antd/form';
 
-declare type StoreBaseValue = string | number | boolean;
-export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
-export interface Store {
-  [name: string]: StoreValue;
-}
 export interface SearchResponseData {
   dataSource: Store[];
   total?: number;
@@ -32,22 +26,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     form,
   } = formTableConfig;
 
-  let version = 3;
-  // antd4
-  if (Form['useForm']) {
-    version = 4;
-  }
 
-  let formInstance = form;
-  if (!form) {
-    if (version === 4) {
-      [formInstance] = Form['useForm']();
-    } else {
-      throw new Error('"form" need in antd@3');
-    }
-  }
-
-  const [initialValues, setInitialValues] = useState();
   const {
     loading,
     requestData = {} as Store,
@@ -71,8 +50,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
         Object.keys(data).forEach(name => {
           obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
         });
-        setInitialValues(data);
-        form.setFieldsValue(obj);
+
         if (touched) {
           setRequestData({
             pageSize: defaultPageSize,
@@ -90,13 +68,18 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     },
   });
 
-  const onFinish = (values: Store) => {
-    searchFunc({
-      current: 1,
-      pageSize: requestData.pageSize,
-      ...values,
-    });
-  };
+  const { formProps, form: formInstance } = useForm({
+    form,
+    async submit(values: Store) {
+      await searchFunc({
+        current: 1,
+        pageSize: requestData.pageSize,
+        ...values,
+      });
+    },
+    defaultFormValues,
+  })
+
 
   const onChange = (pagination, filters, sorter) => {
     searchFunc({
@@ -106,25 +89,6 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
       filters,
       sorter,
     });
-  };
-
-  const formProps = version === 4 ? {
-    form: formInstance,
-    onFinish,
-    initialValues,
-  } : {
-    onSubmit(e) {
-      e.preventDefault();
-      formInstance.validateFields((err, values) => {
-        if (!err) {
-          searchFunc({
-            current: 1,
-            pageSize: requestData.pageSize,
-            ...values,
-          });
-        }
-      });
-    },
   };
 
 

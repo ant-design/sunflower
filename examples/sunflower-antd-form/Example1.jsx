@@ -10,7 +10,6 @@ export default Form.create()(props => {
     defaultFormValues: { username: 'Lily', email: '10164626@qq.com' },
     async submit(values) {
       await new Promise(r => setTimeout(r, 1000));
-      console.log(1);
       message.success(`${JSON.stringify(values)}提交成功`);
     },
   })

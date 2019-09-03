@@ -9,7 +9,7 @@ export interface Store {
 
 export interface UseFormConfig<T> {
   submit?: (formValues: T) => any;
-  defaultFormValues?: Store;
+  defaultFormValues?: Store | (() => (Promise<Store> | Store));
   form: any;
 }
 
@@ -40,16 +40,27 @@ export const useForm = (config: UseFormConfig<Store>) => {
   }
 
   useEffect(() => {
-    if (version === 4) {
-      setInitialValues(defaultFormValues);
+    let value: Store | Promise<Store>;
+    if (typeof defaultFormValues === 'function') {
+      value = defaultFormValues();
     } else {
-      form.setFieldsValue(defaultFormValues);
+      value = defaultFormValues;
     }
+
+    Promise.resolve(value).then((data) => {
+      if (version === 4) {
+        setInitialValues(data);
+      } else {
+        form.setFieldsValue(data);
+      }
+    })
   }, [])
 
 
-  const onFinish = (values: Store) => {
-    submit({ ...values });
+  const onFinish = async (values: Store) => {
+    setLoading(true);
+    await submit({ ...values });
+    setLoading(false);
   };
 
   const formProps = version === 4 ? {
@@ -70,6 +81,7 @@ export const useForm = (config: UseFormConfig<Store>) => {
   };
 
   return {
+    form: formInstance,
     formProps,
     loading,
   };
