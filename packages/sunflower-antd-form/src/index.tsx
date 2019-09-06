@@ -42,9 +42,10 @@ export const useForm = (config: UseFormConfig) => {
   const onFinish = (values: Store) => {
     setFormValues(values);
     setFormLoading(true);
-    Promise.resolve(submit(values)).then(data => {
+    return Promise.resolve(submit(values)).then(data => {
       setFormLoading(false);
       setFormResult(data);
+      return data;
     }).catch(err => {
       setFormLoading(false);
     });
@@ -100,7 +101,7 @@ export const useForm = (config: UseFormConfig) => {
     formLoading,
     submit(values: Store) {
       form.setFieldsValue(values);
-      onFinish(form.getFieldsValue());
+      return onFinish(form.getFieldsValue());
     },
   };
 };
