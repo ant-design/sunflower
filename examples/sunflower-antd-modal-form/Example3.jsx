@@ -35,7 +35,7 @@ export default Form.create()(props => {
             <Form.Item label="Username">
               {
                 form.getFieldDecorator('username')(
-                  <Input placeholder="Username" />
+                  <Input placeholder="Username" disabled />
                 )
               } 
             </Form.Item>

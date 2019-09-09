@@ -12,7 +12,6 @@ export default Form.create()(props => {
     formLoading,
     formValues,
     formResult,
-    submit: formSubmit,
   } = useModalForm({
     defaultVisible: false,
     autoSubmitClose: true,
@@ -52,12 +51,6 @@ export default Form.create()(props => {
                   )
                 } 
               </Form.Item>
-
-              <Form.Item>
-              <Button onClick={() => formSubmit({username: 'lily'}).then((data) => console.log(data))}>
-                Reset
-              </Button>
-            </Form.Item>
             </Form>
           </>
         </Spin>
