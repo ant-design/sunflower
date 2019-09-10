@@ -59,6 +59,12 @@ const obj = useModalForm(config);
       <td>true</td>
     </tr>
     <tr>
+      <td>autoResetForm</td>
+      <td>Reset the specified fields' value(to initialValue) and status</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
       <td>submit</td>
       <td>submit method, the parameter is the value of the form fields</td>
       <td dangerouslySetInnerHTML={{__html: '(formValues) => Promise<formResult> | formResult'}}></td>

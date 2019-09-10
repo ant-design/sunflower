@@ -15,6 +15,7 @@ export default Form.create()(props => {
   } = useModalForm({
     defaultVisible: false,
     autoSubmitClose: true,
+    autoResetForm: true,
     async submit({username, email}) {
       console.log('beforeSubmit');
       await new Promise(r => setTimeout(r, 1000));

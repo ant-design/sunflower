@@ -4,6 +4,7 @@ import { useForm, UseFormConfig } from '@sunflower-antd/form';
 export interface UseModalFormConfig extends UseFormConfig{
   defaultVisible?: boolean;
   autoSubmitClose?: boolean;
+  autoResetForm?: boolean;
 }
 
 export const useModalForm = (config: UseModalFormConfig) => {
@@ -11,6 +12,7 @@ export const useModalForm = (config: UseModalFormConfig) => {
   const {
     defaultVisible = false,
     autoSubmitClose = true,
+    autoResetForm = true,
     submit,
     form,
     defaultFormValues,
@@ -40,19 +42,20 @@ export const useModalForm = (config: UseModalFormConfig) => {
     submit,
     defaultFormValues,
   })
+
+
   const modalFormProps = {
     ...modalProps,
     onOk: () => {
-      if (autoSubmitClose) {
-        formInstance.validateFields((err, values) => {
-          if (!err) {
-            formSubmit({ ...values }).then((data) => {
-              formInstance.resetFields();
-              close();
-            });
-          }
-        });
-      }
+      formSubmit().then(() => {
+        if (autoSubmitClose) {
+          close();
+        }
+
+        if (autoResetForm) {
+          formInstance.resetFields();
+        }
+      });
     },
   }
 
