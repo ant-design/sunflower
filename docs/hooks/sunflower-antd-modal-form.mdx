@@ -1,0 +1,161 @@
+---
+name: useModalForm
+menu: Hooks
+---
+
+import "regenerator-runtime/runtime";
+import Example from '../Example';
+
+
+# useModalForm
+
+## Examples
+
+Default
+<Example name="sunflower-antd-modal-form/Example1" />
+
+With defaultValues
+<Example name="sunflower-antd-modal-form/Example2" />
+
+Submit method
+<Example name="sunflower-antd-modal-form/Example3" />
+
+Default form submit
+<Example name="sunflower-antd-modal-form/Example4" />
+
+## Overview
+
+`useModalForm` is a react-hooks.When you want to use "Modal Form", you can use it.
+
+
+## API
+
+```jsx
+const obj = useModalForm(config);
+```
+
+- config
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>defaultVisible</td>
+      <td>Whether the modal dialog is visible or not</td>
+      <td>boolean</td>
+      <td>false</td>
+    </tr>
+     <tr>
+      <td>autoSubmitClose</td>
+      <td>Click Modal "ok", will trigger submit, then close modal</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>autoResetForm</td>
+      <td>Reset the specified fields' value(to initialValue) and status</td>
+      <td>boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>submit</td>
+      <td>submit method, the parameter is the value of the form fields</td>
+      <td dangerouslySetInnerHTML={{__html: '(formValues) => Promise<formResult> | formResult'}}></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>form</td>
+      <td>Decorated by Form.create() will be automatically set this.props.form property(antd3); useForm react hooks(antd4)</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>defaultFormValues</td>
+      <td>Default form values.If the form has data that needs to be backfilled, use it to get the data.</td>
+      <td>object</td>
+      <td dangerouslySetInnerHTML={{__html: '{}'}}></td>
+    </tr>
+  </tbody>
+</table>
+
+
+- obj
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>modalProps</td>
+      <td>antd Modal props</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>show</td>
+      <td>Specify a function that can open the modal</td>
+      <td>() => void</td>
+    </tr>
+    <tr>
+      <td>close</td>
+      <td>Specify a function that can close the modal</td>
+      <td>() => void</td>
+    </tr>
+    <tr>
+      <td>visible</td>
+      <td>Whether the modal dialog is visible or not</td>
+      <td>boolean</td>
+    </tr>
+     <tr>
+      <td>formProps</td>
+      <td>antd Form props</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>form</td>
+      <td>Form instance</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>formLoading</td>
+      <td>form request loading.</td>
+      <td>boolean</td>
+    </tr>
+    <tr>
+      <td>formValues</td>
+      <td>form values</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>initialValues</td>
+      <td>initial form values</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>formResult</td>
+      <td>submit return value</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>defaultFormValuesLoading</td>
+      <td>When use 'defaultFormValues', the value will be true during the request.</td>
+      <td>boolean</td>
+    </tr>
+    <tr>
+      <td>submit</td>
+      <td>will call the 'submit' method</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
