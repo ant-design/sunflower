@@ -99,7 +99,7 @@ export const useForm = (config: UseFormConfig) => {
     initialValues,
     formResult,
     formLoading,
-    submit(values: Store) {
+    submit(values?: Store) {
       form.setFieldsValue(values);
       return onFinish(form.getFieldsValue());
     },

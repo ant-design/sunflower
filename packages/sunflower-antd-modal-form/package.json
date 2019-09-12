@@ -5,6 +5,10 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "entry": "src/index.tsx",
+  "dependencies": {
+    "@sunflower-antd/form": "0.1.0",
+    "@sunflower-antd/modal": "0.1.0"
+  },
   "peerDependencies": {
     "antd": "^3.19.3",
     "react": "^16.8.4"
