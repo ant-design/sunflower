@@ -33,10 +33,9 @@ const map = {};
 
 function build(name) {
   if (map[name]) {
-    return;
+    return map[name];
   }
-  map[name] = true;
-  return new Promise(resolve => {
+  map[name] = new Promise(resolve => {
     const deps = depsMap[name];
     const promise = Promise.all(deps.map(item => build(item)));
     promise.then(() => {
@@ -56,6 +55,7 @@ function build(name) {
       });
     })
   });
+  return map[name];
 }
 
 
