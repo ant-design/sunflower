@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useForm, UseFormConfig } from '@sunflower-antd/form';
 
 export interface UseStepsFormConfig extends UseFormConfig {
-  total?: number;
   defaultCurrent?: number;
 }
 
@@ -10,8 +9,7 @@ export const useStepsForm = (config: UseStepsFormConfig) => {
   const {
     form,
     defaultFormValues,
-    total,
-    defaultCurrent,
+    defaultCurrent = 0,
     submit,
   } = config || {} as UseStepsFormConfig;
   const [current, setCurrent] = useState(defaultCurrent);
@@ -41,17 +39,15 @@ export const useStepsForm = (config: UseStepsFormConfig) => {
       if (!err) {
         setCurrent(Number(step))
       }
-    })
+    });
   };
 
   const handleStepChange = currentStep => gotoStep(currentStep);
 
   return {
     current,
-    total,
     gotoStep,
     stepsProps: {
-      initial: defaultCurrent,
       current,
       onChange: handleStepChange,
     },
