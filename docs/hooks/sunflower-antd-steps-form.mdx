@@ -16,14 +16,7 @@ import Example from '../Example';
 
 ## Examples
 
-Default
 <Example name="sunflower-antd-steps-form/Example1" />
-
-One Form with the Steps
-<Example name="sunflower-antd-steps-form/Example2" />
-
-defaultCurrent && defaultFormValues
-<Example name="sunflower-antd-steps-form/Example3" />
 
 ## API
 
@@ -66,6 +59,12 @@ const obj = useStepsForm(config);
       <td>Default step, counting from 0.</td>
       <td>number</td>
       <td dangerouslySetInnerHTML={{__html: '0'}}></td>
+    </tr>
+    <tr>
+      <td>total</td>
+      <td>total counting for steps.</td>
+      <td>number</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
