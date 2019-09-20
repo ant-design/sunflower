@@ -10,7 +10,8 @@
     "@sunflower-antd/form": "0.1.0",
     "@sunflower-antd/form-table": "0.3.1",
     "@sunflower-antd/modal": "0.1.0",
-    "@sunflower-antd/modal-form": "0.1.0"
+    "@sunflower-antd/modal-form": "0.1.0",
+    "@sunflower-antd/steps-form": "0.1.0"
   },
   "license": "MIT",
   "publishConfig": {
