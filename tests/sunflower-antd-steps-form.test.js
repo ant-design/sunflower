@@ -20,8 +20,10 @@ test('useStepsForm', async () => {
   const { result } = renderHook(() =>
     useStepsForm(config),
   );
-  const { submit: formSubmit, form, current, gotoStep, stepsProps } = result.current;
+  const { submit: formSubmit, form, current, gotoStep, stepsProps, formProps } = result.current;
   expect(typeof formSubmit).toBe('function');
+  expect(typeof stepsProps).toBe('object');
+  expect(typeof formProps).toBe('object');
   expect(typeof stepsProps.onChange).toBe('function');
   expect(typeof gotoStep).toBe('function');
   expect(typeof current).toBe('number');
