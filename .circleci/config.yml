@@ -46,6 +46,28 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }} 
       - run: yarn bootstrap
       - run: yarn build
+  docs-deploy:
+    docker:
+      - image: circleci/node:latest
+    filters:
+      branches:
+        only: master
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "需要一个 ssh_key"
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn doc:deploy
 workflows:
   version: 2
   lint_test_build:
@@ -53,3 +75,4 @@ workflows:
       - lint
       - test
       - build
+      - docs-deploy
