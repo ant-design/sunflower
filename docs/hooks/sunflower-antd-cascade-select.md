@@ -1,11 +1,6 @@
 ---
-name: useCascadeSelect
-menu: Hooks
+title: useCascadeSelect
 ---
-
-import "regenerator-runtime/runtime";
-import Example from '../Example';
-
 
 # useCascadeSelect
 
@@ -17,14 +12,13 @@ import Example from '../Example';
 
 ## Examples
 
-This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter.When you change the previous select option, the subsequent select values ​​will be cleared.
+This is a typical cascading select scene.When you select the first one, the second function is called with the selected value as a parameter. When you change the previous select option, the subsequent select values ​​will be cleared.
 
-<Example name="sunflower-antd-cascade-select/Example1" />
-
+<iframe src="https://codesandbox.io/embed/usecascadeselectexample1-g5hbp?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 With defaultFormValues
 
-<Example name="sunflower-antd-cascade-select/Example2" />
+<iframe src="https://codesandbox.io/embed/usecascadeselectexample2-2rm67?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 
 ## API
@@ -60,6 +54,7 @@ const obj = useCascadeSelect(config);
   </tbody>
 </table>
 
+
 - obj
 
 <table>
@@ -83,4 +78,3 @@ const obj = useCascadeSelect(config);
     </tr>
   </tbody>
 </table>
-

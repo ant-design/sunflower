@@ -5,12 +5,12 @@
     "bootstrap": "lerna bootstrap",
     "lint": "umi-lint --eslint.ext='.ts,tsx' ./packages/*/src",
     "precommit": "umi-lint --staged --eslint.ext='.ts,tsx' --fix",
-    "dev": "father doc dev",
-    "doc:build": "father doc build",
+    "dev": "vuepress dev docs",
+    "doc:build": "vuepress build docs",
     "build": "node scripts/build",
     "test": "umi-test",
     "cov": "umi-test --coverage",
-    "doc:deploy": "father doc deploy",
+    "doc:deploy": "./deploy.sh",
     "pub": "yarn build && lerna publish"
   },
   "devDependencies": {
@@ -28,6 +28,10 @@
     "react": "^16.9.0",
     "react-syntax-highlighter": "^11.0.1",
     "react-test-renderer": "^16.9.0",
-    "umi-lint": "2.0.2"
+    "umi-lint": "2.0.2",
+    "@vuepress/plugin-active-header-links": "^1.0.0-rc.1",
+    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
+    "vuepress": "^1.1.0"
   }
 }

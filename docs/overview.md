@@ -1,33 +1,34 @@
 ---
-name: Overview
-route: '/'
-order: -1
+title: sunflower
 ---
 
 # sunflower
 
 React Hooks with components of [antd](https://ant.design).
 
-## 🎩&nbsp; Features
+
+## 🎩 Features
 
 - 🏄 Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
 - 💅 Easy to customize. You can easily customize the combination of components you need.
 - 👯 Layered design. You can use react-hooks without ui or react-hooks with antd.
 
-## 🤔&nbsp; Why?
 
-&nbsp;&nbsp;&nbsp;&nbsp;Usually, we use multiple antd components, and we organize their relationship through state and props methods like `value`, `onChange`.
+## 🤔 Why?
 
-&nbsp;&nbsp;&nbsp;&nbsp;Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to use existing processes?
+Usually, we use multiple antd components, and we organize their relationship through state and props methods like `value`, `onChange`.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.
+Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to use existing processes?
+
+Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.
 
 
 ## ⚠️ Warning
 
 This project is still under development.
 
-## 📟&nbsp; Usage
+
+## 📟 Usage
 
 ```
 $ npm install sunflower-antd --save
@@ -50,7 +51,7 @@ ReactDOM.render(<Component />, mountNode);
 ```
 
 
-## ⚒&nbsp; Development
+## ⚒ Development
 
 ```
 $ yarn

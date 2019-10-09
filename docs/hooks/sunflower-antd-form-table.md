@@ -1,11 +1,6 @@
 ---
-name: useFormTable
-menu: Hooks
+title: useFormTable
 ---
-
-import "regenerator-runtime/runtime";
-import Example from '../Example';
-
 
 # useFormTable
 
@@ -14,16 +9,20 @@ import Example from '../Example';
 
 `useFormTable` is a react-hooks.When you want to use "Form Search Table", you can use it.
 
+
 ## Examples
 
 Default
-<Example name="sunflower-antd-form-table/Example1" />
+
+<iframe src="https://codesandbox.io/embed/useformtableexample1-t6e6v?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 With filters and sorter
-<Example name="sunflower-antd-form-table/Example2" />
+
+<iframe src="https://codesandbox.io/embed/useformtableexample2-izvwq?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 With defaultFormValues
-<Example name="sunflower-antd-form-table/Example3" />
+
+<iframe src="https://codesandbox.io/embed/useformtableexample3-mz02e?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 
 ## API
@@ -84,6 +83,7 @@ const obj = useFormTable(config);
 </table>
 
 - responseData
+
 ```js
 {
   list: [{
@@ -96,13 +96,12 @@ const obj = useFormTable(config);
 ```
 
 - requestData
+
 ```js
 search({ current, pageSize, filters, sorter, ...formValues }) {
 
 }
 ```
-
-
 
 
 - obj
