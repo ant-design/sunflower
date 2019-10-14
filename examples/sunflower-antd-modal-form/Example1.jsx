@@ -37,7 +37,7 @@ export default Form.create()(props => {
             <p>submit: username {formValues.username} email {formValues.email}</p>
             <p>result: {formResult}</p>
             <Form layout="inline" {...formProps}>
-              <Form.Item label="Username1">
+              <Form.Item label="Username">
                 {
                   form.getFieldDecorator('username', {
                     rules: [
