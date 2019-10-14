@@ -37,9 +37,13 @@ export default Form.create()(props => {
             <p>submit: username {formValues.username} email {formValues.email}</p>
             <p>result: {formResult}</p>
             <Form layout="inline" {...formProps}>
-              <Form.Item label="Username">
+              <Form.Item label="Username1">
                 {
-                  form.getFieldDecorator('username')(
+                  form.getFieldDecorator('username', {
+                    rules: [
+                      { required: true, message: '该字段不能为空' },
+                    ]
+                  })(
                     <Input placeholder="Username" />
                   )
                 } 
@@ -47,7 +51,11 @@ export default Form.create()(props => {
 
               <Form.Item label="Email">
                 {
-                  form.getFieldDecorator('email')(
+                  form.getFieldDecorator('email', {
+                    rules: [
+                      { required: true, message: '该字段不能为空' },
+                    ]
+                  })(
                     <Input placeholder="Email" />
                   )
                 } 

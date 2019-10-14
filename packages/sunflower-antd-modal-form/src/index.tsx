@@ -47,13 +47,17 @@ export const useModalForm = (config: UseModalFormConfig) => {
   const modalFormProps = {
     ...modalProps,
     onOk: () => {
-      formSubmit().then(() => {
-        if (autoSubmitClose) {
-          close();
-        }
+      formInstance.validateFields((err) => {
+        if (!err) {
+          formSubmit().then(() => {
+            if (autoSubmitClose) {
+              close();
+            }
 
-        if (autoResetForm) {
-          formInstance.resetFields();
+            if (autoResetForm) {
+              formInstance.resetFields();
+            }
+          });
         }
       });
     },
