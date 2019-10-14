@@ -48,7 +48,7 @@ export const useForm = (config: UseFormConfig) => {
       return data;
     }).catch(err => {
       setFormLoading(false);
-      throw new Error(err.message);
+      throw err;
     });
   };
 
@@ -71,7 +71,7 @@ export const useForm = (config: UseFormConfig) => {
       setDefaultFormValuesLoading(false);
       setInitialValues(data);
       form.setFieldsValue(obj);
-    }).catch((err) => {
+    }).catch(() => {
       setDefaultFormValuesLoading(false);
     });
   }, []);
