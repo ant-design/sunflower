@@ -1,18 +1,16 @@
 ---
-name: useModal
-menu: Hooks
+title: useModal
 ---
 
-import "regenerator-runtime/runtime";
-import Example from '../Example';
-
-
 # useModal
+
 
 ## Examples
 
 Default
-<Example name="sunflower-antd-modal/Example1" />
+
+<iframe src="https://codesandbox.io/embed/usemodalexample1-2hrtp?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 ## Overview
 

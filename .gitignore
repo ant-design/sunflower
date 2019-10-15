@@ -1,5 +1,6 @@
 node_modules
-.docz
+.DS_Store
+docs/.vuepress/dist
 dist
 lib
 es

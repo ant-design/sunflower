@@ -1,27 +1,33 @@
 ---
-name: useStepsForm
-menu: Hooks
+title: useForm
 ---
 
-import "regenerator-runtime/runtime";
-import Example from '../Example';
-
-
-# useStepsForm
+# useFormTable
 
 
 ## Overview
 
-`useStepsForm` is a react-hook. When you want to use "Steps Form", you can use it.
+`useFormTable` is a react-hooks. When you want to use "Form", you can use it.
 
 ## Examples
 
-<Example name="sunflower-antd-steps-form/Example1" />
+Default
+
+<iframe src="https://codesandbox.io/embed/useformexample1-rvzvw?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+submit method
+
+<iframe src="https://codesandbox.io/embed/useformexample2-0xl2f?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+defaultFormValues
+
+<iframe src="https://codesandbox.io/embed/useformexample3-6mj9g?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 ## API
 
 ```jsx
-const obj = useStepsForm(config);
+const obj = useForm(config);
 ```
 
 - config
@@ -54,18 +60,6 @@ const obj = useStepsForm(config);
       <td>object</td>
       <td dangerouslySetInnerHTML={{__html: '{}'}}></td>
     </tr>
-    <tr>
-      <td>defaultCurrent</td>
-      <td>Default step, counting from 0.</td>
-      <td>number</td>
-      <td dangerouslySetInnerHTML={{__html: '0'}}></td>
-    </tr>
-    <tr>
-      <td>total</td>
-      <td>total counting for steps.</td>
-      <td>number</td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
 
@@ -84,24 +78,9 @@ const obj = useStepsForm(config);
   </thead>
   <tbody>
     <tr>
-      <td>current</td>
-      <td>current step, counting from 0.</td>
-      <td>number</td>
-    </tr>
-    <tr>
-      <td>gotoStep</td>
-      <td>goto the target step. When use it, the hook will validate current form at first.</td>
-      <td dangerouslySetInnerHTML={{__html: '(step: number) => void'}}></td>
-    </tr>
-    <tr>
-      <td>stepsProps</td>
-      <td>antd Steps props</td>
-      <td>object</td>
-    </tr>
-    <tr>
       <td>formProps</td>
       <td>antd Form props</td>
-      <td>object</td>
+      <td></td>
     </tr>
     <tr>
       <td>form</td>

@@ -1,27 +1,28 @@
 ---
-name: useModalForm
-menu: Hooks
+title: useModalForm
 ---
 
-import "regenerator-runtime/runtime";
-import Example from '../Example';
-
-
 # useModalForm
+
 
 ## Examples
 
 Default
-<Example name="sunflower-antd-modal-form/Example1" />
+
+<iframe src="https://codesandbox.io/embed/usemodalformexample1-x4jlt?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 With defaultValues
-<Example name="sunflower-antd-modal-form/Example2" />
+
+<iframe src="https://codesandbox.io/embed/usemodalformexample2-1r4iq?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 Submit method
-<Example name="sunflower-antd-modal-form/Example3" />
+
+<iframe src="https://codesandbox.io/embed/usemodalformexample3-523db?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 Default form submit
-<Example name="sunflower-antd-modal-form/Example4" />
+
+<iframe src="https://codesandbox.io/embed/usemodalformexample4-p4ptr?fontsize=14" title="sunflower" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; margin-bottom: 60px; border: 1px solid rgb(206, 212, 222); padding: 0.6em; border-radius: 4px; overflow: hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 ## Overview
 

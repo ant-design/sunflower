@@ -8,7 +8,7 @@
 
 <div align="center">
 
-React Hooks with components of [antd](https://ant.design).
+[Ant Design](https://ant.design) 的 React Hook 组件库。
 
 [![build status][circleci-image]][circleci-url] [![Test coverage][coveralls-image]][coveralls-url] [![node version][node-image]][node-url]
 
@@ -21,38 +21,38 @@ React Hooks with components of [antd](https://ant.design).
 
 </div>
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
 
-## 🎩 Features
+## 🎩 特性
 
-- 🏄 Easy to use. You don't need to know too much about state and change methods to use components with interaction logic.
-- 💅 Easy to customize. You can easily customize the combination of components you need.
-- 👯 Layered design. You can use react-hooks without ui or react-hooks with antd.
-
-
-## 🤔 Why?
-
-Usually, we use multiple antd components, and we organize their relationship through state and props methods like `value`, `onChange`.
-
-Is there a way to reduce the process code and describe the relationship between multiple ui components? How can we use a way to use existing processes?
-
-Yes,we can use react-hooks, so the relationship between multiple antd components will be in react-hooks.
+- 🏄 上手简单：你不需要对状态和更改方法有深入的了解，就可以使用带有交互逻辑的组件。
+- 💅 易于定制：你可以轻松地自定义所需要的组件的组合。
+- 👯 分层化设计：你可以在不使用 UI 的情况下使用 React-Hooks，也可以将 React-Hooks 和 Ant Design 搭配使用。
 
 
-## ⚠️ Warning
+## 🤔 初衷
 
-This project is still under development.
+通常，我们使用多个 antd 组件，并通过 state 和 props 方法（例如 `value`，`onChange`）来组织它们之间的关系。
+
+有没有办法减少流程代码，并对多个 UI 组件之间的关系进行描述？我们如何通过一种方式来使用现有流程？
+
+当然，React-Hooks 可以帮我们实现！我们可以将多个 antd 组件之间的关系通过 React-Hooks 描述出来。
 
 
-## 📟 Usage
+## ⚠️ 警告
+
+本项目仍在开发中。
+
+
+## 📟 使用
 
 ```
 $ npm install sunflower-antd --save
 ```
 
 
-## Examples
+## 示例
 
 ### useFormTable
 
@@ -141,16 +141,16 @@ export default Form.create()(Component);
 ## ⚒ Development
 
 ```
-# install
+# 安装
 $ yarn
 $ yarn bootstrap
 
-# dev
+# 开发
 $ yarn dev
 
-# build
+# 构建
 $ yarn build
 
-# test
+# 测试
 $ yarn test
 ```
