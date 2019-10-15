@@ -49,25 +49,27 @@ jobs:
   docs-deploy:
     docker:
       - image: circleci/node:latest
-    filters:
-      branches:
-        only: master
+    working_directory: ~/repo
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "需要一个 ssh_key"
+            - "1e:5d:74:ef:2c:25:11:8c:2c:ee:f8:16:39:ff:22:b9"
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: yarn install
+      - run: git config --global user.email $GH_EMAIL
+      - run: git config --global user.name $GH_NAME
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: chmod u+x *.sh
       - run: yarn doc:deploy
+      
 workflows:
   version: 2
   lint_test_build:
