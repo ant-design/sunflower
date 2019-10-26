@@ -1,12 +1,4 @@
-<p align="center">
-  <a href="https://ant-design.github.io/sunflower/">
-    <img width="200" src="https://user-images.githubusercontent.com/26959437/65831129-bb0d1e80-e2e8-11e9-9c07-1f71c7dc7138.png">
-  </a>
-</p>
-
-<h1 align="center">Sunflower</h1>
-
-<div align="center">
+# Sunflower
 
 [Ant Design](https://ant.design) 的 React Hook 组件库。
 
@@ -18,8 +10,6 @@
 [coveralls-url]: https://codecov.io/gh/ant-design/sunflower
 [node-image]: https://img.shields.io/badge/node.js-%3E=_6.0-green.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
-
-</div>
 
 [English](./README.md) | 简体中文
 
