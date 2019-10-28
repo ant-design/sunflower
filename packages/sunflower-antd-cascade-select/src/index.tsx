@@ -21,7 +21,7 @@ export interface Select {
 
 export interface UseCascadeSelectConfig {
   list: ListItem[];
-  autoFirstSearch: boolean;
+  autoFirstSearch?: boolean;
   form: any;
 }
 
