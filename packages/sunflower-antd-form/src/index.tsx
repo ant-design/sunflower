@@ -11,7 +11,7 @@ export interface Store {
 export interface UseFormConfig {
   defaultFormValues?: Store | (() => (Promise<Store> | Store));
   form?: any;
-  submit: (formValues: Store) => any;
+  submit?: (formValues: Store) => any;
 }
 
 

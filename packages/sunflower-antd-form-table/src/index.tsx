@@ -157,8 +157,8 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     formValues,
     filters: requestData.filters,
     sorter: requestData.sorter,
-    current: requestData.current,
-    pageSize: requestData.pageSize,
+    current: requestData.current as number,
+    pageSize: requestData.pageSize as number,
     dataSource: responseData.dataSource,
     total: responseData.total,
     search: (data) => {
