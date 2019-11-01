@@ -53,6 +53,7 @@ export const useForm = (config: UseFormConfig) => {
   };
 
   useEffect(() => {
+    let isUnMounted = false; 
     if (!defaultFormValues) {
       return;
     }
@@ -64,16 +65,23 @@ export const useForm = (config: UseFormConfig) => {
       value = defaultFormValues;
     }
     Promise.resolve(value).then(data => {
-      const obj = { ...data };
-      Object.keys(data).forEach(name => {
-        obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
-      });
-      setDefaultFormValuesLoading(false);
-      setInitialValues(data);
-      form.setFieldsValue(obj);
+      if(!isUnMounted){
+        const obj = { ...data };
+        Object.keys(data).forEach(name => {
+          obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
+        });
+        setDefaultFormValuesLoading(false);
+        setInitialValues(data);
+        form.setFieldsValue(obj);
+      }
     }).catch(() => {
-      setDefaultFormValuesLoading(false);
+      if(!isUnMounted){
+        setDefaultFormValuesLoading(false);
+      }
     });
+    return ()=> {
+      isUnMounted = true;
+    }
   }, []);
 
 
