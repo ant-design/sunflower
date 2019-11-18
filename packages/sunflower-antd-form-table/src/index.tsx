@@ -130,8 +130,8 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
 
   const tableProps = {
     pagination: {
-      pageSize: requestData.pageSize,
-      current: requestData.current,
+      pageSize: requestData.pageSize as number,
+      current: requestData.current as number,
       defaultPageSize,
       defaultCurrent,
       total: responseData.total,
