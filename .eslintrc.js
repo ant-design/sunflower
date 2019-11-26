@@ -12,5 +12,6 @@ module.exports = {
     "no-underscore-dangle": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "arrow-body-style": 0,
+    "consistent-return": 1
   }
 };

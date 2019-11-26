@@ -53,7 +53,7 @@ export const useForm = (config: UseFormConfig) => {
   };
 
   useEffect(() => {
-    let isUnMounted = false; 
+    let isUnMounted = false;
     if (!defaultFormValues) {
       return;
     }
@@ -65,7 +65,7 @@ export const useForm = (config: UseFormConfig) => {
       value = defaultFormValues;
     }
     Promise.resolve(value).then(data => {
-      if(!isUnMounted){
+      if (!isUnMounted) {
         const obj = { ...data };
         Object.keys(data).forEach(name => {
           obj[name] = form.isFieldTouched(name) ? form.getFieldValue(name) : data[name];
@@ -75,13 +75,13 @@ export const useForm = (config: UseFormConfig) => {
         form.setFieldsValue(obj);
       }
     }).catch(() => {
-      if(!isUnMounted){
+      if (!isUnMounted) {
         setDefaultFormValuesLoading(false);
       }
     });
-    return ()=> {
+    return () => {
       isUnMounted = true;
-    }
+    };
   }, []);
 
 
