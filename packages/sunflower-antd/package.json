@@ -1,17 +1,17 @@
 {
   "name": "sunflower-antd",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "entry": "src/index.ts",
   "dependencies": {
-    "@sunflower-antd/cascade-select": "0.1.1",
-    "@sunflower-antd/form": "0.1.1",
-    "@sunflower-antd/form-table": "0.3.1",
+    "@sunflower-antd/cascade-select": "0.1.3",
+    "@sunflower-antd/form": "0.3.0",
+    "@sunflower-antd/form-table": "0.4.1",
     "@sunflower-antd/modal": "0.1.0",
-    "@sunflower-antd/modal-form": "0.1.1",
-    "@sunflower-antd/steps-form": "0.1.1"
+    "@sunflower-antd/modal-form": "0.2.1",
+    "@sunflower-antd/steps-form": "0.3.0"
   },
   "license": "MIT",
   "publishConfig": {
