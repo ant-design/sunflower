@@ -4,6 +4,7 @@ import { useForm, UseFormConfig } from '@sunflower-antd/form';
 export interface UseStepsFormConfig extends UseFormConfig {
   defaultCurrent?: number;
   total?: number;
+  isBackValidate?: boolean;
 }
 
 export const useStepsForm = (config: UseStepsFormConfig) => {
@@ -13,6 +14,7 @@ export const useStepsForm = (config: UseStepsFormConfig) => {
     defaultCurrent = 0,
     submit,
     total,
+    isBackValidate = true,
   } = config || {} as UseStepsFormConfig;
   const [current, setCurrent] = useState(defaultCurrent);
 
@@ -31,27 +33,41 @@ export const useStepsForm = (config: UseStepsFormConfig) => {
     defaultFormValues,
   });
 
+  const go = step => {
+    let targetStep = step;
+
+    if (step > total - 1) {
+      targetStep = total - 1
+    }
+
+    if (step < 0) {
+      targetStep = 0
+    }
+
+    setCurrent(targetStep)
+  };
+
   const gotoStep = step => {
     if (step === current) {
-      return
+      return true
+    }
+
+    if (step < current && !isBackValidate) {
+      go(step)
+      return true
     }
 
     // goto the target step after passing validate
-    formInstance.validateFields(err => {
-      if (!err) {
-        let targetStep = step;
-
-        if (step > total - 1) {
-          targetStep = total - 1
+    return new Promise(((resolve, reject) => {
+      formInstance.validateFields((err, values) => {
+        if (!err) {
+          go(step);
+          resolve(values)
+        } else {
+          reject(err)
         }
-
-        if (step < 0) {
-          targetStep = 0
-        }
-
-        setCurrent(targetStep)
-      }
-    });
+      });
+    }))
   };
 
   const handleStepChange = currentStep => gotoStep(currentStep);
