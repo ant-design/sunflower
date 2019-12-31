@@ -100,6 +100,22 @@ export const useForm = (config: UseFormConfig) => {
     },
   };
 
+  const formSubmit = (values?: Store) => {
+    form.setFieldsValue(values);
+    let formSubmitResult = Promise.resolve();
+    formInstance.validateFields((err) => {
+      if (!err) {
+        formSubmitResult = onFinish(form.getFieldsValue())
+      }
+    });
+    // 若表单验证失败 submit执行结果不再抛出 并中断后续执行
+    const fieldsError = Object.values(formInstance.getFieldsError());
+    fieldsError.forEach((filedError) => {
+      if (filedError) throw filedError;
+    })
+    return formSubmitResult;
+  }
+
   return {
     form: formInstance,
     formProps,
@@ -108,9 +124,6 @@ export const useForm = (config: UseFormConfig) => {
     initialValues,
     formResult,
     formLoading,
-    submit(values?: Store) {
-      form.setFieldsValue(values);
-      return onFinish(form.getFieldsValue());
-    },
+    submit: formSubmit,
   };
 };
