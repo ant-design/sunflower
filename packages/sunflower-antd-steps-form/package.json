@@ -1,12 +1,12 @@
 {
   "name": "@sunflower-antd/steps-form",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "entry": "src/index.tsx",
   "dependencies": {
-    "@sunflower-antd/form": "0.3.0"
+    "@sunflower-antd/form": "0.3.1"
   },
   "peerDependencies": {
     "antd": "^3.19.3",
