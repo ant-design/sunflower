@@ -21,7 +21,11 @@ export default Form.create()(props => {
     <Form layout="inline" {...formProps}>
       <Form.Item label="Username">
         {
-          form.getFieldDecorator('username')(
+          form.getFieldDecorator('username', {
+            rules: [
+              { required: true, message: 'Please input username' },
+            ]
+          })(
             <Input placeholder="Username" />
           )
         } 
@@ -29,7 +33,15 @@ export default Form.create()(props => {
 
       <Form.Item label="Email">
         {
-          form.getFieldDecorator('email')(
+          form.getFieldDecorator('email', {
+            rules: [
+              { 
+                required: true,
+                message: 'Please input email',
+                type: 'email',
+              },
+            ]
+          })(
             <Input placeholder="Email" />
           )
         } 

@@ -39,16 +39,25 @@ export const useForm = (config: UseFormConfig) => {
     }
   }
 
-  const onFinish = (values: Store) => {
-    setFormValues(values);
+  const onFinish = (formValue: Store) => {
+    setFormValues(formValue);
     setFormLoading(true);
-    return Promise.resolve(submit(values)).then(data => {
-      setFormLoading(false);
-      setFormResult(data);
-      return data;
-    }).catch(err => {
-      setFormLoading(false);
-      throw err;
+    return new Promise((resolve, reject) => {
+      formInstance.validateFields((validateErr, values) => {
+        if (validateErr) {
+          setFormLoading(false);
+          reject(validateErr);
+        } else {
+          resolve(Promise.resolve(submit(values)).then(data => {
+            setFormLoading(false);
+            setFormResult(data);
+            return data;
+          }).catch(err => {
+            setFormLoading(false);
+            throw err;
+          }))
+        }
+      });
     });
   };
 
@@ -92,11 +101,7 @@ export const useForm = (config: UseFormConfig) => {
   } : {
     onSubmit(e) {
       e.preventDefault();
-      formInstance.validateFields((err, values) => {
-        if (!err) {
-          onFinish(values);
-        }
-      });
+      onFinish(form.getFieldsValue());
     },
   };
 
@@ -108,9 +113,9 @@ export const useForm = (config: UseFormConfig) => {
     initialValues,
     formResult,
     formLoading,
-    submit(values?: Store) {
-      form.setFieldsValue(values);
-      return onFinish(form.getFieldsValue());
+    submit: (values?: Store) => {
+      formInstance.setFieldsValue(values);
+      return onFinish(formInstance.getFieldsValue());
     },
   };
 };

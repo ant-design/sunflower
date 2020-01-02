@@ -41,7 +41,7 @@ export default Form.create()(props => {
                 {
                   form.getFieldDecorator('username', {
                     rules: [
-                      { required: true, message: '该字段不能为空' },
+                      { required: true, message: 'Please input username' },
                     ]
                   })(
                     <Input placeholder="Username" />
@@ -53,7 +53,11 @@ export default Form.create()(props => {
                 {
                   form.getFieldDecorator('email', {
                     rules: [
-                      { required: true, message: '该字段不能为空' },
+                      { 
+                        required: true, 
+                        message: 'Please input email',
+                        type: 'email',
+                      },
                     ]
                   })(
                     <Input placeholder="Email" />
