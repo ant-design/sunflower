@@ -42,7 +42,15 @@ export default Form.create()(props => {
 
             <Form.Item label="Email">
               {
-                form.getFieldDecorator('email')(
+                form.getFieldDecorator('email', {
+                  rules: [
+                    { 
+                      required: true, 
+                      message: 'Please input email',
+                      type: 'email',
+                    },
+                  ]
+                })(
                   <Input placeholder="Email" />
                 )
               } 
