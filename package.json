@@ -24,7 +24,7 @@
     "build": "father-build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "cov": "umi-test --coverage"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.5",
     "antd": "^4.0.3",
@@ -50,6 +51,7 @@
     "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
     "react": "^16.13.0",
+    "react-test-renderer": "^16.13.0",
     "yorkie": "^2.0.0"
   }
 }

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Form } from 'antd';
-import { useSearchResult as useSearchResultHooks, UseSearchResultConfig } from '../useSearchResult';
+import {
+  useSearchResult as useSearchResultHooks,
+  UseSearchResultConfig,
+} from '../useSearchResult';
 
 declare type StoreBaseValue = string | number | boolean;
 export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
@@ -16,13 +19,12 @@ export interface UseSearchResultAntdConfig
   extends UseSearchResultConfig<SearchResponseData, Store> {
   defaultPageSize?: number;
   defaultCurrent?: number;
-  defaultFormValues?: Store | (() => (Promise<Store> | Store));
+  defaultFormValues?: Store | (() => Promise<Store> | Store);
   form: any;
 }
 
-
 export const useFormTable = (config: UseSearchResultAntdConfig) => {
-  const formTableConfig = config || {} as UseSearchResultAntdConfig;
+  const formTableConfig = config || ({} as UseSearchResultAntdConfig);
   const {
     search,
     autoFirstSearch = true,
@@ -41,7 +43,6 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
   let formInstance = form;
   if (!form) {
     if (version === 4) {
-      debugger
       [formInstance] = Form['useForm']();
     } else {
       throw new Error('"form" need in antd@3');
@@ -67,11 +68,13 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
         value = defaultFormValues;
       }
       return Promise.resolve(value).then(data => {
-        debugger
+        debugger;
         const touched = formInstance.isFieldsTouched();
         const obj = { ...data };
         Object.keys(data).forEach(name => {
-          obj[name] = formInstance.isFieldTouched(name) ? formInstance.getFieldValue(name) : data[name];
+          obj[name] = formInstance.isFieldTouched(name)
+            ? formInstance.getFieldValue(name)
+            : data[name];
         });
         setInitialValues(data);
         formInstance.setFieldsValue(obj);
@@ -103,36 +106,39 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
   const onChange = (pagination, filters, sorter) => {
     searchFunc({
       ...requestData,
-      current: pagination.current === requestData.current ? 1 : pagination.current,
+      current:
+        pagination.current === requestData.current ? 1 : pagination.current,
       pageSize: pagination.pageSize,
       filters,
       sorter,
     });
   };
 
-  const formProps = version === 4 ? {
-    form: formInstance,
-    onFinish,
-    initialValues,
-  } : {
-    onSubmit(e) {
-      e.preventDefault();
-      formInstance.validateFields((err, values) => {
-        if (!err) {
-          searchFunc({
-            current: 1,
-            pageSize: requestData.pageSize,
-            ...values,
-          });
+  const formProps =
+    version === 4
+      ? {
+          form: formInstance,
+          onFinish,
+          initialValues,
         }
-      });
-    },
-  };
-
+      : {
+          onSubmit(e) {
+            e.preventDefault();
+            formInstance.validateFields((err, values) => {
+              if (!err) {
+                searchFunc({
+                  current: 1,
+                  pageSize: requestData.pageSize,
+                  ...values,
+                });
+              }
+            });
+          },
+        };
 
   const tableProps = {
     pagination: {
-      pageSize: requestData.pageSize || defaultCurrent as number,
+      pageSize: requestData.pageSize || (defaultCurrent as number),
       current: requestData.current as number,
       defaultPageSize,
       defaultCurrent,
@@ -141,8 +147,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     loading,
     dataSource: responseData.dataSource,
     onChange,
-  }
-
+  };
 
   const formValues = { ...requestData };
   delete formValues.current;
@@ -163,7 +168,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     pageSize: requestData.pageSize as number,
     dataSource: responseData.dataSource,
     total: responseData.total,
-    search: (data) => {
+    search: data => {
       searchFunc({
         ...requestData,
         ...data,
