@@ -13,7 +13,6 @@ jobs:
           paths:
             - node_modules
           key: yarn-packages-{{ checksum "yarn.lock" }} 
-      - run: yarn bootstrap
       - run: yarn lint
   test:
     docker:
@@ -28,7 +27,6 @@ jobs:
           paths:
             - node_modules
           key: yarn-packages-{{ checksum "yarn.lock" }} 
-      - run: yarn bootstrap
       - run: yarn cov
       - run: bash <(curl -s https://codecov.io/bash)
   build:
@@ -44,7 +42,6 @@ jobs:
           paths:
             - node_modules
           key: yarn-packages-{{ checksum "yarn.lock" }} 
-      - run: yarn bootstrap
       - run: yarn build
       
 workflows:
