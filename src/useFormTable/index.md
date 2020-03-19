@@ -1,6 +1,10 @@
 ---
 nav:
   title: Process Components
+  path: /process-components
+group:
+  title: Process Components
+  path: /process-components
 title: useFormTable
 ---
 
@@ -11,12 +15,12 @@ When you want to use "Form Search Table", you can use it.
 ## Examples
 
 ### Basic
+
 ```jsx
 import React from 'react';
 import { useFormTable } from 'sunflower-antd';
 import { Input, Button, Table, Form } from 'antd';
-import Mock from "mockjs"; // mock request
-
+import Mock from 'mockjs'; // mock request
 
 export default props => {
   const { formProps, tableProps, form } = useFormTable({
@@ -30,48 +34,47 @@ export default props => {
     defaultPageSize: 5,
   });
 
-  return <div>
+  return (
+    <div>
+      <Form layout="inline" {...formProps}>
+        <Form.Item label="Username" name="username">
+          <Input placeholder="Username" />
+        </Form.Item>
 
-    <Form layout="inline" {...formProps}>
-      <Form.Item label="Username" name="username">
-        <Input placeholder="Username" />
-      </Form.Item>
+        <Form.Item label="Email" name="email">
+          <Input placeholder="Email" />
+        </Form.Item>
 
-      <Form.Item label="Email" name="email">
-        <Input placeholder="Email" />
-      </Form.Item>
+        <Form.Item>
+          <Button onClick={() => form.resetFields()}>Reset</Button>
+        </Form.Item>
 
-      <Form.Item>
-        <Button onClick={() => form.resetFields()}>
-          Reset
-        </Button>
-      </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Search
-        </Button>
-      </Form.Item>
-    </Form>
-
-    <Table
-      style={{marginTop: 20}}
-      columns={[
-        {
-          title: 'Username',
-          dataIndex: 'username',
-          key: 'username',
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-        }
-      ]}
-      rowKey="id"
-      {...tableProps}
-    />
-  </div>
+      <Table
+        style={{ marginTop: 20 }}
+        columns={[
+          {
+            title: 'Username',
+            dataIndex: 'username',
+            key: 'username',
+          },
+          {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+          },
+        ]}
+        rowKey="id"
+        {...tableProps}
+      />
+    </div>
+  );
 };
 
 // mock request
@@ -79,12 +82,12 @@ const total = 200;
 const db = Mock.mock({
   [`list|${total}`]: [
     {
-      username: "@name",
-      email: "@email",
-      id: "@guid",
-      "gender|1": ["male", "female"] 
-    }
-  ]
+      username: '@name',
+      email: '@email',
+      id: '@guid',
+      'gender|1': ['male', 'female'],
+    },
+  ],
 });
 function filter(list, dataIndex, keyword) {
   if (!keyword) {
@@ -93,16 +96,23 @@ function filter(list, dataIndex, keyword) {
   return list.filter(
     item =>
       item[dataIndex].toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) >
-      -1
+      -1,
   );
 }
 function request({ current, pageSize, filters, sorter, username, email }) {
-  console.log('-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s', username, pageSize, current, JSON.stringify(filters), JSON.stringify(sorter));
+  console.log(
+    '-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s',
+    username,
+    pageSize,
+    current,
+    JSON.stringify(filters),
+    JSON.stringify(sorter),
+  );
   const start = pageSize * (current - 1);
   const end = start + pageSize;
   let totalList = db.list;
-  totalList = filter(totalList, "username", username);
-  totalList = filter(totalList, "email", email);
+  totalList = filter(totalList, 'username', username);
+  totalList = filter(totalList, 'email', email);
   if (filters) {
     Object.keys(filters).forEach(key => {
       if (!filters[key]) {
@@ -117,9 +127,13 @@ function request({ current, pageSize, filters, sorter, username, email }) {
   if (sorter && sorter.column) {
     const { dataIndex } = sorter.column;
     if (sorter.order === 'descend') {
-      totalList = [...totalList].sort((a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0),
+      );
     } else {
-      totalList = [...totalList].sort((a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0),
+      );
     }
   }
   const list = totalList.slice(start, end);
@@ -127,9 +141,9 @@ function request({ current, pageSize, filters, sorter, username, email }) {
     setTimeout(() => {
       r({
         list,
-        total: totalList.length
+        total: totalList.length,
       });
-    }, 300)
+    }, 300),
   );
 }
 ```
@@ -140,8 +154,7 @@ function request({ current, pageSize, filters, sorter, username, email }) {
 import React from 'react';
 import { useFormTable } from 'sunflower-antd';
 import { Input, Button, Table, Form } from 'antd';
-import Mock from "mockjs"; // mock request
-
+import Mock from 'mockjs'; // mock request
 
 export default props => {
   const { formProps, tableProps, form } = useFormTable({
@@ -160,48 +173,47 @@ export default props => {
     },
   });
 
-  return <div>
+  return (
+    <div>
+      <Form layout="inline" {...formProps}>
+        <Form.Item label="Username" name="username">
+          <Input placeholder="Username" />
+        </Form.Item>
 
-    <Form layout="inline" {...formProps}>
-      <Form.Item label="Username" name="username">
-        <Input placeholder="Username" />
-      </Form.Item>
+        <Form.Item label="Email" name="email">
+          <Input placeholder="Email" />
+        </Form.Item>
 
-      <Form.Item label="Email" name="email">
-        <Input placeholder="Email" />
-      </Form.Item>
+        <Form.Item>
+          <Button onClick={() => form.resetFields()}>Reset</Button>
+        </Form.Item>
 
-      <Form.Item>
-        <Button onClick={() => form.resetFields()}>
-          Reset
-        </Button>
-      </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Search
-        </Button>
-      </Form.Item>
-    </Form>
-
-    <Table
-      style={{marginTop: 20}}
-      columns={[
-        {
-          title: 'Username',
-          dataIndex: 'username',
-          key: 'username',
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-        }
-      ]}
-      rowKey="id"
-      {...tableProps}
-    />
-  </div>
+      <Table
+        style={{ marginTop: 20 }}
+        columns={[
+          {
+            title: 'Username',
+            dataIndex: 'username',
+            key: 'username',
+          },
+          {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+          },
+        ]}
+        rowKey="id"
+        {...tableProps}
+      />
+    </div>
+  );
 };
 
 // mock request
@@ -209,12 +221,12 @@ const total = 200;
 const db = Mock.mock({
   [`list|${total}`]: [
     {
-      username: "@name",
-      email: "@email",
-      id: "@guid",
-      "gender|1": ["male", "female"] 
-    }
-  ]
+      username: '@name',
+      email: '@email',
+      id: '@guid',
+      'gender|1': ['male', 'female'],
+    },
+  ],
 });
 function filter(list, dataIndex, keyword) {
   if (!keyword) {
@@ -223,16 +235,23 @@ function filter(list, dataIndex, keyword) {
   return list.filter(
     item =>
       item[dataIndex].toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) >
-      -1
+      -1,
   );
 }
 function request({ current, pageSize, filters, sorter, username, email }) {
-  console.log('-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s', username, pageSize, current, JSON.stringify(filters), JSON.stringify(sorter));
+  console.log(
+    '-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s',
+    username,
+    pageSize,
+    current,
+    JSON.stringify(filters),
+    JSON.stringify(sorter),
+  );
   const start = pageSize * (current - 1);
   const end = start + pageSize;
   let totalList = db.list;
-  totalList = filter(totalList, "username", username);
-  totalList = filter(totalList, "email", email);
+  totalList = filter(totalList, 'username', username);
+  totalList = filter(totalList, 'email', email);
   if (filters) {
     Object.keys(filters).forEach(key => {
       if (!filters[key]) {
@@ -247,9 +266,13 @@ function request({ current, pageSize, filters, sorter, username, email }) {
   if (sorter && sorter.column) {
     const { dataIndex } = sorter.column;
     if (sorter.order === 'descend') {
-      totalList = [...totalList].sort((a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0),
+      );
     } else {
-      totalList = [...totalList].sort((a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0),
+      );
     }
   }
   const list = totalList.slice(start, end);
@@ -257,9 +280,9 @@ function request({ current, pageSize, filters, sorter, username, email }) {
     setTimeout(() => {
       r({
         list,
-        total: totalList.length
+        total: totalList.length,
       });
-    }, 300)
+    }, 300),
   );
 }
 ```
@@ -270,8 +293,7 @@ function request({ current, pageSize, filters, sorter, username, email }) {
 import React from 'react';
 import { useFormTable } from 'sunflower-antd';
 import { Input, Button, Form, Table } from 'antd';
-import Mock from "mockjs"; // mock request
-
+import Mock from 'mockjs'; // mock request
 
 export default props => {
   const { formProps, tableProps, sorter, filters, form } = useFormTable({
@@ -284,83 +306,85 @@ export default props => {
     },
   });
 
-  return <div>
-    <Form layout="inline" {...formProps}>
-      <Form.Item label="Username" name="username">
-        <Input placeholder="Username" />
-      </Form.Item>
+  return (
+    <div>
+      <Form layout="inline" {...formProps}>
+        <Form.Item label="Username" name="username">
+          <Input placeholder="Username" />
+        </Form.Item>
 
-      <Form.Item label="Email" name="email">
-        <Input placeholder="Email" />
-      </Form.Item>
+        <Form.Item label="Email" name="email">
+          <Input placeholder="Email" />
+        </Form.Item>
 
-      <Form.Item>
-        <Button onClick={() => form.resetFields()}>
-          Reset
-        </Button>
-      </Form.Item>
+        <Form.Item>
+          <Button onClick={() => form.resetFields()}>Reset</Button>
+        </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Search
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
 
-    <Table
-      style={{marginTop: 20}}
-      columns={[
-        {
-          title: 'Username',
-          dataIndex: 'username',
-          key: 'username',
-          sorter: true,
-          sortOrder: sorter && sorter.order,
-        },
-        {
-          title: 'Gender',
-          dataIndex: 'gender',
-          key: 'gender',
-          filters: [{
-            text: 'male',
-            value: 'male'
-          }, {
-            text: 'female',
-            value: 'female'
-          }],
-          filterMultiple: false,
-          filteredValue: filters && filters.gender || null,
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-        }
-      ]}
-      rowKey="id"
-      {...tableProps}
-      pagination={{
-        ...tableProps.pagination,
-        showQuickJumper: true,
-        showSizeChanger: true,
-        pageSizeOptions: ['5', '10', '20', '50'],
-      }}
-    />
-  </div>
+      <Table
+        style={{ marginTop: 20 }}
+        columns={[
+          {
+            title: 'Username',
+            dataIndex: 'username',
+            key: 'username',
+            sorter: true,
+            sortOrder: sorter && sorter.order,
+          },
+          {
+            title: 'Gender',
+            dataIndex: 'gender',
+            key: 'gender',
+            filters: [
+              {
+                text: 'male',
+                value: 'male',
+              },
+              {
+                text: 'female',
+                value: 'female',
+              },
+            ],
+            filterMultiple: false,
+            filteredValue: (filters && filters.gender) || null,
+          },
+          {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+          },
+        ]}
+        rowKey="id"
+        {...tableProps}
+        pagination={{
+          ...tableProps.pagination,
+          showQuickJumper: true,
+          showSizeChanger: true,
+          pageSizeOptions: ['5', '10', '20', '50'],
+        }}
+      />
+    </div>
+  );
 };
-
 
 // mock request
 const total = 200;
 const db = Mock.mock({
   [`list|${total}`]: [
     {
-      username: "@name",
-      email: "@email",
-      id: "@guid",
-      "gender|1": ["male", "female"] 
-    }
-  ]
+      username: '@name',
+      email: '@email',
+      id: '@guid',
+      'gender|1': ['male', 'female'],
+    },
+  ],
 });
 function filter(list, dataIndex, keyword) {
   if (!keyword) {
@@ -369,16 +393,23 @@ function filter(list, dataIndex, keyword) {
   return list.filter(
     item =>
       item[dataIndex].toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) >
-      -1
+      -1,
   );
 }
 function request({ current, pageSize, filters, sorter, username, email }) {
-  console.log('-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s', username, pageSize, current, JSON.stringify(filters), JSON.stringify(sorter));
+  console.log(
+    '-------> request: username: %s, pageSize: %s, current: %s, filters: %s, sorter: %s',
+    username,
+    pageSize,
+    current,
+    JSON.stringify(filters),
+    JSON.stringify(sorter),
+  );
   const start = pageSize * (current - 1);
   const end = start + pageSize;
   let totalList = db.list;
-  totalList = filter(totalList, "username", username);
-  totalList = filter(totalList, "email", email);
+  totalList = filter(totalList, 'username', username);
+  totalList = filter(totalList, 'email', email);
   if (filters) {
     Object.keys(filters).forEach(key => {
       if (!filters[key]) {
@@ -393,9 +424,13 @@ function request({ current, pageSize, filters, sorter, username, email }) {
   if (sorter && sorter.column) {
     const { dataIndex } = sorter.column;
     if (sorter.order === 'descend') {
-      totalList = [...totalList].sort((a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => b[dataIndex].charCodeAt(0) - a[dataIndex].charCodeAt(0),
+      );
     } else {
-      totalList = [...totalList].sort((a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0));
+      totalList = [...totalList].sort(
+        (a, b) => a[dataIndex].charCodeAt(0) - b[dataIndex].charCodeAt(0),
+      );
     }
   }
   const list = totalList.slice(start, end);
@@ -403,17 +438,20 @@ function request({ current, pageSize, filters, sorter, username, email }) {
     setTimeout(() => {
       r({
         list,
-        total: totalList.length
+        total: totalList.length,
       });
-    }, 300)
+    }, 300),
   );
 }
 ```
 
-
 ## API
 
-### config
+```js
+const result = useFormTable(config);
+```
+
+### Config
 
 <table>
   <thead>
@@ -465,6 +503,7 @@ function request({ current, pageSize, filters, sorter, username, email }) {
 </table>
 
 - responseData
+
 ```js
 {
   list: [{
@@ -472,21 +511,19 @@ function request({ current, pageSize, filters, sorter, username, email }) {
   }, {
     name: 'lily',
   }],
-  total: 10, 
+  total: 10,
 }
 ```
 
 - requestData
+
 ```js
 search({ current, pageSize, filters, sorter, ...formValues }) {
 
 }
 ```
 
-
-
-
-### result
+### Result
 
 <table>
   <thead>
