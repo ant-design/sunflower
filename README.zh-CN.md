@@ -1,6 +1,6 @@
 # 介绍
 
-English | 简体中文(README.zh-CN.md)
+[English](README.md) | 简体中文
 
 多个 [antd](https://ant.design) 组件的 react-hooks.
 
