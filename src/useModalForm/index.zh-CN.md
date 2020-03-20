@@ -288,8 +288,8 @@ const result = useModalForm(config);
     <tr>
       <th>名称</th>
       <th>说明</th>
-      <th>Type</th>
-      <th width="200px">类型</th>
+      <th>类型</th>
+      <th width="200px">默认值</th>
     </tr>
   </thead>
   <tbody>
