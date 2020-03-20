@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form } from 'antd';
+import Form from '../form';
 import {
   useSearchResult as useSearchResultHooks,
   UseSearchResultConfig,

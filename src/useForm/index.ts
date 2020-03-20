@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Form } from 'antd';
+import Form from '../form';
 
 export declare type StoreBaseValue = string | number | boolean;
 export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];

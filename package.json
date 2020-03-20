@@ -26,7 +26,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "rm -rf lib es && tsc --module esnext --outDir ./es && tsc --module commonjs --outDir ./lib",
+    "build": "rm -rf es lib && node build.js",
     "lint": "eslint --ext .ts,.tsx \"./src\"",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
