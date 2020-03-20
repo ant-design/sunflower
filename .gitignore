@@ -3,6 +3,8 @@ npm-debug.log*
 yarn-error.log
 coverage
 dist
+es
+lib
 .DS_Store
 .umi
 .umi-production

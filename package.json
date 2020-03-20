@@ -1,5 +1,6 @@
 {
   "name": "sunflower-antd",
+  "version": "1.0.0-alpha.2",
   "description": "Process Components for antd",
   "repository": {
     "type": "git",
@@ -19,12 +20,13 @@
     "access": "public"
   },
   "files": [
-    "dist"
+    "es",
+    "lib"
   ],
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "rm -rf dist && tsc --module esnext --outDir ./dist/es && tsc --module commonjs --outDir ./dist/lib",
+    "build": "rm -rf lib es && tsc --module esnext --outDir ./es && tsc --module commonjs --outDir ./lib",
     "lint": "eslint --ext .ts,.tsx \"./src\"",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
@@ -65,6 +67,5 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
-  },
-  "version": "1.0.0-alpha.1"
+  }
 }

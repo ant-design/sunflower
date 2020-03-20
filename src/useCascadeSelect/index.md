@@ -5,6 +5,7 @@ nav:
 group:
   title: Process Components
   path: /process-components
+  order: 2
 title: useCascadeSelect
 ---
 
@@ -19,7 +20,7 @@ title: useCascadeSelect
 Change the "Like" select option, the "Type" select values ​​will change.
 
 ```jsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Input, Select, Form, Button, Table } from 'antd';
 import { useCascadeSelect, useFormTable } from 'sunflower-antd';
 import Mock from 'mockjs'; // mock request
@@ -33,7 +34,18 @@ const tailLayout = {
 };
 
 export default props => {
-  const { selects, search } = useCascadeSelect({
+  const { formProps, tableProps, form } = useFormTable({
+    async search(values) {
+      const res = await request(values);
+      return {
+        dataSource: res.list,
+        total: res.total,
+      };
+    },
+  });
+
+  const { selects } = useCascadeSelect({
+    form,
     list: [
       {
         name: 'like',
@@ -86,16 +98,6 @@ export default props => {
   });
   const [like, type] = selects;
 
-  const { formProps, tableProps, form } = useFormTable({
-    async search(values) {
-      const res = await request(values);
-      return {
-        dataSource: res.list,
-        total: res.total,
-      };
-    },
-  });
-
   return (
     <div>
       <Form {...layout} {...formProps} style={{ width: 600 }}>
@@ -104,7 +106,7 @@ export default props => {
         </Form.Item>
 
         <Form.Item label="Like" name="like">
-          <Select {...like.props}>
+          <Select {...like.props} allowClear>
             {like.options.map(item => (
               <Select.Option value={item.value}>{item.label}</Select.Option>
             ))}
@@ -112,7 +114,7 @@ export default props => {
         </Form.Item>
 
         <Form.Item label="Type" name="type">
-          <Select {...type.props}>
+          <Select {...type.props} allowClear>
             {type.options.map(item => (
               <Select.Option value={item.value}>{item.label}</Select.Option>
             ))}

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Form } from 'antd';
 
 declare type StoreBaseValue = string | number | boolean;
-export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
-export interface Store {
+declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
+interface Store {
   [name: string]: StoreValue;
 }
 
