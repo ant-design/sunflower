@@ -1,6 +1,6 @@
 {
   "name": "sunflower-antd",
-  "description": "react hooks for antd",
+  "description": "Process Components for antd",
   "repository": {
     "type": "git",
     "url": "https://github.com/ant-design/sunflower"
@@ -18,18 +18,21 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "father-build",
+    "build": "rm -rf dist && tsc --module esnext --outDir ./dist/es && tsc --module commonjs --outDir ./dist/lib",
     "lint": "eslint --ext .ts,.tsx \"./src\"",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "cov": "umi-test --coverage"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
@@ -46,16 +49,21 @@
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.5",
     "antd": "^4.0.3",
-    "dumi": "^1.0.5",
+    "dumi": "^1.0.8",
     "father-build": "^1.17.2",
     "lint-staged": "^10.0.7",
     "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
     "react": "^16.13.0",
     "react-test-renderer": "^16.13.0",
+    "typescript": "^3.8.3",
     "yorkie": "^2.0.0"
   },
   "dependencies": {
     "@umijs/fabric": "^2.0.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   }
 }

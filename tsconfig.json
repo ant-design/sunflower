@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": "./",
-    "strict": true,
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]

@@ -49,7 +49,7 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
     }
   }
 
-  const [initialValues, setInitialValues] = useState();
+  const [initialValues, setInitialValues] = useState<Store>();
   const {
     loading,
     requestData = {} as Store,
