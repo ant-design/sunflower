@@ -6,8 +6,8 @@ import {
 } from '../useSearchResult';
 
 declare type StoreBaseValue = string | number | boolean;
-export declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
-export interface Store {
+declare type StoreValue = StoreBaseValue | Store | StoreBaseValue[];
+interface Store {
   [name: string]: StoreValue;
 }
 export interface SearchResponseData {

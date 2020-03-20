@@ -5,8 +5,8 @@ nav:
 group:
   title: Process Components
   path: /process-components
-  order: 3
 title: useModalForm
+order: 3
 ---
 
 ## Overview

@@ -5,8 +5,8 @@ nav:
 group:
   title: 流程组件
   path: /zh-CN/process-components
-  order: 3
 title: useModalForm
+order: 3
 ---
 
 ## 说明
