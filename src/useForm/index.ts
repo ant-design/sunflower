@@ -42,25 +42,48 @@ export const useForm = (config: UseFormConfig) => {
     setFormValues(formValue);
     setFormLoading(true);
     return new Promise((resolve, reject) => {
-      formInstance.validateFields((validateErr, values) => {
-        if (validateErr) {
-          setFormLoading(false);
-          reject(validateErr);
-        } else {
-          resolve(
-            Promise.resolve(submit(values))
-              .then(data => {
-                setFormLoading(false);
-                setFormResult(data);
-                return data;
-              })
-              .catch(err => {
-                setFormLoading(false);
-                throw err;
-              }),
-          );
-        }
-      });
+      if (version === 4) {
+        formInstance
+          .validateFields()
+          .then(values => {
+            resolve(
+              Promise.resolve(submit(values))
+                .then(data => {
+                  setFormLoading(false);
+                  setFormResult(data);
+                  return data;
+                })
+                .catch(err => {
+                  setFormLoading(false);
+                  throw err;
+                }),
+            );
+          })
+          .catch(validateErr => {
+            setFormLoading(false);
+            reject(validateErr);
+          });
+      } else {
+        formInstance.validateFields((validateErr, values) => {
+          if (validateErr) {
+            setFormLoading(false);
+            reject(validateErr);
+          } else {
+            resolve(
+              Promise.resolve(submit(values))
+                .then(data => {
+                  setFormLoading(false);
+                  setFormResult(data);
+                  return data;
+                })
+                .catch(err => {
+                  setFormLoading(false);
+                  throw err;
+                }),
+            );
+          }
+        });
+      }
     });
   };
 
