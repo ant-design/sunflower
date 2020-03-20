@@ -4,7 +4,6 @@ nav:
 title: Installation
 ---
 
-
 Make sure you have `antd` installed, then install:
 
 ```bash
@@ -18,3 +17,5 @@ eg:
 ```js
 import { useFormTable } from 'sunflower-antd';
 ```
+
+Visit ["Process Components"](process-components)

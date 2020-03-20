@@ -17,3 +17,5 @@ Sunflower 包括了不同的流程组件，你可从 `sunflower-antd` 中使用�
 ```js
 import { useFormTable } from 'sunflower-antd';
 ```
+
+查看 ["流程组件"](process-components) 使用
