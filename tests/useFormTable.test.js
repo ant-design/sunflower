@@ -34,7 +34,7 @@ test('useFormTable', async () => {
   delete props.onChange;
   expect(props).toEqual({
     pagination: {
-      pageSize: 1,
+      pageSize: 10,
       current: undefined,
       defaultPageSize: 10,
       defaultCurrent: 1,

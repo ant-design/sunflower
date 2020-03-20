@@ -30,7 +30,7 @@ test('useModalForm', async () => {
   };
   const { result } = renderHook(() => useModalForm(config));
   const { formProps, modalProps, form } = result.current;
-  expect(typeof formProps.onSubmit).toBe('function');
+  expect(typeof formProps.onFinish).toBe('function');
   expect(typeof modalProps.onOk).toBe('function');
   expect(form).toBe(mockForm);
 });
