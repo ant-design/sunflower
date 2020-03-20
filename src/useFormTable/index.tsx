@@ -68,7 +68,6 @@ export const useFormTable = (config: UseSearchResultAntdConfig) => {
         value = defaultFormValues;
       }
       return Promise.resolve(value).then(data => {
-        debugger;
         const touched = formInstance.isFieldsTouched();
         const obj = { ...data };
         Object.keys(data).forEach(name => {
