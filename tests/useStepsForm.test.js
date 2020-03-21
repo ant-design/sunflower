@@ -4,7 +4,10 @@ import { useStepsForm } from '../src';
 function excuteHook(defaultCurrent = 0) {
   const submit = jest.fn();
   const mockForm = {
-    validateFields: cb => cb(),
+    validateFields: () =>
+      new Promise(resolve => {
+        resolve();
+      }),
   };
   const config = {
     form: mockForm,
@@ -25,7 +28,7 @@ function excuteHook(defaultCurrent = 0) {
 }
 
 describe('useStepsForm', () => {
-  test('base use', () => {
+  test('base use', async () => {
     const result = excuteHook();
     const {
       submit: formSubmit,
@@ -42,24 +45,24 @@ describe('useStepsForm', () => {
     expect(typeof current).toBe('number');
     expect(current).toBe(0);
 
-    act(() => gotoStep(1));
+    await act(() => gotoStep(1));
     expect(result.current.current).toBe(1);
   });
 
-  test('goto prev step', () => {
+  test('goto prev step', async () => {
     const result = excuteHook(1);
     const { current, gotoStep } = result.current;
     expect(current).toBe(1);
 
-    act(() => gotoStep(0));
+    await act(() => gotoStep(0));
     expect(result.current.current).toBe(0);
   });
 
-  test('goto a step more than total', () => {
+  test('goto a step more than total', async () => {
     const result = excuteHook();
     const { gotoStep } = result.current;
 
-    act(() => gotoStep(3));
+    await act(() => gotoStep(3));
     expect(result.current.current).toBe(1);
   });
 
@@ -71,19 +74,19 @@ describe('useStepsForm', () => {
     expect(result.current.current).toBe(1);
   });
 
-  test('goto a negative step', () => {
+  test('goto a negative step', async () => {
     const result = excuteHook();
     const { gotoStep } = result.current;
 
-    act(() => gotoStep(-2));
+    await act(() => gotoStep(-2));
     expect(result.current.current).toBe(0);
   });
 
-  test('stepsProps onChange', () => {
+  test('stepsProps onChange', async () => {
     const result = excuteHook();
     const { stepsProps } = result.current;
 
-    act(() => stepsProps.onChange(1));
+    await act(() => stepsProps.onChange(1));
     expect(result.current.current).toBe(1);
   });
 });
