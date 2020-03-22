@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 cp.fork(
-  path.join(__dirname, 'node_modules/typescript/bin/tsc'),
+  path.join(__dirname, '../node_modules/typescript/bin/tsc'),
   ['--module', 'esnext', '--outDir', './es'],
   {
     cwd: __dirname,
@@ -15,7 +15,7 @@ cp.fork(
 });
 
 cp.fork(
-  path.join(__dirname, 'node_modules/typescript/bin/tsc'),
+  path.join(__dirname, '../node_modules/typescript/bin/tsc'),
   ['--module', 'commonjs', '--outDir', './lib'],
   {
     cwd: __dirname,
