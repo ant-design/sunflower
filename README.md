@@ -10,7 +10,7 @@ Process Components for antd.
 [npm-image]: https://img.shields.io/npm/v/sunflower-antd.svg?style=flat
 [npm-url]: https://www.npmjs.com/package/sunflower-antd
 
-English | [简体中文](./README-zh_CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 ## Why
 
