@@ -53,6 +53,7 @@
     "antd": "^4.0.3",
     "dumi": "^1.0.8",
     "father-build": "^1.17.2",
+    "gh-pages": "^2.2.0",
     "lint-staged": "^10.0.7",
     "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
