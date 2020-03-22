@@ -1,3 +1,3 @@
-import Form from 'antd/lib/form';
+import Form from 'antd/es/form';
 
 export default Form;
