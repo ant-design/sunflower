@@ -289,7 +289,7 @@ const result = useForm(config);
     </tr>
     <tr>
       <td>initialValues</td>
-      <td>单默认值. 对应defaultFormValues</td>
+      <td>表单默认值. 对应defaultFormValues</td>
       <td>object</td>
     </tr>
     <tr>
