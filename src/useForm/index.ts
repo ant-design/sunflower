@@ -45,9 +45,9 @@ export const useForm = (config: UseFormConfig) => {
       if (version === 4) {
         formInstance
           .validateFields()
-          .then(values => {
+          .then(() => {
             resolve(
-              Promise.resolve(submit(values))
+              Promise.resolve(submit(formValue))
                 .then(data => {
                   setFormLoading(false);
                   setFormResult(data);
@@ -64,13 +64,13 @@ export const useForm = (config: UseFormConfig) => {
             reject(validateErr);
           });
       } else {
-        formInstance.validateFields((validateErr, values) => {
+        formInstance.validateFields(validateErr => {
           if (validateErr) {
             setFormLoading(false);
             reject(validateErr);
           } else {
             resolve(
-              Promise.resolve(submit(values))
+              Promise.resolve(submit(formValue))
                 .then(data => {
                   setFormLoading(false);
                   setFormResult(data);
@@ -133,7 +133,7 @@ export const useForm = (config: UseFormConfig) => {
       : {
           onSubmit(e) {
             e.preventDefault();
-            onFinish(formInstance.getFieldsValue());
+            onFinish(formInstance.getFieldsValue(version === 4 ? true : null));
           },
         };
 
@@ -147,7 +147,7 @@ export const useForm = (config: UseFormConfig) => {
     formLoading,
     submit: (values?: Store) => {
       formInstance.setFieldsValue(values);
-      return onFinish(formInstance.getFieldsValue());
+      return onFinish(formInstance.getFieldsValue(version === 4 ? true : null));
     },
   };
 };
