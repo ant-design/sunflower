@@ -45,6 +45,7 @@ export default props => {
   } = useStepsForm({
     async submit(values) {
       const { username, email, address } = values;
+      console.log(username, email, address);
       await new Promise(r => setTimeout(r, 1000));
       return 'ok';
     },
@@ -63,7 +64,7 @@ export default props => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Username" />
       </Form.Item>
       <Form.Item label="Email" name="email">
         <Input placeholder="Email" />
@@ -74,8 +75,17 @@ export default props => {
     </>,
 
     <>
-      <Form.Item label="Address" name="address">
-        <Input />
+      <Form.Item
+        label="Address"
+        name="address"
+        rules={[
+          {
+            required: true,
+            message: 'Please input address',
+          },
+        ]}
+      >
+        <Input placeholder="Address" />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button
@@ -100,9 +110,9 @@ export default props => {
   return (
     <div>
       <Steps {...stepsProps}>
-        <Step title="First Step" />
-        <Step title="Second Step" />
-        <Step title="Success" />
+        <Step title="第一步" />
+        <Step title="第二步" />
+        <Step title="成功" />
       </Steps>
 
       <div style={{ marginTop: 60 }}>
@@ -139,10 +149,10 @@ export default props => {
 ## API
 
 ```js
-const obj = useStepsForm(config);
+const Result = useStepsForm(Config);
 ```
 
-- config
+### Config
 
 <table>
   <thead>
@@ -188,12 +198,12 @@ const obj = useStepsForm(config);
       <td>isBackValidate</td>
       <td>should validate if go to prev step</td>
       <td>boolean</td>
-      <td dangerouslySetInnerHTML={{__html: 'true'}}></td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
 
-- obj
+### Result
 
 <table>
   <thead>

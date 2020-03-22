@@ -20,139 +20,127 @@ order: 4
 ```jsx
 import React, { Fragment } from 'react';
 import { useStepsForm } from 'sunflower-antd';
-import {
-  Steps,
-  Input,
-  Button,
-  Form,
-  Result,
-  InputNumber,
-  Descriptions,
-} from 'antd';
+import { Steps, Input, Button, Form, Result, InputNumber } from 'antd';
 
 const { Step } = Steps;
 
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
 export default props => {
-  const [form] = Form.useForm();
-  const { current, gotoStep, stepsProps, formProps, submit } = useStepsForm({
-    async submit({ username, email }) {
-      console.log('beforeSubmit');
+  const {
+    form,
+    current,
+    gotoStep,
+    stepsProps,
+    formProps,
+    submit,
+    formLoading,
+    formValues,
+  } = useStepsForm({
+    async submit(values) {
+      const { username, email, address } = values;
+      console.log(username, email, address);
       await new Promise(r => setTimeout(r, 1000));
-      console.log('afterSubmit', username, email);
       return 'ok';
     },
-    form,
     total: 3,
   });
 
-  const handleSubmit = () => {
-    submit().then(result => {
-      if (result === 'ok') {
-        gotoStep(current + 1);
-      }
-    });
-  };
+  const formList = [
+    <>
+      <Form.Item
+        label="用户名"
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: '请输入用户名',
+          },
+        ]}
+      >
+        <Input placeholder="用户" />
+      </Form.Item>
+      <Form.Item label="邮箱" name="email">
+        <Input placeholder="邮箱" />
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button onClick={() => gotoStep(current + 1)}>下一步</Button>
+      </Form.Item>
+    </>,
+
+    <>
+      <Form.Item
+        label="地址"
+        name="address"
+        rules={[
+          {
+            required: true,
+            message: '请输入地址',
+          },
+        ]}
+      >
+        <Input placeholder="地址" />
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button
+          style={{ marginRight: 10 }}
+          type="primary"
+          loading={formLoading}
+          onClick={() => {
+            submit().then(result => {
+              if (result === 'ok') {
+                gotoStep(current + 1);
+              }
+            });
+          }}
+        >
+          提交
+        </Button>
+        <Button onClick={() => gotoStep(current - 1)}>上一步</Button>
+      </Form.Item>
+    </>,
+  ];
 
   return (
     <div>
-      {current === 1 && (
-        <Descriptions column={1}>
-          <Descriptions.Item label="current step">{current}</Descriptions.Item>
-          <Descriptions.Item label="Username">
-            {form.getFieldValue('username')}
-          </Descriptions.Item>
-          <Descriptions.Item label="Email">
-            {form.getFieldValue('email')}
-          </Descriptions.Item>
-        </Descriptions>
-      )}
       <Steps {...stepsProps}>
-        <Step title="First Step" description="Input your basic info" />
+        <Step title="First Step" />
         <Step title="Second Step" />
         <Step title="Success" />
       </Steps>
-      <Form {...formProps}>
-        {current === 0 && (
-          <Fragment>
-            <Form.Item
-              label="username"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input username',
-                },
-              ]}
-            >
-              <Input placeholder="Username" />
-            </Form.Item>
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input email',
-                  type: 'email',
-                },
-              ]}
-            >
-              <Input placeholder="Email" />
-            </Form.Item>
-          </Fragment>
+
+      <div style={{ marginTop: 60 }}>
+        <Form {...layout} {...formProps} style={{ maxWidth: 600 }}>
+          {formList[current]}
+        </Form>
+
+        {current === 2 && (
+          <Result
+            status="success"
+            title="提交成功!"
+            extra={
+              <>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    form.resetFields();
+                    gotoStep(0);
+                  }}
+                >
+                  再次购买
+                </Button>
+                <Button>查看详情</Button>
+              </>
+            }
+          />
         )}
-        {current === 1 && (
-          <Form.Item
-            label="Price"
-            name="price"
-            rules={[
-              {
-                required: true,
-                message: 'Please input the price',
-                type: 'number',
-                max: 9999,
-                min: 0,
-              },
-            ]}
-          >
-            <InputNumber
-              formatter={value =>
-                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-              }
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
-            />
-          </Form.Item>
-        )}
-      </Form>
-      {current === 2 && (
-        <Result
-          status="success"
-          title="Submit is succeed!"
-          extra={
-            <Fragment>
-              <Button type="primary" onClick={() => gotoStep(0)}>
-                buy it again
-              </Button>
-              ,<Button>check detail</Button>
-            </Fragment>
-          }
-        />
-      )}
-      {current < 1 && (
-        <Button onClick={() => gotoStep(current + 1)}>下一步</Button>
-      )}
-      {current === 1 && (
-        <Fragment>
-          <Button
-            style={{ marginRight: 10 }}
-            type="primary"
-            onClick={handleSubmit}
-          >
-            提交
-          </Button>
-          <Button onClick={() => gotoStep(current - 1)}>上一步</Button>
-        </Fragment>
-      )}
+      </div>
     </div>
   );
 };
@@ -179,7 +167,7 @@ const Result = useStepsForm(Config);
     <tr>
       <td>submit</td>
       <td>请求方法, 其参数为 form fields 的值</td>
-      <td dangerouslySetInnerHTML={{__html: '(formValues) => Promise<formResult> | formResult'}}></td>
+      <td>(formValues) => Promise&lt;formResult&gt; | formResult</td>
       <td></td>
     </tr>
     <tr>
@@ -192,13 +180,13 @@ const Result = useStepsForm(Config);
       <td>defaultFormValues</td>
       <td>默认的表单回填值，可为一个对象，也可为一个异步方法</td>
       <td>object</td>
-      <td dangerouslySetInnerHTML={{__html: '{}'}}></td>
+      <td></td>
     </tr>
     <tr>
       <td>defaultCurrent</td>
       <td>默认开始的步骤，从 0 开始</td>
       <td>number</td>
-      <td dangerouslySetInnerHTML={{__html: '0'}}></td>
+      <td>0</td>
     </tr>
     <tr>
       <td>total</td>
@@ -210,7 +198,7 @@ const Result = useStepsForm(Config);
       <td>isBackValidate</td>
       <td>返回上一步时是否校验表单</td>
       <td>boolean</td>
-      <td dangerouslySetInnerHTML={{__html: 'true'}}></td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
