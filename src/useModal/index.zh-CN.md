@@ -6,7 +6,7 @@ group:
   title: 流程组件
   path: /zh-CN/process-components
 title: useModal
-order: 4
+order: 6
 ---
 
 ## 说明

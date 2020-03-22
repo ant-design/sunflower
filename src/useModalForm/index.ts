@@ -40,7 +40,7 @@ export const useModalForm = (config: UseModalFormConfig) => {
   const modalFormProps = {
     ...modalProps,
     onOk: () => {
-      formSubmit().then(value => {
+      formSubmit().then(() => {
         if (autoSubmitClose) {
           close();
         }

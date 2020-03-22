@@ -6,7 +6,7 @@ group:
   title: Process Components
   path: /process-components
 title: useModal
-order: 4
+order: 6
 ---
 
 ## Overview
