@@ -48,11 +48,10 @@
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.2.1",
-    "@umijs/preset-react": "1.x",
+    "@umijs/fabric": "^2.0.4",
     "@umijs/test": "^3.0.5",
     "antd": "^4.0.3",
     "dumi": "^1.0.8",
-    "father-build": "^1.17.2",
     "gh-pages": "^2.2.0",
     "lint-staged": "^10.0.7",
     "mockjs": "^1.1.0",
@@ -61,9 +60,6 @@
     "react-test-renderer": "^16.13.0",
     "typescript": "^3.8.3",
     "yorkie": "^2.0.0"
-  },
-  "dependencies": {
-    "@umijs/fabric": "^2.0.4"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
