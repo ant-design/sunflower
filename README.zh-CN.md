@@ -12,6 +12,12 @@ antd 流程组件
 
 [English](./README.md) | 简体中文
 
+## 特定
+
+- 支持 antd4, antd3
+- 将 antd 组件间关系使用 react-hooks 来表述，使用流程组件的方式来简化开发
+- 提炼于业务实际流程，拿来即用
+
 ## 为什么
 
 通常，我们使用 antd 的多个组件来完成一个流程。比如想要完成一个 “使用 Form 搜索后 Table 来展示列表” 的功能，则需要去处理 “Form” 跟 “Table” 的关系，包括查询，分页等。
@@ -62,10 +68,10 @@ export default props => {
 };
 ```
 
-## Document
+## 快速开始
 
-- [English](https://ant-design.github.io/sunflower)
-- [简体中文](https://ant-design.github.io/sunflower/zh-CN)
+- [English](https://ant-design.github.io/sunflower/getting-started)
+- [简体中文](https://ant-design.github.io/sunflower/zh-CN/getting-started)
 
 ## 使用
 

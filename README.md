@@ -12,6 +12,12 @@ Process Components for antd.
 
 English | [简体中文](./README.zh-CN.md)
 
+## Features
+
+- Support antd4, antd3
+- The relationship between antd components is expressed using react-hooks, and process components are used to simplify development
+- Process Components are extracted from the actual business processes and used immediately
+
 ## Why
 
 Usually, we use multiple components of antd to complete a process. For example, if you want to complete the function of "using Table to display the list after Form search", you need to deal with the relationship between "Form" and "Table", including query, pagination, etc.
@@ -64,8 +70,8 @@ export default props => {
 
 ## Document
 
-- [English](https://ant-design.github.io/sunflower)
-- [简体中文](https://ant-design.github.io/sunflower/zh-CN)
+- [English](https://ant-design.github.io/sunflower/getting-started)
+- [简体中文](https://ant-design.github.io/sunflower/zh-CN/getting-started)
 
 ## Usage
 
