@@ -1,10 +1,10 @@
 ---
 nav:
   title: 流程组件
-  path: /process-components
+  path: /zh-CN/process-components
 group:
   title: 流程组件
-  path: /process-components
+  path: /zh-CN/process-components
 title: useStepsForm
 order: 4
 ---
@@ -160,11 +160,11 @@ export default props => {
 
 ## API
 
-```jsx
-const obj = useStepsForm(config);
+```js
+const Result = useStepsForm(Config);
 ```
 
-- config
+### Config
 
 <table>
   <thead>
@@ -215,7 +215,7 @@ const obj = useStepsForm(config);
   </tbody>
 </table>
 
-- obj
+### Result
 
 <table>
   <thead>
