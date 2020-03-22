@@ -133,7 +133,9 @@ export const useForm = (config: UseFormConfig) => {
       : {
           onSubmit(e) {
             e.preventDefault();
-            onFinish(formInstance.getFieldsValue(version === 4 ? true : null));
+            onFinish(
+              formInstance.getFieldsValue(version === 4 ? true : undefined),
+            );
           },
         };
 
@@ -147,7 +149,9 @@ export const useForm = (config: UseFormConfig) => {
     formLoading,
     submit: (values?: Store) => {
       formInstance.setFieldsValue(values);
-      return onFinish(formInstance.getFieldsValue(version === 4 ? true : null));
+      return onFinish(
+        formInstance.getFieldsValue(version === 4 ? true : undefined),
+      );
     },
   };
 };
