@@ -5,6 +5,7 @@ export default defineConfig({
   mode: 'site',
   base: '/sunflower/',
   publicPath: '/sunflower/',
+  exportStatic: {},
   extraBabelPlugins: [
     [
       'babel-plugin-import',
