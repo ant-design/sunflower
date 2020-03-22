@@ -1,16 +1,24 @@
-# 介绍
+# Sunflower
 
-English | 简体中文(README.zh-CN.md)
+Process Components for antd.
 
-多个 [antd](https://ant.design) 组件的 react-hooks.
+[![NPM version][npm-image]][npm-url]
+[![build status][circleci-image]][circleci-url]
 
-## 为什么?
+[circleci-image]: https://img.shields.io/circleci/build/github/ant-design/sunflower/master.svg?style=flat-square
+[circleci-url]: https://circleci.com/gh/ant-design/sunflower/tree/master
+[npm-image]: https://img.shields.io/npm/v/sunflower-antd.svg?style=flat
+[npm-url]: https://www.npmjs.com/package/sunflower-antd
 
-通常，我们使用 antd 的多个组件来完成一个流程。比如想要完成一个 “使用Form 搜索后 Table 来展示列表” 的功能，则需要去处理 “Form” 跟 “Table” 的关系，包括查询，分页等。 
+English | [简体中文](./README-zh_CN.md)
 
-是否有个方式来简化组件间关系的维护？这就是 sunflower 的作用。
+## Why
 
-以下是一个 “Form & Table” 场景的示例，只需要以下的代码，就可完成包括查询，分页等功能。`useFormTable` 是一个 react-hooks，会返回 antd 组件的 props 等，将这些 props 给到 antd 组件即可完成组件间的联系。
+Usually, we use multiple components of antd to complete a process. For example, if you want to complete the function of "using Table to display the list after Form search", you need to deal with the relationship between "Form" and "Table", including query, pagination, etc.
+
+Is there a way to simplify the maintenance of relationships between components? This is what sunflower is for. React-hooks that describe a scene are called "Process Components". Sunflower is a series of antd-based "Process Components".
+
+The following is an example of a "Form & Table" scenario. You only need the following code to complete functions such as querying and paging. `useFormTable` is a react-hooks, which will return the props of the antd component, etc. You can give these props to the antd component to complete the connection between the components.
 
 ```js
 import React from 'react';
@@ -25,41 +33,51 @@ export default props => {
     },
   });
 
-  return <div>
-    <Form {...formProps}>
-      <Form.Item label="Username" name="username">
-        <Input placeholder="Username" />
-      </Form.Item>
-      
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Search
-        </Button>
-      </Form.Item>
-    
-    </Form>
+  return (
+    <div>
+      <Form {...formProps}>
+        <Form.Item label="Username" name="username">
+          <Input placeholder="Username" />
+        </Form.Item>
 
-    <Table
-      columns={[
-        {
-          title: 'Username',
-          dataIndex: 'username',
-          key: 'username',
-        },
-      ]}
-      {...tableProps}
-    />
-  </div>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
+
+      <Table
+        columns={[
+          {
+            title: 'Username',
+            dataIndex: 'username',
+            key: 'username',
+          },
+        ]}
+        {...tableProps}
+      />
+    </div>
+  );
 };
 ```
 
+## Document
 
-## 安装方式
+- [English](https://ant-design.github.io/sunflower)
+- [简体中文](https://ant-design.github.io/sunflower/zh-CN)
+
+## Usage
 
 ```
-$ npm install sunflower-antd --save
+$ npm i sunflower-antd --save
+// or
+$ yarn add sunflower-antd
 ```
 
-## 使用方式
+## Development
 
-sunflower 包括不同的 react-hooks，每一个都对应一个流程。你可从 `sunflower-antd` 里依赖不同的来使用。
+```
+$ yarn
+$ yarn start
+```

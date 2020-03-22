@@ -18,9 +18,9 @@ order: 4
 ### Basic
 
 ```jsx
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useStepsForm } from 'sunflower-antd';
-import { Steps, Input, Button, Form, Result, InputNumber } from 'antd';
+import { Steps, Input, Button, Form, Result } from 'antd';
 
 const { Step } = Steps;
 
@@ -41,7 +41,6 @@ export default props => {
     formProps,
     submit,
     formLoading,
-    formValues,
   } = useStepsForm({
     async submit(values) {
       const { username, email, address } = values;
