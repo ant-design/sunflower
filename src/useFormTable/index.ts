@@ -20,7 +20,7 @@ export interface UseSearchResultAntdConfig
   defaultPageSize?: number;
   defaultCurrent?: number;
   defaultFormValues?: Store | (() => Promise<Store> | Store);
-  form: any;
+  form?: any;
 }
 
 export const useFormTable = (config: UseSearchResultAntdConfig) => {
