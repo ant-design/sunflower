@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'Sunflower',
   mode: 'site',
   base: '/sunflower/',
+  publicPath: '/sunflower/',
   extraBabelPlugins: [
     [
       'babel-plugin-import',
@@ -17,11 +18,11 @@ export default defineConfig({
   navs: {
     'zh-CN': [
       null,
-      { title: 'GitHub', path: 'https://github.com/umijs/hooks' },
+      { title: 'GitHub', path: 'https://github.com/ant-design/sunflower' },
     ],
     'en-US': [
       null,
-      { title: 'GitHub', path: 'https://github.com/umijs/hooks' },
+      { title: 'GitHub', path: 'https://github.com/ant-design/sunflower' },
     ],
   },
 });
