@@ -4857,10 +4857,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.30":
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.30.tgz#b254add6ee1a0c0bfa6ef8c68fb1a856c08a6e79"
-  integrity sha512-2pRNjrua9u7InWyS5i0mqqaj1/ggjyTXL6WSeYAjEcqIweC0OJiA3sKxq7Lc+gK0ztjfMgQeRmV5RJknEYH+FQ==
+"@umijs/preset-dumi@1.0.37":
+  version "1.0.37"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.37.tgz#7018e68c8844c3423bb0cc1962bae45ec94cd435"
+  integrity sha512-yzSwnWOKssWq8P0yct+ITqGuzdpqr0UO2w96j0BiQLG82VCH3+H7E/Qcdd43Hedq4ez6To+D9OeNAsL6dLV+kw==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -4899,7 +4899,7 @@
     remark-parse "^7.0.1"
     remark-rehype "^5.0.0"
     slash2 "^2.0.0"
-    sylvanas "^0.4.2"
+    sylvanas "0.4.3"
     symlink-dir "^3.1.1"
     unified "^8.4.1"
     unist-util-visit "^2.0.1"
@@ -7537,11 +7537,11 @@ dotenv@8.2.0:
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 dumi@^1.0.8:
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.30.tgz#efe3c18414c131bcd22d19d1e6838ab13e312de9"
-  integrity sha512-x70w5u9ubyHVeuqEmR9W9i7sENZBXZ/Nv0hWaBdFVqYEMZL539pygAl1XXeh/YTv5X8qhTTuGtkQ1Ylfc/IN5g==
+  version "1.0.37"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.37.tgz#8d23adf63aa0321c3045338d264245b2573ac7e3"
+  integrity sha512-1lpFIPp7uk/NQci1HkHIlYT5rnGnVDy5svzfhy7aYwlzbCKMVIvZ8FSfCBKMNiP0R1m6K4SW8ucBDW7tSiKgBA==
   dependencies:
-    "@umijs/preset-dumi" "1.0.30"
+    "@umijs/preset-dumi" "1.0.37"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
@@ -15822,7 +15822,7 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sylvanas@^0.4.2:
+sylvanas@0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/sylvanas/-/sylvanas-0.4.3.tgz#e40ce0e651bd9f57b3a4738ce4aecbfd84eb649f"
   integrity sha512-iuo8eo3XS4t4JHLd+0i7DWg6WXzRQs6DL2F06pHxmkd4PJkhU+8ilQVC+TX4OoYg0w+CtdHxyU9GHf2cVHT9XA==
